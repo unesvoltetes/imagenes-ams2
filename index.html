@@ -168,7 +168,7 @@
             <button class="nav-btn" id="btn-ranking" onclick="showTab('ranking')"><i data-lucide="trophy"></i> <span>Clasificación</span></button>
             <button class="nav-btn" id="btn-community" onclick="showTab('community')"><i data-lucide="users"></i> <span>Comunidad</span></button>
             <button class="nav-btn" id="btn-analytics" onclick="showTab('analytics')"><i data-lucide="bar-chart-3"></i> <span>Analytics</span></button>
-            <button class="nav-btn" id="btn-security" onclick="showTab('security')"><i data-lucide="shield-alert"></i> <span>Seguridad</span></button>
+            <button class="nav-btn" id="btn-sancionados" onclick="showTab('sancionados')"><i data-lucide="user-x"></i> <span>Sancionados</span></button>
         </nav>
     </header>
 
@@ -279,7 +279,7 @@
             else if (activeTab === 'ranking') renderRanking(query);
             else if (activeTab === 'community') renderCommunity(query);
             else if (activeTab === 'analytics') renderAnalytics();
-            else if (activeTab === 'security') renderSecurity(query);
+            else if (activeTab === 'sancionados') renderSancionados(query);
             
             lucide.createIcons();
         }
@@ -547,7 +547,7 @@
             });
         }
 
-        function renderSecurity(query) {
+        function renderSancionados(query) {
             const container = document.getElementById('content');
             const banned = fullData.pilotos.filter(p => (p.veces_baneado || 0) > 0 && p.nombre.toLowerCase().includes(query));
 
@@ -555,8 +555,8 @@
                 container.innerHTML = `
                     <div style="text-align:center; padding:4rem; color:var(--cyan);">
                         <i data-lucide="check-circle" style="width:48px; height:48px; margin-bottom:1rem;"></i>
-                        <h3 style="font-weight:800;">LIMPIEZA TOTAL</h3>
-                        <p style="opacity:0.6; font-size:0.9rem;">No hay pilotos con sanciones activas en la base de datos.</p>
+                        <h3 style="font-weight:800;">SIN SANCIONES</h3>
+                        <p style="opacity:0.6; font-size:0.9rem;">No hay pilotos en la lista negra actualmente.</p>
                     </div>
                 `;
                 return;
@@ -566,15 +566,17 @@
             banned.forEach(p => {
                 const card = document.createElement('div');
                 card.className = 'list-item';
-                card.style.borderColor = '#f85149';
+                card.style.border = '1px solid #f85149';
+                card.style.background = 'rgba(248, 81, 73, 0.05)';
                 card.innerHTML = `
-                    <img src="https://unavatar.io/steam/${p.steam_id}" class="avatar-mini">
+                    <img src="https://unavatar.io/steam/${p.steam_id}" class="avatar-mini" style="border-color:#f85149">
                     <div>
                         <div class="item-name" style="color:#f85149">${p.nombre}</div>
                         <div class="item-tag">ID: ${p.steam_id}</div>
                     </div>
-                    <div><div class="item-val" style="color:#f85149">${p.veces_baneado}</div><div class="item-label">SANCIONES</div></div>
-                    <div style="grid-column: span 2; text-align:right; font-size:0.75rem; color:var(--text-dim);">Último ingreso: ${p.ultima_conexion || '---'}</div>
+                    <div><div class="item-val" style="color:#f85149">${p.veces_baneado}</div><div class="item-label">BANEOS</div></div>
+                    <div style="text-align:center;"><div class="item-val" style="color:#ffcc00">🚫</div><div class="item-label">BLACKLIST</div></div>
+                    <div style="grid-column: span 2; text-align:right; font-size:0.75rem; color:var(--text-dim);">Última actividad: ${p.ultima_conexion || '---'}</div>
                 `;
                 list.appendChild(card);
             });
