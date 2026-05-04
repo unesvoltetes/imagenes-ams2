@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UNES - Configurar Combo</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         body {
             background-color: #000;
@@ -47,6 +46,7 @@
             header { padding: 1rem; }
         }
     </style>
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 
 <body>
@@ -66,7 +66,7 @@
     </header>
 
     <div id="unes-combo-custom-container"
-        style="background: transparent; color: #fff; font-family: 'Outfit', 'Inter', sans-serif; max-width: 1000px; margin: 0 auto; padding: 10px;">
+        style="background: transparent; color: #fff; font-family: 'Outfit', 'Inter', sans-serif; max-width: 1300px; margin: 0 auto; padding: 10px; display: flex; flex-direction: column; align-items: center;">
 
         <!-- Estilos Premium -->
         <style>
@@ -619,35 +619,163 @@
                 filter: drop-shadow(0 0 5px var(--primary));
             }
 
-            @media (max-width: 800px) {
-                #unes-combo-custom-container .top-row {
+            @media (max-width: 1200px) {
+                #unes-combo-custom-container {
                     flex-direction: column;
+                    align-items: center;
                 }
+                #combo-form-wrapper { width: 100%; }
+                #unes-history-widget { max-width: 100%; width: 100%; }
+            }
 
-                #unes-combo-custom-container .preview-box {
-                    flex: 1;
-                    min-width: 100%;
-                }
+            /* Widget Historial Estilo Discord */
+            #unes-history-widget {
+                --bg-card: #1a1a24;
+                --accent: #ffcc00;
+                --text-dim: #8c8c9b;
+                --user-color: #00c8ff;
+                --red-unes: #e60000;
+                
+                background: var(--bg-card);
+                border-radius: 12px;
+                width: 100%;
+                max-width: 320px;
+                font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+                color: white;
+                overflow: hidden;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+                border: 0.5px solid var(--red-unes);
+                margin: 0;
+                flex-shrink: 0;
+                position: sticky;
+                top: 80px;
+            }
 
-                #unes-combo-custom-container .grid-3,
-                #unes-combo-custom-container .grid-4 {
-                    grid-template-columns: 1fr 1fr;
-                }
+            #unes-history-widget .widget-header {
+                padding: 15px;
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                background: rgba(0,0,0,0.2);
+            }
+
+            #unes-history-widget .logo-container {
+                width: 42px;
+                height: 42px;
+                background: #000;
+                border-radius: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 5px;
+                border: 1px solid #444;
+            }
+
+            #unes-history-widget .logo-container img { width: 100%; height: auto; }
+
+            #unes-history-widget .header-text { display: flex; flex-direction: column; }
+            #unes-history-widget .header-text .title { font-weight: 900; font-size: 1.1rem; letter-spacing: 0.5px; margin: 0; }
+            #unes-history-widget .header-text .status { font-size: 0.7rem; color: #b416da; font-weight: 800; text-transform: uppercase; }
+
+            #unes-history-widget .widget-body { padding: 15px; }
+            #unes-history-widget .section-label {
+                font-size: 0.65rem;
+                color: var(--text-dim);
+                font-weight: 800;
+                margin-bottom: 15px;
+                letter-spacing: 1px;
+            }
+
+            #unes-history-widget .scroll-area {
+                max-height: 550px;
+                overflow-y: auto;
+                padding-right: 8px;
+            }
+
+            #unes-history-widget .scroll-area::-webkit-scrollbar { width: 5px; }
+            #unes-history-widget .scroll-area::-webkit-scrollbar-track { background: rgba(0,0,0,0.1); }
+            #unes-history-widget .scroll-area::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+
+            #unes-history-widget .combo-item {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                padding: 12px 0;
+                border-bottom: 1px solid rgba(255,255,255,0.05);
+            }
+
+            #unes-history-widget .avatar-container { position: relative; flex-shrink: 0; }
+            #unes-history-widget .mini-map {
+                width: 45px;
+                height: 45px;
+                background: #000;
+                border-radius: 50%;
+                padding: 6px;
+                border: 2px solid #333;
+                object-fit: contain;
+            }
+            #unes-history-widget .status-dot {
+                position: absolute;
+                bottom: 2px;
+                right: 2px;
+                width: 12px;
+                height: 12px;
+                background: #3ba55d;
+                border-radius: 50%;
+                border: 2px solid var(--bg-card);
+            }
+
+            #unes-history-widget .item-info { display: flex; flex-direction: column; overflow: hidden; }
+            #unes-history-widget .item-track {
+                font-weight: 700;
+                font-size: 0.95rem;
+                color: #fff;
+                line-height: 1.2;
+            }
+            #unes-history-widget .item-car {
+                font-size: 0.8rem;
+                color: var(--accent);
+                font-weight: 600;
+                margin-top: 2px;
+            }
+            #unes-history-widget .item-user { 
+                font-size: 0.65rem; 
+                color: var(--user-color); 
+                margin-top: 4px;
+                font-weight: 500;
+                letter-spacing: 0.3px;
+            }
+
+            #unes-history-widget .widget-footer {
+                background: var(--red-unes);
+                padding: 16px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+                text-decoration: none !important;
+                color: white !important;
+                font-weight: 900;
+                font-size: 1rem;
+                transition: all 0.3s;
+            }
+            #unes-history-widget .widget-footer:hover { filter: brightness(1.2); letter-spacing: 1px; }
+            #unes-history-widget .widget-footer img { height: 22px; }
+
+            #unes-history-widget .loading-state {
+                text-align: center;
+                color: var(--text-dim);
+                font-size: 0.85rem;
+                padding: 30px 0;
             }
         </style>
 
-        <div id="combo-form-wrapper">
+        <h1 class="main-title" style="width: 100%; text-align: center; margin-top: 20px;">🚀 CONFIGURAR COMBO</h1>
 
-
-            <div id="topActionButtons"
-                style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; max-width: 800px; margin-left: auto; margin-right: auto;">
-
-                <h1 class="main-title">🚀 CONFIGURAR COMBO</h1>
-
-            </div>
-            <div id="recentPanel" class="recent-panel" style="max-width: 600px; margin: 0 auto 20px;"></div>
-
-            <form id="googleComboForm"
+        <div id="main-content-layout" style="display: flex; gap: 30px; align-items: flex-start; justify-content: center; width: 100%; margin-top: 20px; flex-wrap: wrap;">
+            <div id="combo-form-container" style="flex: 1; max-width: 900px; min-width: 320px;">
+                <div id="recentPanel" class="recent-panel" style="max-width: 600px; margin: 0 auto 20px;"></div>
+                <form id="googleComboForm"
                 action="https://docs.google.com/forms/d/e/1FAIpQLSc-azaO0KOJwxWwlkApEtKJP4nJalklofgxqWz3WpGIa8pnZA/formResponse"
                 method="POST" target="hidden_iframe" onsubmit="return handleSubmit(event)">
 
@@ -1045,6 +1173,27 @@
             </div>
         </div>
 
+                <!-- Widget Historial de Combos Estilo Discord v2.2 -->
+                <div id="unes-history-widget" class="discord-widget">
+                    <div class="widget-header">
+                        <div class="logo-container">
+                            <img src="https://raw.githubusercontent.com/unesvoltetes/imagenes-ams2/main/optimizadas/uneslog.png" alt="UNES" />
+                        </div>
+                        <div class="header-text">
+                            <span class="title">COMBOS RECIENTES</span>
+                            <span class="status" id="history-count">CARGANDO...</span>
+                        </div>
+                    </div>
+
+                    <div class="widget-body">
+                        <div class="section-label">ÚLTIMOS ENVIADOS (BLOQUEADOS)</div>
+                        <div id="combo-list-container" class="scroll-area">
+                            <div class="loading-state">Consultando historial...</div>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- Cierre de main-content-layout -->
+
     </div>
 
     <div class="form-legend">
@@ -1114,17 +1263,17 @@
         }
 
         async function initForm() {
-            document.getElementById('topActionButtons').style.display = 'flex';
-            document.querySelector('.main-title').style.display = 'block';
-            document.getElementById('googleComboForm').style.display = 'block';
-            document.querySelector('.top-row').style.display = 'flex';
-            document.getElementById('successView').style.display = 'none';
-            document.getElementById('inDate').name = 'entry.506982970';
-            document.getElementById('googleComboForm').reset();
-            const carSel = document.getElementById('inCar');
-            const trackSel = document.getElementById('inTrack');
-            carSel.innerHTML = '<option value="">⏳ Consultando historial...</option>';
-            trackSel.innerHTML = '<option value="">⏳ Consultando historial...</option>';
+            try {
+                const form = document.getElementById('googleComboForm');
+                if (form) {
+                    form.style.display = 'block';
+                    form.reset();
+                }
+                
+                const carSel = document.getElementById('inCar');
+                const trackSel = document.getElementById('inTrack');
+                if (carSel) carSel.innerHTML = '<option value="">⏳ Cargando datos...</option>';
+                if (trackSel) trackSel.innerHTML = '<option value="">⏳ Cargando datos...</option>';
             const recentHistory = await fetchRecentHistory(10);
             const blockedTracks = new Set(recentHistory.map(r => r[3]));
             const blockedCars = new Set(recentHistory.map(r => r[5]));
@@ -1386,6 +1535,90 @@
         }
 
         initForm();
+    </script>
+    <script>
+        // Lógica Widget Historial Discord v2.2
+        (function() {
+            async function updateHistoryWidget() {
+                const container = document.getElementById('combo-list-container');
+                const countLabel = document.getElementById('history-count');
+                if (!container || !countLabel) return;
+                
+                try {
+                    const url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ3cHE1Ew3bBKZ1P-MlVcL5h08tQiGM7kNQORORfpLclUMVDCU7LfQ37G0fGIYrY1Ma8KbEQGlZeqcj/pub?output=csv&cachebuster=' + Date.now();
+                    const response = await fetch(url);
+                    const csvText = await response.text();
+                    
+                    const rows = csvText.split('\n').map(row => {
+                        // Manejo robusto de CSV
+                        const cells = [];
+                        let currentCell = '';
+                        let inQuotes = false;
+                        for (let i = 0; i < row.length; i++) {
+                            const char = row[i];
+                            if (char === '"') inQuotes = !inQuotes;
+                            else if (char === ',' && !inQuotes) {
+                                cells.push(currentCell.trim().replace(/^"(.*)"$/, '$1'));
+                                currentCell = '';
+                            } else currentCell += char;
+                        }
+                        cells.push(currentCell.trim().replace(/^"(.*)"$/, '$1'));
+                        return cells;
+                    });
+                    
+                    const validRows = rows.slice(1).filter(r => r.length > 5 && r[3] && r[3] !== '');
+                    const latest = validRows.reverse().slice(0, 20);
+                    
+                    if (latest.length === 0) {
+                        container.innerHTML = '<div class="loading-state">No hay combos registrados.</div>';
+                        countLabel.textContent = '0 COMBOS';
+                        return;
+                    }
+
+                    countLabel.textContent = latest.length + ' ÚLTIMOS';
+                    container.innerHTML = '';
+
+                    latest.forEach(row => {
+                        const trackName = row[3] || 'Desconocido';
+                        const carName = row[5] || 'Desconocido';
+                        const user = row[2] || 'Piloto';
+                        
+                        const encodedTrack = encodeURIComponent(trackName);
+                        const mapUrl = `https://raw.githubusercontent.com/unesvoltetes/imagenes-ams2/main/optimizadas/circuitos/${encodedTrack}.png`;
+
+                        const item = document.createElement('div');
+                        item.className = 'combo-item';
+                        item.innerHTML = `
+                            <div class="avatar-container">
+                                <img class="mini-map" src="${mapUrl}" onerror="this.src='https://raw.githubusercontent.com/unesvoltetes/imagenes-ams2/main/optimizadas/uneslog.png'">
+                                <div class="status-dot"></div>
+                            </div>
+                            <div class="item-info">
+                                <span class="item-track">${trackName.replace(/_/g, ' ')}</span>
+                                <span class="item-car">${carName}</span>
+                                <span class="item-user">enviado por ${user}</span>
+                            </div>
+                        `;
+                        container.appendChild(item);
+                    });
+
+                } catch (e) {
+                    console.error("Widget Error:", e);
+                    container.innerHTML = '<div class="loading-state">⚠️ Error al cargar historial.</div>';
+                    countLabel.textContent = 'ERROR';
+                }
+            }
+
+            updateHistoryWidget();
+            setInterval(updateHistoryWidget, 60000);
+        })();
+
+        // Forzar inicialización de iconos de forma independiente
+        window.addEventListener('DOMContentLoaded', () => {
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+        });
     </script>
     </div>
 </body>

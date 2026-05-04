@@ -234,6 +234,12 @@
                     fullData.summary[r.session_id][r.stage] = r;
                 });
                 if (activeTab === 'history') render();
+
+                // Lógica de navegación por hash (enlaces directos)
+                const hash = window.location.hash.replace('#', '');
+                if (['history', 'records', 'ranking', 'analytics', 'sancionados'].includes(hash)) {
+                    showTab(hash);
+                }
             } catch (e) { console.error(e); }
         }
 
