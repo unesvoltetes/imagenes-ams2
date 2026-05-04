@@ -1212,6 +1212,7 @@
 
         function randomizeForm() {
             const form = document.getElementById('googleComboForm');
+            if (!form) return;
             const selects = form.querySelectorAll('select');
             selects.forEach(sel => {
                 const options = Array.from(sel.options).filter(opt => opt.value !== "");
@@ -1224,14 +1225,15 @@
             if (dateInput) {
                 const randomDay = Math.floor(Math.random() * 28) + 1;
                 const randomMonth = Math.floor(Math.random() * 12) + 1;
-                const year = 2024;
+                const year = new Date().getFullYear();
                 dateInput.value = `${randomDay.toString().padStart(2, '0')}/${randomMonth.toString().padStart(2, '0')}/${year}`;
             }
-            syncPreview();
-            const btn = event ? event.target : null;
-            if (btn && btn.classList.contains('recent-combos-btn')) {
+            if (typeof syncPreview === 'function') syncPreview();
+            
+            const btn = (typeof window !== 'undefined' && window.event) ? window.event.target : null;
+            if (btn && btn.tagName === 'BUTTON') {
                 const originalText = btn.innerHTML;
-                btn.innerHTML = '✨ ¡LISTO!';
+                btn.innerHTML = '🎲 ¡LISTO!';
                 setTimeout(() => btn.innerHTML = originalText, 1000);
             }
         }
@@ -1246,9 +1248,10 @@
             } else if (idOrName === 'inDate') {
                 const randomDay = Math.floor(Math.random() * 28) + 1;
                 const randomMonth = Math.floor(Math.random() * 12) + 1;
-                el.value = `${randomDay.toString().padStart(2, '0')}/${randomMonth.toString().padStart(2, '0')}/2024`;
+                const year = new Date().getFullYear();
+                el.value = `${randomDay.toString().padStart(2, '0')}/${randomMonth.toString().padStart(2, '0')}/${year}`;
             }
-            syncPreview();
+            if (typeof syncPreview === 'function') syncPreview();
         }
 
         async function fetchRecentHistory(limit = 10) {
@@ -1263,48 +1266,80 @@
         }
 
         async function initForm() {
+            const form = document.getElementById('googleComboForm');
+            const carSel = document.getElementById('inCar');
+            const trackSel = document.getElementById('inTrack');
+            
+            if (form) {
+                form.style.display = 'block';
+                form.reset();
+            }
+
+            // 1. Poblado inicial inmediato con datos locales (siempre funciona)
+            if (carSel) {
+                carSel.innerHTML = '<option value="">Selecciona un auto...</option>';
+                carNames.forEach(c => {
+                    const opt = document.createElement('option');
+                    opt.value = opt.textContent = c;
+                    carSel.appendChild(opt);
+                });
+            }
+            if (trackSel) {
+                trackSel.innerHTML = '<option value="">Selecciona un circuito...</option>';
+                trackNames.forEach(t => {
+                    const opt = document.createElement('option');
+                    opt.value = opt.textContent = t;
+                    trackSel.appendChild(opt);
+                });
+            }
+
+            // 2. Intentar cargar historial y filtrar (opcional, puede fallar en local)
             try {
-                const form = document.getElementById('googleComboForm');
-                if (form) {
-                    form.style.display = 'block';
-                    form.reset();
+                const recentHistory = await fetchRecentHistory(10);
+                if (recentHistory && recentHistory.length > 0) {
+                    const blockedTracks = new Set(recentHistory.map(r => r[3]));
+                    const blockedCars = new Set(recentHistory.map(r => r[5]));
+                    
+                    const filterFn = (name, isTrack) => {
+                        const n = name.toUpperCase();
+                        if (n.includes('RX') || n.includes('KART')) return false;
+                        if (isTrack && blockedTracks.has(name)) return false;
+                        if (!isTrack && blockedCars.has(name)) return false;
+                        return true;
+                    };
+                    
+                    if (carSel) {
+                        carSel.innerHTML = '<option value="">Selecciona un auto...</option>';
+                        carNames.filter(c => filterFn(c, false)).forEach(c => {
+                            const opt = document.createElement('option');
+                            opt.value = opt.textContent = c;
+                            carSel.appendChild(opt);
+                        });
+                    }
+                    if (trackSel) {
+                        trackSel.innerHTML = '<option value="">Selecciona un circuito...</option>';
+                        trackNames.filter(t => filterFn(t, true)).forEach(t => {
+                            const opt = document.createElement('option');
+                            opt.value = opt.textContent = t;
+                            trackSel.appendChild(opt);
+                        });
+                    }
                 }
-                
-                const carSel = document.getElementById('inCar');
-                const trackSel = document.getElementById('inTrack');
-                if (carSel) carSel.innerHTML = '<option value="">⏳ Cargando datos...</option>';
-                if (trackSel) trackSel.innerHTML = '<option value="">⏳ Cargando datos...</option>';
-            const recentHistory = await fetchRecentHistory(10);
-            const blockedTracks = new Set(recentHistory.map(r => r[3]));
-            const blockedCars = new Set(recentHistory.map(r => r[5]));
-            const filterFn = (name, isTrack) => {
-                const n = name.toUpperCase();
-                if (n.includes('RX') || n.includes('KART')) return false;
-                if (isTrack && blockedTracks.has(name)) return false;
-                if (!isTrack && blockedCars.has(name)) return false;
-                return true;
-            };
-            carSel.innerHTML = '<option value="">Selecciona un auto...</option>';
-            carNames.filter(c => filterFn(c, false)).forEach(c => {
-                const opt = document.createElement('option');
-                opt.value = opt.textContent = c;
-                carSel.appendChild(opt);
-            });
-            trackSel.innerHTML = '<option value="">Selecciona un circuito...</option>';
-            trackNames.filter(t => filterFn(t, true)).forEach(t => {
-                const opt = document.createElement('option');
-                opt.value = opt.textContent = t;
-                trackSel.appendChild(opt);
-            });
+            } catch (e) { 
+                console.warn("Historial no disponible, usando datos por defecto."); 
+            }
+
+            // 3. Carga de metadatos (opcional)
             try {
                 const [carsRes, tracksRes] = await Promise.all([
                     fetch('https://raw.githubusercontent.com/unesvoltetes/imagenes-ams2/main/js/autos.json'),
                     fetch('https://raw.githubusercontent.com/unesvoltetes/imagenes-ams2/main/js/circuitos.json')
                 ]);
-                carsData = await carsRes.json();
-                tracksData = await tracksRes.json();
+                if (carsRes.ok) carsData = await carsRes.json();
+                if (tracksRes.ok) tracksData = await tracksRes.json();
             } catch (e) { }
-            syncPreview();
+            
+            if (typeof syncPreview === 'function') syncPreview();
         }
 
         function syncPreview() {
