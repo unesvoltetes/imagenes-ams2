@@ -2,186 +2,586 @@
 <html lang="es" translate="no">
 <head>
     <meta charset="UTF-8">
+    <meta name="google" content="notranslate">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UNES HUB - Central de Datos 24/7</title>
+    <title>UNES HUB - Central de Datos Cloud 24/7</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {
             --bg: #0a0c10;
             --card-bg: #161b22;
-            --accent: #b314da;
+            --accent: #b314da; /* Púrpura Blogger */
+            --accent-hover: #d11aff;
             --text: #c9d1d9;
             --text-dim: #8b949e;
+            --header-bg: rgba(22, 27, 34, 0.8);
             --border: #30363d;
             --gold: #ffcc00;
             --cyan: #00ffcc;
+            --modal-bg: rgba(22, 27, 34, 0.95);
         }
 
-        body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 0; }
-        header { background: rgba(22, 27, 34, 0.8); backdrop-filter: blur(10px); padding: 1rem 2rem; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 1.5rem; font-weight: 800; display: flex; align-items: center; gap: 10px; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Outfit', sans-serif; 
+            background-color: var(--bg); 
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        header {
+            position: sticky; top: 0;
+            background: var(--header-bg);
+            backdrop-filter: blur(12px);
+            padding: 1rem 2rem;
+            border-bottom: 1px solid var(--border);
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 100;
+        }
+
+        .logo { display:flex; align-items:center; gap:0.8rem; font-size:1.5rem; font-weight:800; color:#fff; }
         .logo span { color: var(--accent); }
+
+        nav { display: flex; gap: 1.5rem; }
+        .nav-btn {
+            background: transparent; border: none; color: var(--text-dim);
+            font-family: inherit; font-size: 1rem; cursor: pointer;
+            padding: 0.5rem 0; border-bottom: 2px solid transparent;
+            transition: 0.3s; display: flex; align-items: center; gap: 0.5rem;
+        }
+        .nav-btn:hover, .nav-btn.active { color: #fff; border-bottom-color: var(--accent); }
+
+        main { max-width: 1100px; margin: 2rem auto; padding: 0 1rem; }
+
+        .search-box {
+            background: var(--card-bg); border: 1px solid var(--border);
+            border-radius: 12px; padding: 1rem 1.5rem; margin-bottom: 2.5rem;
+            display: flex; gap: 1rem; align-items: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        .search-box input {
+            flex: 1; background: transparent; border: none;
+            color: #fff; font-family: inherit; font-size: 1.1rem; outline: none;
+        }
+
+        /* VISTA DE LISTA */
+        .list-container { display: flex; flex-direction: column; gap: 0.5rem; }
+        .list-item {
+            background: var(--card-bg); border: 1px solid var(--border);
+            border-radius: 10px; padding: 0.8rem 1.5rem;
+            display: grid; grid-template-columns: 60px 1fr 100px 100px 100px auto;
+            align-items: center; gap: 1rem;
+            transition: 0.2s; cursor: pointer;
+        }
+        .list-item:hover { border-color: var(--accent); transform: scale(1.01); background: rgba(179, 20, 218, 0.05); }
+        .avatar-mini { width: 40px; height: 40px; border-radius: 50%; background: var(--border); object-fit: cover; border: 2px solid var(--border); }
+
+        .item-name { font-weight: 600; font-size: 1.1rem; color: #fff; }
+        .item-tag { font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; }
+        .item-val { font-weight: 800; color: #fff; text-align: center; }
+        .item-label { font-size: 0.65rem; color: var(--text-dim); text-align: center; }
+
+        /* SESSION CARDS */
+        .session-card-pro {
+            background: #141418; border-radius: 15px; border: 1px solid rgba(255,255,255,0.05);
+            margin-bottom: 1rem; overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .session-header {
+            padding: 1.2rem; display: flex; justify-content: space-between; align-items: center;
+            background: rgba(255,255,255,0.02); cursor: pointer;
+        }
+        .session-header:hover { background: rgba(255,255,255,0.05); }
         
-        main { max-width: 1000px; margin: 2rem auto; padding: 0 1rem; }
-        .search-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 1rem; margin-bottom: 2rem; display: flex; gap: 1rem; align-items: center; }
-        .search-box input { flex: 1; background: transparent; border: none; color: #fff; font-size: 1.1rem; outline: none; }
+        .track-title { font-size: 1.2rem; font-weight: 800; color: #fff; }
+        .car-subtitle { font-size: 0.85rem; color: var(--cyan); font-weight: 600; }
+        .winner-tag { color: var(--gold); font-weight: 800; text-align: right; }
+        .pole-tag { font-size: 0.75rem; color: var(--cyan); opacity: 0.8; text-align: right; }
 
-        .nav-tabs { display: flex; gap: 10px; margin-bottom: 2rem; }
-        .tab-btn { background: var(--card-bg); border: 1px solid var(--border); color: var(--text-dim); padding: 0.6rem 1.2rem; border-radius: 8px; cursor: pointer; font-weight: 600; transition: 0.3s; }
-        .tab-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+        .blogger-table { width: 100%; border-collapse: separate; border-spacing: 0 4px; font-size: 0.85rem; color: #ccc; }
+        .blogger-table th { color: #555; font-size: 0.65rem; text-transform: uppercase; padding: 10px; text-align: left; }
+        .blogger-table tr { background: rgba(255,255,255,0.03); }
+        .blogger-table td { padding: 10px; }
 
-        .list-container { display: flex; flex-direction: column; gap: 10px; }
-        .item-card { background: var(--card-bg); border: 1px solid var(--border); padding: 1rem 1.5rem; border-radius: 12px; display: grid; grid-template-columns: 50px 1fr 100px 100px auto; align-items: center; gap: 15px; cursor: pointer; transition: 0.2s; }
-        .item-card:hover { border-color: var(--accent); transform: scale(1.01); }
-        .avatar { width: 40px; height: 40px; border-radius: 50%; background: #222; }
-        .name { font-weight: 800; font-size: 1.1rem; }
-        .val { font-weight: 900; color: var(--accent); font-size: 1.2rem; text-align: center; }
-        .label { font-size: 0.7rem; color: var(--text-dim); text-align: center; text-transform: uppercase; }
-
-        .session-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 1rem; overflow: hidden; }
-        .session-head { padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; }
-        .track-name { font-weight: 800; font-size: 1.2rem; }
-        .winner { color: var(--gold); font-weight: 800; }
-
-        #loader { text-align: center; padding: 4rem; }
-        .spinner { width: 40px; height: 40px; border: 4px solid #222; border-top-color: var(--accent); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 1rem; }
+        /* LOADER */
+        .loader { display: none; text-align: center; padding: 4rem; }
+        .spinner { width: 40px; height: 40px; border: 4px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto; }
         @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* SELECTORS */
+        .week-selector {
+            background: var(--card-bg); border: 1px solid var(--border);
+            color: #fff; padding: 0.5rem 1rem; border-radius: 8px; font-family: inherit;
+            outline: none; cursor: pointer; font-weight: 600;
+        }
+        .week-selector:hover { border-color: var(--accent); }
+
+        /* TECH TABLE */
+        .tech-table { width: 100%; border-collapse: collapse; margin-top: 1rem; font-size: 0.85rem; }
+        .tech-table th { text-align: left; padding: 1rem; color: var(--text-dim); border-bottom: 1px solid var(--border); font-weight: 400; }
+        .tech-table td { padding: 0.8rem 1rem; border-bottom: 1px solid rgba(255,255,255,0.03); }
+        .sr-badge { font-weight: 800; padding: 2px 6px; border-radius: 4px; }
+        .sr-good { background: rgba(35, 134, 54, 0.2); color: #3fb950; }
+        .sr-bad { background: rgba(248, 81, 73, 0.2); color: #f85149; }
+
+        /* ANALYTICS */
+        .analytics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 2rem; margin-top: 1rem; }
+        .chart-container { background: var(--card-bg); padding: 1.5rem; border-radius: 15px; border: 1px solid var(--border); }
+        .chart-title { font-size: 0.9rem; font-weight: 800; color: var(--accent); text-transform: uppercase; margin-bottom: 1.5rem; letter-spacing: 1px; }
+
+        /* BADGES */
+        .badge-socio { color: var(--gold); margin-left: 8px; font-size: 1rem; }
+        .badge-admin { color: #3fb1ff; margin-left: 8px; font-size: 1rem; }
+
+        /* TAB CONTROLS MINI */
+        .tab-controls { display: flex; gap: 8px; }
+        .tab-btn-mini {
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #888;
+            padding: 4px 12px; border-radius: 6px; font-weight: 800; font-size: 0.7rem;
+            cursor: pointer; transition: 0.2s; text-transform: uppercase;
+        }
+        .tab-btn-mini:hover { border-color: var(--accent); color: #fff; }
+        .tab-btn-mini.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+        @media (max-width: 768px) {
+            .analytics-grid { grid-template-columns: 1fr; }
+            .list-item { grid-template-columns: 50px 1fr auto; }
+            .item-val, .item-label { display: none; }
+            nav { gap: 0.5rem; }
+            .nav-btn span { display: none; }
+        }
     </style>
 </head>
 <body>
 
-<header>
-    <div class="logo"><i data-lucide="database"></i> UNES<span>HUB</span></div>
-    <div style="font-size: 0.8rem; color: var(--text-dim);">CLOUD EDITION 24/7</div>
-</header>
+    <header>
+        <div class="logo">
+            <i data-lucide="shield-check"></i>
+            CENTRAL<span>DATOS</span>
+        </div>
+        <nav>
+            <button class="nav-btn active" id="btn-history" onclick="showTab('history')"><i data-lucide="calendar"></i> <span>Carreras</span></button>
+            <button class="nav-btn" id="btn-ranking" onclick="showTab('ranking')"><i data-lucide="trophy"></i> <span>Clasificación</span></button>
+            <button class="nav-btn" id="btn-community" onclick="showTab('community')"><i data-lucide="users"></i> <span>Comunidad</span></button>
+            <button class="nav-btn" id="btn-analytics" onclick="showTab('analytics')"><i data-lucide="bar-chart-3"></i> <span>Analytics</span></button>
+            <button class="nav-btn" id="btn-security" onclick="showTab('security')"><i data-lucide="shield-alert"></i> <span>Seguridad</span></button>
+        </nav>
+    </header>
 
-<main>
-    <div class="search-box">
-        <i data-lucide="search" style="color:var(--text-dim)"></i>
-        <input type="text" id="searchInput" placeholder="Buscar piloto, circuito o coche..." oninput="render()">
-    </div>
+    <main>
+        <div class="search-box">
+            <i data-lucide="search" style="color: var(--text-dim)"></i>
+            <input type="text" id="mainSearch" placeholder="Buscar piloto o circuito..." oninput="render()">
+            
+            <select id="timeFilter" class="week-selector" onchange="render()">
+                <option value="all">Todo el tiempo</option>
+            </select>
 
-    <div class="nav-tabs">
-        <button class="tab-btn active" id="tab-ranking" onclick="setTab('ranking')">CLASIFICACIÓN</button>
-        <button class="tab-btn" id="tab-history" onclick="setTab('history')">HISTORIAL</button>
-        <button class="tab-btn" id="tab-community" onclick="setTab('community')">COMUNIDAD</button>
-    </div>
+            <div id="statsInfo" style="font-size: 0.8rem; color: var(--text-dim); white-space: nowrap;">Cargando nube...</div>
+        </div>
 
-    <div id="loader">
-        <div class="spinner"></div>
-        <p>Conectando con Supabase Cloud...</p>
-    </div>
+        <div id="loader" class="loader">
+            <div class="spinner"></div>
+            <p style="margin-top: 1rem; color: var(--text-dim);">Sincronizando con Supabase Cloud...</p>
+        </div>
 
-    <div id="content" class="list-container"></div>
-</main>
+        <div id="content"></div>
+    </main>
 
-<script>
-    const SUPABASE_URL = "https://tffpfvzsxnxzsupuddzc.supabase.co";
-    const SUPABASE_KEY = "sb_publishable_hInXQ_vVR9K1FPEDyLOR9Q_eJDkVypo";
-    const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    <script>
+        const SUPABASE_URL = "https://tffpfvzsxnxzsupuddzc.supabase.co";
+        const SUPABASE_KEY = "sb_publishable_hInXQ_vVR9K1FPEDyLOR9Q_eJDkVypo";
+        const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-    let activeTab = 'ranking';
-    let fullData = { pilotos: [], history: [] };
+        let fullData = { history: [], pilotos: [], puntos: [], results_summary: {} };
+        let activeTab = 'history';
 
-    async function init() {
-        lucide.createIcons();
-        try {
-            // Cargar Pilotos
-            const { data: pData } = await _supabase.from('pilotos').select('*');
-            fullData.pilotos = pData || [];
+        async function init() {
+            lucide.createIcons();
+            document.getElementById('loader').style.display = 'block';
+            
+            try {
+                // Carga paralela de datos base
+                const [pRes, sRes, ptsRes] = await Promise.all([
+                    _supabase.from('pilotos').select('*'),
+                    _supabase.from('sesiones').select('*').order('end_time', { ascending: false }),
+                    _supabase.from('puntos_semanales').select('*')
+                ]);
 
-            // Cargar Puntos de la última semana (simplificado para el HUB)
-            const { data: ptsData } = await _supabase.from('puntos_semanales').select('*');
-            // Mapear puntos a los pilotos
-            fullData.pilotos.forEach(p => {
-                const userPts = ptsData.filter(x => x.steam_id === p.steam_id);
-                p.total_puntos = userPts.reduce((sum, x) => sum + (x.puntos || 0), 0);
-                p.total_races = userPts.reduce((sum, x) => sum + (x.carreras || 0), 0);
-            });
+                fullData.pilotos = pRes.data || [];
+                fullData.history = sRes.data || [];
+                fullData.puntos = ptsRes.data || [];
 
-            // Cargar Sesiones
-            const { data: sData } = await _supabase.from('sesiones').select('*').order('end_time', { ascending: false }).limit(50);
-            fullData.history = sData || [];
+                // Poblar selector de semanas
+                populateWeeks();
+                
+                // Cargar ganadores y poles de las últimas 50 sesiones para el historial rápido
+                const recentIds = fullData.history.slice(0, 50).map(s => s.session_id);
+                const { data: winRes } = await _supabase.from('resultados')
+                    .select('session_id, stage, name, flt, pos')
+                    .in('session_id', recentIds)
+                    .eq('pos', 1);
+                
+                (winRes || []).forEach(r => {
+                    if (!fullData.results_summary[r.session_id]) fullData.results_summary[r.session_id] = {};
+                    fullData.results_summary[r.session_id][r.stage] = r;
+                });
 
+                updateStatsInfo();
+                render();
+            } catch (e) {
+                console.error("Error init:", e);
+                document.getElementById('content').innerHTML = `<p style="color: #ff4d4d; text-align: center;">Error de conexión con la nube. Revisa las credenciales.</p>`;
+            }
+            
             document.getElementById('loader').style.display = 'none';
+        }
+
+        function updateStatsInfo() {
+            const hCount = fullData.history.length;
+            const pCount = fullData.pilotos.length;
+            document.getElementById('statsInfo').innerHTML = `<span style="color:var(--accent); font-weight:800">${pCount}</span> PILOTOS <span style="opacity:0.3">|</span> ${hCount} CARRERAS`;
+        }
+
+        function populateWeeks() {
+            const selector = document.getElementById('timeFilter');
+            const weeks = [...new Set(fullData.history.map(s => s.week))].sort().reverse();
+            
+            let html = '<option value="all">Todo el tiempo</option>';
+            weeks.forEach(w => {
+                const wNum = w.split('-W')[1] || w;
+                html += `<option value="${w}">Semana ${wNum}</option>`;
+            });
+            selector.innerHTML = html;
+            if (weeks.length > 0) selector.value = weeks[0];
+        }
+
+        function showTab(tab) {
+            activeTab = tab;
+            document.querySelectorAll('.nav-btn').forEach(b => {
+                b.classList.remove('active');
+                if (b.id === `btn-${tab}`) b.classList.add('active');
+            });
             render();
-        } catch (e) {
-            console.error(e);
-            document.getElementById('loader').innerHTML = "Error cargando datos de la nube.";
         }
-    }
 
-    function setTab(tab) {
-        activeTab = tab;
-        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-        document.getElementById('tab-' + tab).classList.add('active');
-        render();
-    }
+        function render() {
+            const query = document.getElementById('mainSearch').value.toLowerCase();
+            const week = document.getElementById('timeFilter').value;
+            const container = document.getElementById('content');
+            container.innerHTML = '';
 
-    function render() {
-        const query = document.getElementById('searchInput').value.toLowerCase();
-        const container = document.getElementById('content');
-        container.innerHTML = '';
+            if (activeTab === 'history') renderHistory(query, week);
+            else if (activeTab === 'ranking') renderRanking(query);
+            else if (activeTab === 'community') renderCommunity(query);
+            else if (activeTab === 'analytics') renderAnalytics();
+            else if (activeTab === 'security') renderSecurity(query);
+            
+            lucide.createIcons();
+        }
 
-        if (activeTab === 'ranking') {
-            let filtered = fullData.pilotos
-                .filter(p => p.total_puntos > 0 && p.nombre.toLowerCase().includes(query))
-                .sort((a,b) => b.total_puntos - a.total_puntos);
+        function renderHistory(query, week) {
+            const container = document.getElementById('content');
+            let filtered = fullData.history.filter(s => 
+                (s.track_name.toLowerCase().includes(query) || s.car_name.toLowerCase().includes(query)) &&
+                (week === 'all' || s.week === week)
+            );
 
-            filtered.forEach(p => {
-                const div = document.createElement('div');
-                div.className = 'item-card';
-                div.innerHTML = `
-                    <div class="avatar" style="background: url('https://unavatar.io/steam/${p.steam_id}') center/cover"></div>
-                    <div>
-                        <div class="name" style="color:${p.es_socio ? 'var(--gold)' : (p.es_admin ? '#3fb1ff' : '#fff')}">${p.nombre}</div>
-                        <div style="font-size:0.7rem; color:var(--text-dim)">ID: ${p.steam_id}</div>
-                    </div>
-                    <div><div class="val">${p.total_puntos}</div><div class="label">Puntos</div></div>
-                    <div><div class="val">${p.total_races}</div><div class="label">Carreras</div></div>
-                    <i data-lucide="chevron-right" style="opacity:0.3"></i>
-                `;
-                container.appendChild(div);
-            });
-        } else if (activeTab === 'history') {
-            let filtered = fullData.history.filter(s => s.track_name.toLowerCase().includes(query) || s.car_name.toLowerCase().includes(query));
-            filtered.forEach(s => {
-                const div = document.createElement('div');
-                div.className = 'session-card';
-                div.innerHTML = `
-                    <div class="session-head">
-                        <div>
-                            <div style="font-size:0.7rem; color:var(--text-dim)">${s.date} · ${s.time}</div>
-                            <div class="track-name">${s.track_name}</div>
-                            <div style="font-size:0.8rem; color:var(--cyan)">🏎️ ${s.car_name}</div>
+            if (filtered.length === 0) {
+                container.innerHTML = '<p style="text-align:center; padding:2rem; opacity:0.5;">No hay sesiones que coincidan.</p>';
+                return;
+            }
+
+            filtered.forEach((s, idx) => {
+                const sum = fullData.results_summary[s.session_id] || {};
+                const winner = sum.r?.name || '---';
+                const pole = sum.q?.name || '---';
+                const poleTime = sum.q?.flt || '--:--.---';
+
+                const card = document.createElement('div');
+                card.className = 'session-card-pro';
+                card.innerHTML = `
+                    <div class="session-header" onclick="toggleSession(${idx}, '${s.session_id}')">
+                        <div style="flex: 1;">
+                            <div style="font-size:0.7rem; color:var(--text-dim);">${s.date} · ${s.time}</div>
+                            <div class="track-title">${s.track_name}</div>
+                            <div class="car-subtitle">🏎️ ${s.car_name}</div>
                         </div>
-                        <i data-lucide="calendar" style="opacity:0.2"></i>
+                        <div class="tab-controls" style="margin: 0 20px;">
+                            <button class="tab-btn-mini" onclick="event.stopPropagation(); loadSessionResults('${s.session_id}', 'q', ${idx})">Qualy</button>
+                            <button class="tab-btn-mini" onclick="event.stopPropagation(); loadSessionResults('${s.session_id}', 'r', ${idx})">Race</button>
+                        </div>
+                        <div style="text-align:right;">
+                            <div class="winner-tag">🏆 ${winner}</div>
+                            <div class="pole-tag">Pole: ${pole} (${poleTime})</div>
+                        </div>
+                    </div>
+                    <div id="details-${idx}" style="display:none; padding:1rem; background:rgba(0,0,0,0.2); border-top:1px solid rgba(255,255,255,0.05)">
+                        <div id="table-container-${idx}">Cargando resultados...</div>
                     </div>
                 `;
-                container.appendChild(div);
-            });
-        } else if (activeTab === 'community') {
-            let filtered = fullData.pilotos.filter(p => p.nombre.toLowerCase().includes(query));
-            filtered.forEach(p => {
-                const sr = p.vueltas_totales > 0 ? Math.round((p.vueltas_limpias / p.vueltas_totales) * 100) : 0;
-                const div = document.createElement('div');
-                div.className = 'item-card';
-                div.innerHTML = `
-                    <div class="avatar" style="background: url('https://unavatar.io/steam/${p.steam_id}') center/cover"></div>
-                    <div class="name">${p.nombre}</div>
-                    <div><div class="val" style="color:${sr > 80 ? 'var(--cyan)' : '#f85149'}">${sr}%</div><div class="label">Limpieza</div></div>
-                    <div><div class="val" style="color:var(--text-dim)">${p.vueltas_totales}</div><div class="label">Vueltas</div></div>
-                    <i data-lucide="shield" style="opacity:0.3"></i>
-                `;
-                container.appendChild(div);
+                container.appendChild(card);
             });
         }
-        lucide.createIcons();
-    }
 
-    init();
-</script>
+        function toggleSession(idx, sid) {
+            const el = document.getElementById(`details-${idx}`);
+            if (el.style.display === 'none') {
+                el.style.display = 'block';
+                loadSessionResults(sid, 'r', idx);
+            } else {
+                el.style.display = 'none';
+            }
+        }
+
+        async function loadSessionResults(sid, stage, idx) {
+            const cont = document.getElementById(`table-container-${idx}`);
+            cont.innerHTML = '<div class="spinner" style="width:20px; height:20px;"></div>';
+            
+            const { data } = await _supabase.from('resultados')
+                .select('*')
+                .eq('session_id', sid)
+                .eq('stage', stage)
+                .order('pos', { ascending: true });
+
+            if (!data || data.length === 0) {
+                cont.innerHTML = '<p style="font-size:0.8rem; opacity:0.5;">No hay resultados registrados para esta etapa.</p>';
+                return;
+            }
+
+            let html = `
+                <table class="blogger-table">
+                    <thead>
+                        <tr><th>Pos</th><th>Piloto</th><th>Coche</th><th style="text-align:right">Vuelta Rápida</th></tr>
+                    </thead>
+                    <tbody>
+            `;
+            data.forEach(r => {
+                html += `
+                    <tr>
+                        <td style="font-weight:800; color:${r.pos <= 3 ? 'var(--gold)' : 'inherit'}">${r.pos}º</td>
+                        <td style="font-weight:600">${r.name}</td>
+                        <td style="font-size:0.75rem; opacity:0.6">${r.car_name}</td>
+                        <td style="text-align:right; font-family:monospace; color:var(--cyan)">${r.flt}</td>
+                    </tr>
+                `;
+            });
+            html += '</tbody></table>';
+            cont.innerHTML = html;
+        }
+
+        function renderRanking(query) {
+            const container = document.getElementById('content');
+            // Agrupar puntos por piloto
+            const ranking = fullData.pilotos.map(p => {
+                const pData = fullData.puntos.filter(pts => pts.steam_id === p.steam_id);
+                return {
+                    ...p,
+                    pts: pData.reduce((sum, x) => sum + (x.puntos || 0), 0),
+                    races: pData.reduce((sum, x) => sum + (x.carreras || 0), 0),
+                    poles: pData.reduce((sum, x) => sum + (x.poles || 0), 0)
+                };
+            }).filter(p => p.pts > 0 && p.nombre.toLowerCase().includes(query))
+              .sort((a,b) => b.pts - a.pts);
+
+            if (ranking.length === 0) {
+                container.innerHTML = '<p style="text-align:center; padding:2rem; opacity:0.5;">No hay pilotos en la clasificación.</p>';
+                return;
+            }
+
+            const list = document.createElement('div'); list.className = 'list-container';
+            ranking.forEach((p, idx) => {
+                const card = document.createElement('div');
+                card.className = 'list-item';
+                card.innerHTML = `
+                    <img src="https://unavatar.io/steam/${p.steam_id}" class="avatar-mini">
+                    <div>
+                        <div class="item-name ${p.es_admin ? 'badge-admin' : (p.es_socio ? 'badge-socio' : '')}">${p.nombre} ${p.es_admin ? '👑' : (p.es_socio ? '🛡️' : '')}</div>
+                        <div class="item-tag">Rango: ${p.races > 20 ? 'Veterano' : 'Novato'}</div>
+                    </div>
+                    <div><div class="item-val">${p.pts}</div><div class="item-label">Puntos</div></div>
+                    <div><div class="item-val">${p.races}</div><div class="item-label">Carreras</div></div>
+                    <div><div class="item-val">${p.poles}</div><div class="item-label">Poles</div></div>
+                    <i data-lucide="chevron-right" style="opacity:0.2"></i>
+                `;
+                list.appendChild(card);
+            });
+            container.appendChild(list);
+        }
+
+        function renderCommunity(query) {
+            const container = document.getElementById('content');
+            const filtered = fullData.pilotos.filter(p => p.nombre.toLowerCase().includes(query))
+                .sort((a,b) => (b.veces_conectado || 0) - (a.veces_conectado || 0));
+
+            const table = document.createElement('table');
+            table.className = 'tech-table';
+            table.innerHTML = `
+                <thead>
+                    <tr><th>Piloto</th><th>Cargo</th><th>SR (%)</th><th>Vueltas (L/T)</th><th>Ingresos</th><th>Última Vez</th></tr>
+                </thead>
+                <tbody>
+            `;
+            filtered.slice(0, 50).forEach(p => {
+                const sr = p.vueltas_totales > 0 ? Math.round((p.vueltas_limpias / p.vueltas_totales) * 100) : 0;
+                table.innerHTML += `
+                    <tr>
+                        <td>
+                            <div style="display:flex; align-items:center; gap:10px;">
+                                <img src="https://unavatar.io/steam/${p.steam_id}" style="width:24px; height:24px; border-radius:50%;">
+                                <span style="font-weight:600">${p.nombre}</span>
+                            </div>
+                        </td>
+                        <td>${p.es_admin ? '👑' : (p.es_socio ? '🛡️' : '👤')}</td>
+                        <td><span class="sr-badge ${sr > 80 ? 'sr-good' : 'sr-bad'}">${sr}%</span></td>
+                        <td style="opacity:0.6">${p.vueltas_limpias || 0} / ${p.vueltas_totales || 0}</td>
+                        <td>${p.veces_conectado || 0}</td>
+                        <td style="font-size:0.75rem; opacity:0.5">${p.ultima_conexion || '---'}</td>
+                    </tr>
+                `;
+            });
+            table.innerHTML += '</tbody>';
+            container.appendChild(table);
+        }
+
+        function renderAnalytics() {
+            const container = document.getElementById('content');
+            container.innerHTML = `
+                <div class="analytics-grid">
+                    <div class="chart-container">
+                        <div class="chart-title">Participación Semanal</div>
+                        <canvas id="chart-participation"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <div class="chart-title">Top 5 Circuitos</div>
+                        <canvas id="chart-tracks"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <div class="chart-title">Limpieza de la Comunidad (SR)</div>
+                        <canvas id="chart-sr"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <div class="chart-title">Top 5 Vehículos</div>
+                        <canvas id="chart-cars"></canvas>
+                    </div>
+                </div>
+            `;
+
+            // Data Participation
+            const weeksData = {};
+            fullData.history.forEach(s => weeksData[s.week] = (weeksData[s.week] || 0) + 1);
+            const sortedWeeks = Object.keys(weeksData).sort();
+            
+            new Chart(document.getElementById('chart-participation'), {
+                type: 'line',
+                data: {
+                    labels: sortedWeeks.map(w => w.split('-W')[1]),
+                    datasets: [{
+                        label: 'Carreras',
+                        data: sortedWeeks.map(w => weeksData[w]),
+                        borderColor: '#b314da',
+                        backgroundColor: 'rgba(179, 20, 218, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: { plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.05)' } }, x: { grid: { display: false } } } }
+            });
+
+            // Top Tracks
+            const trackData = {};
+            fullData.history.forEach(s => trackData[s.track_name] = (trackData[s.track_name] || 0) + 1);
+            const topTracks = Object.entries(trackData).sort((a,b) => b[1] - a[1]).slice(0, 5);
+
+            new Chart(document.getElementById('chart-tracks'), {
+                type: 'bar',
+                data: {
+                    labels: topTracks.map(t => t[0].substring(0, 15)),
+                    datasets: [{
+                        data: topTracks.map(t => t[1]),
+                        backgroundColor: '#00ffcc'
+                    }]
+                },
+                options: { indexAxis: 'y', plugins: { legend: { display: false } } }
+            });
+
+            // SR Distribution
+            const srRanges = { "90-100": 0, "70-90": 0, "50-70": 0, "<50": 0 };
+            fullData.pilotos.forEach(p => {
+                const sr = p.vueltas_totales > 0 ? (p.vueltas_limpias / p.vueltas_totales) * 100 : 0;
+                if (sr >= 90) srRanges["90-100"]++;
+                else if (sr >= 70) srRanges["70-90"]++;
+                else if (sr >= 50) srRanges["50-70"]++;
+                else srRanges["<50"]++;
+            });
+
+            new Chart(document.getElementById('chart-sr'), {
+                type: 'doughnut',
+                data: {
+                    labels: Object.keys(srRanges),
+                    datasets: [{
+                        data: Object.values(srRanges),
+                        backgroundColor: ['#238636', '#ffcc00', '#f85149', '#444']
+                    }]
+                }
+            });
+
+            // Top Cars
+            const carData = {};
+            fullData.history.forEach(s => carData[s.car_name] = (carData[s.car_name] || 0) + 1);
+            const topCars = Object.entries(carData).sort((a,b) => b[1] - a[1]).slice(0, 5);
+
+            new Chart(document.getElementById('chart-cars'), {
+                type: 'bar',
+                data: {
+                    labels: topCars.map(c => c[0].substring(0, 15)),
+                    datasets: [{
+                        data: topCars.map(c => c[1]),
+                        backgroundColor: '#b314da'
+                    }]
+                }
+            });
+        }
+
+        function renderSecurity(query) {
+            const container = document.getElementById('content');
+            const banned = fullData.pilotos.filter(p => (p.veces_baneado || 0) > 0 && p.nombre.toLowerCase().includes(query));
+
+            if (banned.length === 0) {
+                container.innerHTML = `
+                    <div style="text-align:center; padding:4rem; color:var(--cyan);">
+                        <i data-lucide="check-circle" style="width:48px; height:48px; margin-bottom:1rem;"></i>
+                        <h3 style="font-weight:800;">LIMPIEZA TOTAL</h3>
+                        <p style="opacity:0.6; font-size:0.9rem;">No hay pilotos con sanciones activas en la base de datos.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            const list = document.createElement('div'); list.className = 'list-container';
+            banned.forEach(p => {
+                const card = document.createElement('div');
+                card.className = 'list-item';
+                card.style.borderColor = '#f85149';
+                card.innerHTML = `
+                    <img src="https://unavatar.io/steam/${p.steam_id}" class="avatar-mini">
+                    <div>
+                        <div class="item-name" style="color:#f85149">${p.nombre}</div>
+                        <div class="item-tag">ID: ${p.steam_id}</div>
+                    </div>
+                    <div><div class="item-val" style="color:#f85149">${p.veces_baneado}</div><div class="item-label">SANCIONES</div></div>
+                    <div style="grid-column: span 2; text-align:right; font-size:0.75rem; color:var(--text-dim);">Último ingreso: ${p.ultima_conexion || '---'}</div>
+                `;
+                list.appendChild(card);
+            });
+            container.appendChild(list);
+        }
+
+        init();
+    </script>
 </body>
 </html>
