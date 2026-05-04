@@ -18,47 +18,33 @@
             min-height: 100vh;
         }
 
-        .unes-nav-bar {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 30px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            padding-bottom: 10px;
+        header {
+            position: sticky; top: 0;
             background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
-            position: sticky;
-            top: 0;
+            backdrop-filter: blur(12px);
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #222;
+            display: flex; justify-content: space-between; align-items: center;
             z-index: 100;
-            padding-top: 15px;
         }
 
-        .unes-nav-item {
-            background: transparent;
-            border: none;
-            color: #8b949e;
-            font-family: 'Outfit', sans-serif;
-            font-size: 0.85rem;
-            cursor: pointer;
-            padding: 0.6rem 1rem;
-            border-bottom: 2px solid transparent;
-            transition: 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+        .logo { display:flex; align-items:center; gap:0.8rem; font-size:1.5rem; font-weight:800; color:#fff; }
+        .logo span { color: #b314da; }
+
+        nav { display: flex; gap: 0.5rem; }
+        .nav-btn {
+            background: transparent; border: none; color: #8b949e;
+            font-family: inherit; font-size: 0.85rem; cursor: pointer;
+            padding: 0.5rem 0.8rem; border-bottom: 2px solid transparent;
+            transition: 0.3s; display: flex; align-items: center; gap: 0.4rem;
             font-weight: 600;
             text-decoration: none;
         }
+        .nav-btn:hover, .nav-btn.active { color: #fff; border-bottom-color: #b314da; }
 
-        .unes-nav-item:hover {
-            color: #fff;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 8px 8px 0 0;
-        }
-
-        .unes-nav-item.active {
-            color: #ffcc00;
-            border-bottom-color: #ffcc00;
+        @media (max-width: 768px) {
+            .nav-btn span { display: none; }
+            header { padding: 1rem; }
         }
     </style>
 </head>
@@ -67,17 +53,17 @@
     <div id="page-bg"
         style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.10; background-size: cover; background-position: center; transition: background 0.5s ease-in-out; filter: blur(5px);">
     </div>
-    <div class="unes-nav-bar">
-        <a href="index.html" class="unes-nav-item">
-            <i data-lucide="calendar"></i> <span>CARRERAS</span>
-        </a>
-        <div class="unes-nav-item active">
-            <i data-lucide="plus-circle"></i> <span>ENVIAR COMBO</span>
-        </div>
-        <a href="index.html#ranking" class="unes-nav-item">
-            <i data-lucide="trophy"></i> <span>RANKING</span>
-        </a>
-    </div>
+    <header>
+        <div class="logo"><i data-lucide="shield-check"></i> UNES<span>Adictos al Gas</span></div>
+        <nav>
+            <a href="index.html" class="nav-btn"><i data-lucide="calendar"></i> <span>Carreras</span></a>
+            <div class="nav-btn active"><i data-lucide="plus-circle"></i> <span>Tú Combo</span></div>
+            <a href="index.html" class="nav-btn"><i data-lucide="gauge"></i> <span>Récords</span></a>
+            <a href="index.html" class="nav-btn"><i data-lucide="trophy"></i> <span>Ranking</span></a>
+            <a href="index.html" class="nav-btn"><i data-lucide="bar-chart-3"></i> <span>Stats</span></a>
+            <a href="index.html" class="nav-btn"><i data-lucide="user-x"></i> <span>Baneados</span></a>
+        </nav>
+    </header>
 
     <div id="unes-combo-custom-container"
         style="background: transparent; color: #fff; font-family: 'Outfit', 'Inter', sans-serif; max-width: 1000px; margin: 0 auto; padding: 10px;">
@@ -657,10 +643,7 @@
                 style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; max-width: 800px; margin-left: auto; margin-right: auto;">
 
                 <h1 class="main-title">🚀 CONFIGURAR COMBO</h1>
-                <button type="button" class="recent-combos-btn" onclick="randomizeForm()"
-                    style="flex: 1; min-width: 50px; margin: 0; background: rgba(255, 204, 0, 0.1); border-color: var(--primary); color: var(--primary);">
-                    🎲 RELLENAR ALEATORIAMENTE
-                </button>
+
             </div>
             <div id="recentPanel" class="recent-panel" style="max-width: 600px; margin: 0 auto 20px;"></div>
 
@@ -687,7 +670,13 @@
                         </div>
 
                         <div>
-                            <div class="section-header">📶 COMBINACIÓN</div>
+                            <div class="section-header" style="display: flex; align-items: center; justify-content: space-between;">
+                                <span>📶 COMBINACIÓN</span>
+                                <button type="button" onclick="randomizeForm()" 
+                                    style="background: rgba(255,255,255,0.05); border: 1px solid #444; color: #aaa; font-size: 0.65rem; padding: 4px 10px; border-radius: 4px; cursor: pointer; text-transform: uppercase; font-weight: 800; letter-spacing: 0.5px; transition: 0.3s;">
+                                    🎲 TODO ALEATORIO
+                                </button>
+                            </div>
                             <div class="form-grid">
                                 <div>
                                     <label>Circuito <span class="req">⦿</span> <span class="dice-btn" title="Aleatorio"
@@ -1327,6 +1316,73 @@
             document.getElementById('recentPanel').style.display = 'none';
             document.querySelector('.top-row').style.display = 'none';
             document.getElementById('successView').style.display = 'block';
+            
+            updateLimit();
+        }
+
+        async function fetchRecentHistory(limit = 10) {
+            try {
+                const url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ3cHE1Ew3bBKZ1P-MlVcL5h08tQiGM7kNQORORfpLclUMVDCU7LfQ37G0fGIYrY1Ma8KbEQGlZeqcj/pub?output=csv&cachebuster=' + Date.now();
+                const response = await fetch(url);
+                const csvText = await response.text();
+                const rows = csvText.split('\n').map(row => row.split(',').map(cell => cell.trim().replace(/^"(.*)"$/, '$1')));
+                const validRows = rows.slice(1).filter(r => r.length > 5 && r[3] && r[3] !== '');
+                return validRows.reverse().slice(0, limit);
+            } catch (e) { return []; }
+        }
+
+        function updateLimit() {
+            const today = new Date().toISOString().split('T')[0];
+            const stats = JSON.parse(localStorage.getItem('combo_submissions') || '{"date":"","count":0}');
+            if (stats.date === today) {
+                stats.count++;
+            } else {
+                stats.date = today;
+                stats.count = 1;
+            }
+            localStorage.setItem('combo_submissions', JSON.stringify(stats));
+        }
+
+        async function toggleRecent() {
+            const panel = document.getElementById('recentPanel');
+            if (panel.style.display === 'block') {
+                panel.style.display = 'none';
+                return;
+            }
+            
+            panel.style.display = 'block';
+            panel.innerHTML = '<p style="text-align:center; color:#8c8c9b; font-size:0.9em;">🔍 Consultando servidor...</p>';
+            
+            const last5 = await fetchRecentHistory(5);
+            
+            if (last5.length === 0) {
+                panel.innerHTML = '<p style="text-align:center; color:#8c8c9b;">No hay combos registrados aún o error de conexión.</p>';
+                return;
+            }
+            
+            panel.innerHTML = '<h4 style="margin:0 0 15px 0; color:#8c8c9b; font-size:0.75rem; text-transform:uppercase; letter-spacing:2px; font-weight:900;">HISTORIAL RECIENTE</h4>';
+            last5.forEach(row => {
+                const timestamp = row[0] || '';
+                const user = row[2] || 'Piloto';
+                const track = (row[3] || '???').replace(/_/g, ' ');
+                const car = row[5] || '???';
+                
+                const dateParts = timestamp.split(' ');
+                const shortDate = dateParts.length > 1 ? 
+                    `${dateParts[0].substring(0, 5)} ${dateParts[1].substring(0, 5)}` : '';
+
+                const item = document.createElement('div');
+                item.className = 'recent-item';
+                item.innerHTML = `
+                    <span class="track">${track}</span>
+                    <span class="sep">—</span>
+                    <span class="car">${car}</span>
+                    <span class="sep">—</span>
+                    <span class="user">por ${user.toUpperCase()}</span>
+                    <span class="date">${shortDate}</span>
+                `;
+                panel.appendChild(item);
+            });
         }
 
         initForm();
