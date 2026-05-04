@@ -1494,14 +1494,39 @@
 
         function handleIframeLoad() { if (submitted) showSuccess(); }
         function showSuccess() {
-            document.getElementById('googleComboForm').style.display = 'none';
-            document.querySelector('.main-title').style.display = 'none';
-            document.getElementById('topActionButtons').style.display = 'none';
-            document.getElementById('recentPanel').style.display = 'none';
-            document.querySelector('.top-row').style.display = 'none';
-            document.getElementById('successView').style.display = 'block';
+            const hide = (id) => { const el = document.getElementById(id); if (el) el.style.display = 'none'; };
+            const hideClass = (cls) => { const el = document.querySelector(cls); if (el) el.style.display = 'none'; };
             
-            updateLimit();
+            hide('googleComboForm');
+            hideClass('.main-title');
+            hide('topActionButtons');
+            hide('recentPanel');
+            hideClass('.top-row');
+            
+            const sv = document.getElementById('successView');
+            if (sv) {
+                sv.style.display = 'flex';
+                sv.style.flexDirection = 'column';
+                sv.style.alignItems = 'center';
+                sv.style.justifyContent = 'center';
+                sv.style.minHeight = '400px';
+                sv.innerHTML = `
+                    <div style="text-align:center; padding:3rem; background:var(--card-bg); border-radius:24px; border:1px solid var(--primary); box-shadow:0 15px 50px rgba(180,22,218,0.3); max-width:500px; width:100%; animation: fadeInUp 0.5s ease-out;">
+                        <div style="font-size:4rem; margin-bottom:1.5rem; filter: drop-shadow(0 0 10px var(--primary));">🚀</div>
+                        <h2 style="font-size:2.2rem; font-weight:900; margin-bottom:1rem; color:var(--text);">¡COMBO ENVIADO!</h2>
+                        <p style="color:var(--text-dim); margin-bottom:2.5rem; font-size:1.1rem;">Tu configuración se ha registrado con éxito y pronto aparecerá en el historial.</p>
+                        <div style="display:flex; flex-direction:column; gap:1rem;">
+                            <button onclick="location.reload()" class="submit-btn" style="width:100%; font-size:1.1rem; padding:1.2rem; cursor:pointer;">
+                                <i data-lucide="plus-circle" style="width:20px; vertical-align:middle; margin-right:8px;"></i> ENVIAR OTRO COMBO
+                            </button>
+                            <a href="index.html" class="nav-btn" style="text-decoration:none; justify-content:center; border:1px solid var(--border); padding:1.1rem; border-radius:14px; color:var(--text-dim); font-weight:700; transition:all 0.3s;">
+                                <i data-lucide="home" style="width:18px; vertical-align:middle; margin-right:8px;"></i> VOLVER AL INICIO
+                            </a>
+                        </div>
+                    </div>
+                `;
+                if (typeof lucide !== 'undefined') lucide.createIcons();
+            }
         }
 
         async function fetchRecentHistory(limit = 10) {
