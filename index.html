@@ -111,6 +111,18 @@
         .spinner { width: 40px; height: 40px; border: 4px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 1s linear infinite; margin: auto; }
         @keyframes spin { to { transform: rotate(360deg); } }
 
+        /* Toast Notification */
+        #toast {
+            position: fixed; top: 20px; right: 20px; 
+            background: var(--accent); color: #fff;
+            padding: 0.8rem 1.5rem; border-radius: 8px;
+            font-weight: 800; transform: translateY(-100px);
+            transition: 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+            z-index: 2000; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            display: flex; align-items: center; gap: 10px;
+        }
+        #toast.active { transform: translateY(0); }
+
         @media (max-width: 768px) {
             .nav-btn span { display: none; }
             .records-selectors { flex-direction: column; }
@@ -131,6 +143,7 @@
     </header>
 
     <main>
+        <div id="toast"><i data-lucide="copy"></i> <span id="toast-msg">ID Copiado</span></div>
         <div id="search-section">
             <div class="search-box">
                 <i data-lucide="search" style="color: var(--text-dim)"></i>
@@ -276,22 +289,24 @@
 
         function render() {
             const query = document.getElementById('mainSearch').value.toLowerCase();
-            const limit = parseInt(document.getElementById('resultsLimit').value) || 20;
+            const limitVal = document.getElementById('resultsLimit').value;
+            const limit = limitVal === 'all' ? 999999 : parseInt(limitVal);
             const container = document.getElementById('content');
             container.innerHTML = '';
 
-            if (activeTab === 'history') renderHistory(query);
+            if (activeTab === 'history') renderHistory(query, limit);
             else if (activeTab === 'ranking') renderRanking(query, limit);
             else if (activeTab === 'analytics') renderAnalytics();
             else if (activeTab === 'records') loadRecords();
-            else if (activeTab === 'sancionados') renderSancionados(query);
+            else if (activeTab === 'sancionados') renderSancionados(query, limit);
             lucide.createIcons();
         }
 
-        function renderHistory(query) {
+        function renderHistory(query, limit) {
             const filtered = fullData.history.filter(s => s.track_name.toLowerCase().includes(query) || s.car_name.toLowerCase().includes(query));
+            const paginated = filtered.slice(0, limit);
             let html = '';
-            filtered.forEach((s, idx) => {
+            paginated.forEach((s, idx) => {
                 const sum = fullData.summary[s.session_id] || {};
                 html += `
                 <div class="session-card-pro">
@@ -432,6 +447,7 @@
 
         function renderSancionados(query) {
             const container = document.getElementById('content');
+            const limit = document.getElementById('resultsLimit').value;
             
             // 1. Obtener pilotos conocidos que están baneados actualmente
             const knownBanned = fullData.pilotos.filter(p => 
@@ -443,7 +459,10 @@
             // 2. Añadir IDs de la blacklist que NO conocemos (pilotos que nunca entraron)
             const unknownBannedIds = fullData.blacklist.filter(id => !fullData.pilotos.find(p => p.steam_id === id));
             
-            if (knownBanned.length === 0 && unknownBannedIds.length === 0) {
+            let allBanned = [...knownBanned, ...unknownBannedIds.map(id => ({ steam_id: id, nombre: "Piloto Bloqueado", unknown: true }))];
+            if (limit !== 'all') allBanned = allBanned.slice(0, parseInt(limit));
+
+            if (allBanned.length === 0) {
                 const isLocal = window.location.protocol === 'file:';
                 container.innerHTML = `
                 <div style="text-align:center; padding:5rem; opacity:0.8;">
@@ -454,16 +473,15 @@
                 return;
             }
 
-            // Renderizar conocidos
-            knownBanned.forEach(p => {
-                const isPermanent = fullData.blacklist.includes(p.steam_id) || p.esta_baneado;
-                renderBannedCard(container, p.nombre, p.steam_id, p.avatar_url, isPermanent, p.veces_baneado);
-            });
-
-            // Renderizar desconocidos
-            unknownBannedIds.forEach(id => {
-                if (id.includes(query)) {
-                    renderBannedCard(container, "Piloto Bloqueado", id, null, true, 0);
+            // Renderizar todos los baneados (limitados)
+            allBanned.forEach(p => {
+                if (p.unknown) {
+                    if (p.steam_id.includes(query)) {
+                        renderBannedCard(container, "Piloto Bloqueado", p.steam_id, null, true, 0);
+                    }
+                } else {
+                    const isPermanent = fullData.blacklist.includes(p.steam_id) || p.esta_baneado;
+                    renderBannedCard(container, p.nombre, p.steam_id, p.avatar_url, isPermanent, p.veces_baneado);
                 }
             });
             lucide.createIcons();
@@ -479,8 +497,9 @@
             <div style="display:flex; justify-content:space-between; align-items:center;">
                 <div style="display:flex; align-items:center; gap:15px;">
                     <img src="${avatar || 'https://avatars.akamai.steamstatic.com/fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb_full.jpg'}" 
-                         title="SteamID: ${sid}" 
-                         style="width:45px; height:45px; border-radius:50%; border:2px solid ${isPermanent ? '#f85149' : '#ffa657'}; opacity:0.6; cursor:help;">
+                         title="Clic para copiar ID: ${sid}" 
+                         onclick="copyID('${sid}')"
+                         style="width:45px; height:45px; border-radius:50%; border:2px solid ${isPermanent ? '#f85149' : '#ffa657'}; opacity:0.6; cursor:copy;">
                     <div>
                         <b style="font-size:1.1rem; color:#fff;">${nombre}</b>
                         <div style="color:${isPermanent ? '#f85149' : '#ffa657'}; font-size:0.65rem; font-weight:800; text-transform:uppercase; letter-spacing:1px;">
@@ -505,8 +524,9 @@
             body.innerHTML = `
                 <div style="display:flex; gap:1.5rem; align-items:center; margin-bottom:2rem;">
                     <img src="${p.avatar_url || 'https://avatars.akamai.steamstatic.com/fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb_full.jpg'}" 
-                         title="SteamID: ${sid}"
-                         style="width:80px; height:80px; border-radius:50%; border:2px solid var(--accent); cursor:help;">
+                         title="Clic para copiar ID: ${sid}"
+                         onclick="copyID('${sid}')"
+                         style="width:80px; height:80px; border-radius:50%; border:2px solid var(--accent); cursor:copy;">
                     <div><h2 style="font-weight:800;">${p.nombre}</h2></div>
                 </div>
                 <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:1rem; margin-bottom:2rem;">
@@ -528,6 +548,17 @@
         }
 
         function closeModal() { document.getElementById('modal').classList.remove('active'); }
+
+        function copyID(sid) {
+            navigator.clipboard.writeText(sid).then(() => {
+                const toast = document.getElementById('toast');
+                const msg = document.getElementById('toast-msg');
+                msg.innerText = "ID Copiado: " + sid;
+                toast.classList.add('active');
+                setTimeout(() => toast.classList.remove('active'), 2500);
+            });
+        }
+
         function toggleSession(idx, sid) {
             const el = document.getElementById(`details-${idx}`);
             const isHidden = el.style.display === 'none';
