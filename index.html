@@ -155,13 +155,12 @@
             <button class="nav-btn active" id="btn-history" onclick="showTab('history')"><i data-lucide="calendar"></i> <span>Carreras</span></button>
             <button class="nav-btn" id="btn-records" onclick="showTab('records')"><i data-lucide="gauge"></i> <span>Récords</span></button>
             <button class="nav-btn" id="btn-ranking" onclick="showTab('ranking')"><i data-lucide="trophy"></i> <span>Ranking</span></button>
-            <button class="nav-btn" id="btn-community" onclick="showTab('community')"><i data-lucide="users"></i> <span>Comunidad</span></button>
             <button class="nav-btn" id="btn-analytics" onclick="showTab('analytics')"><i data-lucide="bar-chart-3"></i> <span>Stats</span></button>
             <button class="nav-btn" id="btn-sancionados" onclick="showTab('sancionados')"><i data-lucide="user-x"></i> <span>Baneados</span></button>
         </nav>
     </header>
 
-    <main>
+    <main id="main-container">
         <div id="search-section">
             <div class="search-box">
                 <i data-lucide="search" style="color: var(--text-dim)"></i>
@@ -226,10 +225,8 @@
 
                 populateSelectors();
                 
-                // Activar cargador de avatares inteligente
                 setInterval(lazyLoadAvatars, 2000);
                 
-                // Cargar resumen de ganadores para el historial rápido
                 const recentIds = fullData.history.slice(0, 30).map(s => s.session_id);
                 const { data: winRes } = await _supabase.from('resultados').select('session_id, stage, name, flt, pos').in('session_id', recentIds).eq('pos', 1);
                 (winRes || []).forEach(r => {
@@ -257,19 +254,15 @@
             const selectedTrack = tSel.value;
             const selectedCar = cSel.value;
 
-            // Obtener todas las combinaciones reales de la historia
             const combinations = fullData.history.map(s => ({ t: s.track_name, c: s.car_name }));
 
             if (changedType === 'track') {
-                // Si cambió el circuito, filtramos los coches disponibles para ese circuito
                 const availableCars = [...new Set(combinations.filter(x => x.t === selectedTrack).map(x => x.c))].sort();
                 cSel.innerHTML = availableCars.map(c => `<option value="${c}" ${c === selectedCar ? 'selected' : ''}>${c}</option>`).join('');
             } else if (changedType === 'car') {
-                // Si cambió el coche, filtramos los circuitos disponibles para ese coche
                 const availableTracks = [...new Set(combinations.filter(x => x.c === selectedCar).map(x => x.t))].sort();
                 tSel.innerHTML = availableTracks.map(t => `<option value="${t}" ${t === selectedTrack ? 'selected' : ''}>${t}</option>`).join('');
             } else {
-                // Inicialización: Llenar ambos con todo lo que existe
                 const allTracks = [...new Set(combinations.map(x => x.t))].sort();
                 const allCars = [...new Set(combinations.map(x => x.c))].sort();
                 tSel.innerHTML = allTracks.map(t => `<option value="${t}">${t}</option>`).join('');
@@ -301,7 +294,6 @@
         function timeAgo(dateString) {
             if (!dateString) return '---';
             try {
-                // Formato: "03/05/2026 17:46:32"
                 const [d, t] = dateString.split(' ');
                 const [day, month, year] = d.split('/');
                 const [h, m, s] = t.split(':');
@@ -321,7 +313,7 @@
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
             document.getElementById(`btn-${tab}`).classList.add('active');
             
-            document.getElementById('search-section').style.display = (tab === 'records') ? 'none' : 'block';
+            document.getElementById('search-section').style.display = (tab === 'records' || tab === 'history' || tab === 'ranking') ? 'block' : 'none';
             document.getElementById('records-section').style.display = (tab === 'records') ? 'block' : 'none';
             
             if (tab === 'records') loadRecords();
@@ -335,8 +327,7 @@
             container.innerHTML = '';
 
             if (activeTab === 'history') renderHistory(query, week);
-            else if (activeTab === 'ranking') renderRanking(query);
-            else if (activeTab === 'community') renderCommunity(query);
+            else if (activeTab === 'ranking') renderRanking(fullData.pilotos.filter(p => p.nombre.toLowerCase().includes(query)));
             else if (activeTab === 'analytics') renderAnalytics();
             else if (activeTab === 'sancionados') renderSancionados(query);
             
@@ -385,7 +376,6 @@
             
             if (!data) { cont.innerHTML = 'Error cargando datos.'; return; }
 
-            // FILTRO ANTI-DUPLICADOS: Solo un resultado por piloto
             const uniqueResults = [];
             const seen = new Set();
             data.forEach(r => {
@@ -417,7 +407,6 @@
             
             container.innerHTML = '<div class="spinner" style="margin:2rem auto;"></div>';
 
-            // Encontrar IDs de sesiones que coinciden con esta combinación de pista y coche
             const sessionIds = fullData.history
                 .filter(s => s.track_name === track && s.car_name === car)
                 .map(s => s.session_id);
@@ -427,7 +416,6 @@
                 return;
             }
 
-            // Consultar resultados de esas sesiones específicas
             const { data } = await _supabase.from('resultados')
                 .select('*')
                 .in('session_id', sessionIds)
@@ -473,11 +461,6 @@
                          style="width:100px; height:100px; border-radius:50%; border:3px solid var(--accent); object-fit:cover; background:#111; opacity:0.6; transition:opacity 0.5s;">
                     <div>
                         <h2 style="font-size:2rem; font-weight:800;">${p.nombre || 'Piloto'}</h2>
-                        <div style="color:var(--text-dim); font-size:0.8rem;">ID: ${sid}</div>
-                        <div style="margin-top:10px;">
-                            ${p.es_admin ? '<span class="badge" style="background:#3fb1ff; color:#000;">ADMIN</span>' : ''}
-                            ${p.es_socio ? '<span class="badge" style="background:var(--gold); color:#000;">SOCIO</span>' : ''}
-                        </div>
                     </div>
                 </div>
                 <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:1rem; margin-bottom:2rem;">
@@ -533,47 +516,52 @@
             if (el.style.display === 'block') loadSessionResults(sid, 'r', idx);
         }
 
-        function renderRanking(query) {
+        function renderRanking(pilotos) {
             const container = document.getElementById('content');
-            const ranking = fullData.pilotos.map(p => {
-                const pData = fullData.puntos.filter(pts => pts.steam_id === p.steam_id);
-                return { ...p, pts: pData.reduce((sum, x) => sum + (x.puntos || 0), 0), races: pData.reduce((sum, x) => sum + (x.carreras || 0), 0) };
-            }).filter(p => p.pts > 0 && p.nombre.toLowerCase().includes(query)).sort((a,b) => b.pts - a.pts);
-
-            ranking.forEach(p => {
-                const card = document.createElement('div');
-                card.className = 'list-item';
-                card.onclick = () => openProfile(p.steam_id);
-                card.innerHTML = `<img src="${p.avatar_url || 'https://avatars.akamai.steamstatic.com/fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb_full.jpg'}" 
-                                       data-sid="${p.steam_id}" ${!p.avatar_url ? 'data-pending="true"' : ''}
-                                       style="width:40px; height:40px; border-radius:50%; object-fit:cover; background:#111; opacity:0.6;">
-                    <div><div style="font-weight:800; color:#fff;">${p.nombre}</div><div style="font-size:0.7rem; color:var(--text-dim);">ID: ${p.steam_id}</div></div>
-                    <div><div style="font-weight:900; color:var(--gold); text-align:center;">${p.pts}</div><div style="font-size:0.6rem; color:var(--text-dim); text-align:center;">PUNTOS</div></div>
-                    <div><div style="font-weight:800; text-align:center;">${p.races}</div><div style="font-size:0.6rem; color:var(--text-dim); text-align:center;">CARRERAS</div></div>
-                    <i data-lucide="chevron-right" style="opacity:0.3"></i>`;
-                container.appendChild(card);
-            });
-        }
-
-        function renderCommunity(query) {
-            const container = document.getElementById('content');
-            const filtered = fullData.pilotos.filter(p => p.nombre.toLowerCase().includes(query)).sort((a,b) => (b.veces_conectado || 0) - (a.veces_conectado || 0));
-            let html = '<table class="tech-table" style="width:100%; border-collapse:collapse;"><thead><tr style="color:var(--text-dim); font-size:0.8rem; text-align:left;"><th style="padding:1rem;">Piloto</th><th>SR</th><th>Vueltas</th><th>Actividad</th></tr></thead><tbody>';
-            filtered.slice(0, 50).forEach(p => {
+            const tableData = pilotos.map(p => {
+                const pInfo = fullData.puntos.filter(pt => pt.steam_id === p.steam_id);
+                const pts = pInfo.reduce((s, x) => s + (x.puntos || 0), 0);
+                const races = pInfo.reduce((s, x) => s + (x.carreras || 0), 0);
                 const sr = p.vueltas_totales > 0 ? Math.round((p.vueltas_limpias / p.vueltas_totales) * 100) : 0;
-                html += `<tr style="border-bottom:1px solid var(--border); cursor:pointer;" onclick="openProfile('${p.steam_id}')">
-                    <td style="padding:1rem; display:flex; align-items:center; gap:10px;">
-                        <img src="${p.avatar_url || 'https://avatars.akamai.steamstatic.com/fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb_full.jpg'}" 
-                             data-sid="${p.steam_id}" ${!p.avatar_url ? 'data-pending="true"' : ''}
-                             style="width:24px; height:24px; border-radius:50%; object-fit:cover; background:#111; opacity:0.6;">
-                        ${p.nombre}
-                    </td>
-                    <td><span class="badge" style="background:${sr > 80 ? '#238636' : '#f85149'}">${sr}%</span></td>
-                    <td style="opacity:0.6;">${p.vueltas_totales}</td>
-                    <td style="font-size:0.7rem;" title="${p.ultima_conexion || ''}">${timeAgo(p.ultima_conexion)}</td>
-                </tr>`;
+                return { ...p, pts, races, sr };
+            }).sort((a, b) => b.pts - a.pts || b.vueltas_totales - a.vueltas_totales);
+
+            let html = `
+                <table style="width:100%; border-collapse:collapse; background:var(--card-bg); border-radius:12px; overflow:hidden;">
+                    <thead style="background:rgba(255,255,255,0.05);">
+                        <tr>
+                            <th style="padding:1rem; text-align:left; width:50px;">Pos</th>
+                            <th style="padding:1rem; text-align:left;">Piloto</th>
+                            <th style="padding:1rem; text-align:center;">SR</th>
+                            <th style="padding:1rem; text-align:center;">Vueltas</th>
+                            <th style="padding:1rem; text-align:center;">Puntos</th>
+                            <th style="padding:1rem; text-align:center;">Carreras</th>
+                            <th style="padding:1rem; text-align:right;">Actividad</th>
+                        </tr>
+                    </thead>
+                    <tbody>`;
+
+            tableData.forEach((p, i) => {
+                const posColor = i === 0 ? 'var(--gold)' : i === 1 ? '#C0C0C0' : i === 2 ? '#CD7F32' : 'inherit';
+                html += `
+                    <tr class="list-item-row" onclick="openProfile('${p.steam_id}')">
+                        <td style="padding:1rem; font-weight:900; color:${posColor};">#${i + 1}</td>
+                        <td style="padding:1rem; display:flex; align-items:center; gap:10px;">
+                            <img src="${p.avatar_url || 'https://avatars.akamai.steamstatic.com/fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb_full.jpg'}" 
+                                 data-sid="${p.steam_id}" ${!p.avatar_url ? 'data-pending="true"' : ''}
+                                 style="width:32px; height:32px; border-radius:50%; object-fit:cover; background:#111; opacity:0.6;">
+                            <span style="font-weight:700; max-width:180px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;" title="${p.nombre}">${p.nombre}</span>
+                        </td>
+                        <td style="text-align:center;"><span class="badge" style="background:${p.sr > 80 ? '#238636' : '#f85149'}">${p.sr}%</span></td>
+                        <td style="text-align:center; opacity:0.7;">${p.vueltas_totales}</td>
+                        <td style="text-align:center; font-weight:900; color:var(--gold);">${p.pts}</td>
+                        <td style="text-align:center; opacity:0.7;">${p.races}</td>
+                        <td style="text-align:right; font-size:0.8rem;" title="${p.ultima_conexion || ''}">${timeAgo(p.ultima_conexion)}</td>
+                    </tr>`;
             });
-            container.appendChild(Object.assign(document.createElement('div'), { innerHTML: html + '</tbody></table>' }));
+
+            html += `</tbody></table>`;
+            container.innerHTML = html;
         }
 
         function renderAnalytics() {
