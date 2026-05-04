@@ -444,7 +444,12 @@
             const unknownBannedIds = fullData.blacklist.filter(id => !fullData.pilotos.find(p => p.steam_id === id));
             
             if (knownBanned.length === 0 && unknownBannedIds.length === 0) {
-                container.innerHTML = '<div style="text-align:center; padding:5rem; opacity:0.5;"><i data-lucide="check-circle" style="color:var(--cyan); width:48px; height:48px; margin-bottom:1rem;"></i><p>No hay pilotos sancionados actualmente.</p></div>';
+                const isLocal = window.location.protocol === 'file:';
+                container.innerHTML = `
+                <div style="text-align:center; padding:5rem; opacity:0.8;">
+                    <i data-lucide="${isLocal ? 'shield-off' : 'check-circle'}" style="color:${isLocal ? 'var(--gold)' : 'var(--cyan)'}; width:48px; height:48px; margin-bottom:1rem;"></i>
+                    <p>${isLocal ? '<b>MODO LOCAL DETECTADO</b><br>El navegador bloquea la carga de la Blacklist por seguridad.<br>Funcionará perfectamente al subirlo a GitHub.' : 'No hay pilotos sancionados actualmente.'}</p>
+                </div>`;
                 lucide.createIcons();
                 return;
             }
