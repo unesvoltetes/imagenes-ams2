@@ -169,12 +169,12 @@
         async function init() {
             lucide.createIcons();
             try {
-                // Cargar datos y blacklist en paralelo
+                // Cargar datos y blacklist en paralelo (con cache-busting para la blacklist)
                 const [pRes, sRes, ptsRes, blRes] = await Promise.all([
                     _supabase.from('pilotos').select('*'),
                     _supabase.from('sesiones').select('*').order('end_time', { ascending: false }),
                     _supabase.from('puntos_semanales').select('*'),
-                    fetch('blacklist.json').then(r => r.json()).catch(() => [])
+                    fetch('blacklist.json?v=' + Date.now()).then(r => r.json()).catch(() => [])
                 ]);
                 fullData.pilotos = pRes.data || [];
                 fullData.history = sRes.data || [];
@@ -411,28 +411,58 @@
 
         function renderSancionados(query) {
             const container = document.getElementById('content');
-            const banned = fullData.pilotos.filter(p => (fullData.blacklist.includes(p.steam_id) || p.esta_baneado || p.baneado) && p.nombre.toLowerCase().includes(query));
-            if (banned.length === 0) {
+            
+            // 1. Obtener pilotos conocidos que están baneados actualmente
+            const knownBanned = fullData.pilotos.filter(p => 
+                (fullData.blacklist.includes(p.steam_id) || p.esta_baneado || p.baneado) && 
+                p.nombre.toLowerCase().includes(query)
+            );
+
+            // 2. Añadir IDs de la blacklist que NO conocemos (pilotos que nunca entraron)
+            const unknownBannedIds = fullData.blacklist.filter(id => !fullData.pilotos.find(p => p.steam_id === id));
+            
+            if (knownBanned.length === 0 && unknownBannedIds.length === 0) {
                 container.innerHTML = '<div style="text-align:center; padding:5rem; opacity:0.5;"><i data-lucide="check-circle" style="color:var(--cyan); width:48px; height:48px; margin-bottom:1rem;"></i><p>No hay pilotos sancionados actualmente.</p></div>';
                 lucide.createIcons();
                 return;
             }
-            banned.forEach(p => {
-                const card = document.createElement('div');
-                card.className = 'session-card-pro'; card.style.padding = '1.2rem'; card.style.borderLeft = '4px solid #f85149';
-                card.innerHTML = `
-                <div style="display:flex; justify-content:space-between; align-items:center;">
-                    <div style="display:flex; align-items:center; gap:15px;">
-                        <img src="${p.avatar_url || 'https://avatars.akamai.steamstatic.com/fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb_full.jpg'}" style="width:45px; height:45px; border-radius:50%; border:2px solid #f85149; opacity:0.6;">
-                        <div>
-                            <b style="font-size:1.1rem; color:#fff;">${p.nombre}</b>
-                            <div style="color:#f85149; font-size:0.65rem; font-weight:800; text-transform:uppercase; letter-spacing:1px;">Acceso Denegado / Blacklist</div>
-                        </div>
-                    </div>
-                    <i data-lucide="shield-alert" style="color:#f85149; width:24px; height:24px;"></i>
-                </div>`;
-                container.appendChild(card);
+
+            // Renderizar conocidos
+            knownBanned.forEach(p => {
+                const isPermanent = fullData.blacklist.includes(p.steam_id) || p.esta_baneado;
+                renderBannedCard(container, p.nombre, p.steam_id, p.avatar_url, isPermanent, p.veces_baneado);
             });
+
+            // Renderizar desconocidos
+            unknownBannedIds.forEach(id => {
+                if (id.includes(query)) {
+                    renderBannedCard(container, "Piloto Bloqueado", id, null, true, 0);
+                }
+            });
+            lucide.createIcons();
+        }
+
+        function renderBannedCard(container, nombre, sid, avatar, isPermanent, veces) {
+            const card = document.createElement('div');
+            card.className = 'session-card-pro'; 
+            card.style.padding = '1.2rem'; 
+            card.style.borderLeft = isPermanent ? '4px solid #f85149' : '4px solid #ffa657';
+            
+            card.innerHTML = `
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+                <div style="display:flex; align-items:center; gap:15px;">
+                    <img src="${avatar || 'https://avatars.akamai.steamstatic.com/fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb_full.jpg'}" style="width:45px; height:45px; border-radius:50%; border:2px solid ${isPermanent ? '#f85149' : '#ffa657'}; opacity:0.6;">
+                    <div>
+                        <b style="font-size:1.1rem; color:#fff;">${nombre}</b>
+                        <div style="color:${isPermanent ? '#f85149' : '#ffa657'}; font-size:0.65rem; font-weight:800; text-transform:uppercase; letter-spacing:1px;">
+                            ${isPermanent ? 'Acceso Denegado / Blacklist' : 'Sanción en Historial (' + veces + ')'}
+                        </div>
+                        <div style="font-size:0.6rem; opacity:0.4;">ID: ${sid}</div>
+                    </div>
+                </div>
+                <i data-lucide="${isPermanent ? 'shield-alert' : 'history'}" style="color:${isPermanent ? '#f85149' : '#ffa657'}; width:24px; height:24px;"></i>
+            </div>`;
+            container.appendChild(card);
         }
 
         async function openProfile(sid) {
