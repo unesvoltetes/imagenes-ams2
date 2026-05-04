@@ -224,9 +224,6 @@
                 fullData.puntos = ptsRes.data || [];
                 fullData.blacklist = bRes || [];
 
-                // Cargar avatares de forma asíncrona
-                loadAllAvatars();
-
                 populateSelectors();
                 
                 // Cargar resumen de ganadores para el historial rápido
@@ -276,35 +273,6 @@
                 cSel.innerHTML = allCars.map(c => `<option value="${c}">${c}</option>`).join('');
             }
             loadRecords();
-        }
-
-        async function loadAllAvatars() {
-            const uniqueIds = [...new Set(fullData.pilotos.map(p => p.steam_id))];
-            uniqueIds.forEach(id => {
-                fetchSteamAvatar(id);
-            });
-        }
-
-        async function fetchSteamAvatar(sid) {
-            try {
-                // Usamos un proxy para saltar el CORS de Steam y obtener el XML de perfil
-                const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(`https://steamcommunity.com/profiles/${sid}/?xml=1`)}`;
-                const res = await fetch(proxyUrl);
-                const json = await res.json();
-                
-                if (json.contents) {
-                    const parser = new DOMParser();
-                    const xmlDoc = parser.parseFromString(json.contents, "text/xml");
-                    const avatarUrl = xmlDoc.getElementsByTagName("avatarFull")[0]?.childNodes[0]?.nodeValue;
-                    
-                    if (avatarUrl) {
-                        // Actualizar todas las imágenes con este steam_id
-                        document.querySelectorAll(`img[data-sid="${sid}"]`).forEach(img => {
-                            img.src = avatarUrl;
-                        });
-                    }
-                }
-            } catch (e) { console.error("Error avatar:", sid, e); }
         }
 
         function showTab(tab) {
@@ -459,8 +427,8 @@
 
             body.innerHTML = `
                 <div style="display:flex; gap:2rem; align-items:center; margin-bottom:2rem;">
-                    <img src="https://ui-avatars.com/api/?name=${encodeURIComponent(p.nombre)}&background=random&color=fff&bold=true" 
-                         data-sid="${sid}"
+                    <img src="https://avatar.steam-id.com/${sid}.png" 
+                         onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(p.nombre)}&background=random&color=fff&bold=true'"
                          style="width:100px; height:100px; border-radius:50%; border:3px solid var(--accent); object-fit:cover;">
                     <div>
                         <h2 style="font-size:2rem; font-weight:800;">${p.nombre || 'Piloto'}</h2>
@@ -535,8 +503,8 @@
                 const card = document.createElement('div');
                 card.className = 'list-item';
                 card.onclick = () => openProfile(p.steam_id);
-                card.innerHTML = `<img src="https://ui-avatars.com/api/?name=${encodeURIComponent(p.nombre)}&background=random&color=fff" 
-                                       data-sid="${p.steam_id}"
+                card.innerHTML = `<img src="https://avatar.steam-id.com/${p.steam_id}.png" 
+                                       onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(p.nombre)}&background=random&color=fff'"
                                        style="width:40px; height:40px; border-radius:50%; object-fit:cover;">
                     <div><div style="font-weight:800; color:#fff;">${p.nombre}</div><div style="font-size:0.7rem; color:var(--text-dim);">ID: ${p.steam_id}</div></div>
                     <div><div style="font-weight:900; color:var(--gold); text-align:center;">${p.pts}</div><div style="font-size:0.6rem; color:var(--text-dim); text-align:center;">PUNTOS</div></div>
@@ -554,8 +522,8 @@
                 const sr = p.vueltas_totales > 0 ? Math.round((p.vueltas_limpias / p.vueltas_totales) * 100) : 0;
                 html += `<tr style="border-bottom:1px solid var(--border); cursor:pointer;" onclick="openProfile('${p.steam_id}')">
                     <td style="padding:1rem; display:flex; align-items:center; gap:10px;">
-                        <img src="https://ui-avatars.com/api/?name=${encodeURIComponent(p.nombre)}&background=random&color=fff" 
-                             data-sid="${p.steam_id}"
+                        <img src="https://avatar.steam-id.com/${p.steam_id}.png" 
+                             onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(p.nombre)}&background=random&color=fff'"
                              style="width:24px; height:24px; border-radius:50%; object-fit:cover;">
                         ${p.nombre}
                     </td>
@@ -584,8 +552,8 @@
             banned.forEach(p => {
                 const card = document.createElement('div');
                 card.className = 'list-item'; card.style.border = '1px solid #f85149';
-                card.innerHTML = `<img src="https://ui-avatars.com/api/?name=${encodeURIComponent(p.nombre)}&background=f85149&color=fff" 
-                                       data-sid="${p.steam_id}"
+                card.innerHTML = `<img src="https://avatar.steam-id.com/${p.steam_id}.png" 
+                                       onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(p.nombre)}&background=f85149&color=fff'"
                                        style="width:40px; height:40px; border-radius:50%; object-fit:cover;">
                                   <div><div style="color:#f85149; font-weight:800;">${p.nombre}</div></div><div>BLACKLIST</div><i data-lucide="alert-triangle" style="color:#f85149"></i>`;
                 container.appendChild(card);
