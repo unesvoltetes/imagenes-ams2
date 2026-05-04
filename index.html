@@ -210,6 +210,7 @@
 
         let fullData = { history: [], pilotos: [], puntos: [], blacklist: [], summary: {} };
         let activeTab = 'history';
+        let sortConfig = { col: 'pts', dir: 'desc' };
 
         async function init() {
             lucide.createIcons();
@@ -231,14 +232,15 @@
                 setInterval(lazyLoadAvatars, 2000);
                 
                 const recentIds = fullData.history.slice(0, 30).map(s => s.session_id);
-                render(); 
+                
+                document.getElementById('loader').style.display = 'none';
+                
                 const { data: winRes } = await _supabase.from('resultados').select('session_id, stage, name, flt, pos').in('session_id', recentIds).eq('pos', 1);
                 (winRes || []).forEach(r => {
                     if (!fullData.summary[r.session_id]) fullData.summary[r.session_id] = {};
                     fullData.summary[r.session_id][r.stage] = r;
                 });
 
-                document.getElementById('loader').style.display = 'none';
                 render();
             } catch (e) { console.error(e); }
         }
@@ -310,6 +312,16 @@
                 const days = Math.floor(diff/86400);
                 return `Hace ${days} día${days > 1 ? 's' : ''}`;
             } catch(e) { return dateString; }
+        }
+
+        function sortTable(column) {
+            if (sortConfig.col === column) {
+                sortConfig.dir = sortConfig.dir === 'asc' ? 'desc' : 'asc';
+            } else {
+                sortConfig.col = column;
+                sortConfig.dir = 'desc';
+            }
+            render();
         }
 
         function showTab(tab) {
@@ -527,20 +539,36 @@
                 const pts = pInfo.reduce((s, x) => s + (x.puntos || 0), 0);
                 const races = pInfo.reduce((s, x) => s + (x.carreras || 0), 0);
                 const sr = p.vueltas_totales > 0 ? Math.round((p.vueltas_limpias / p.vueltas_totales) * 100) : 0;
-                return { ...p, pts, races, sr };
-            }).sort((a, b) => b.pts - a.pts || b.vueltas_totales - a.vueltas_totales);
+                
+                // Helper para ordenar por fecha
+                const parts = (p.ultima_conexion || '01/01/2000 00:00:00').split(/[\/\s:]/);
+                const dateVal = new Date(parts[2], parts[1]-1, parts[0], parts[3]||0, parts[4]||0, parts[5]||0).getTime();
+
+                return { ...p, pts, races, sr, dateVal };
+            }).sort((a, b) => {
+                const col = sortConfig.col;
+                const dir = sortConfig.dir === 'asc' ? 1 : -1;
+                if (col === 'nombre') return a.nombre.localeCompare(b.nombre) * dir;
+                if (col === 'actividad') return (a.dateVal - b.dateVal) * dir;
+                return (a[col] - b[col]) * dir;
+            });
+
+            const getIcon = (col) => {
+                if (sortConfig.col !== col) return '<i data-lucide="chevrons-up-down" style="width:12px; opacity:0.3"></i>';
+                return sortConfig.dir === 'asc' ? '<i data-lucide="chevron-up" style="width:12px; color:var(--accent)"></i>' : '<i data-lucide="chevron-down" style="width:12px; color:var(--accent)"></i>';
+            };
 
             let html = `
                 <table style="width:100%; border-collapse:collapse; background:var(--card-bg); border-radius:12px; overflow:hidden;">
-                    <thead style="background:rgba(255,255,255,0.05);">
+                    <thead style="background:rgba(255,255,255,0.05); cursor:pointer;">
                         <tr>
                             <th style="padding:1rem; text-align:left; width:50px;">Pos</th>
-                            <th style="padding:1rem; text-align:left;">Piloto</th>
-                            <th style="padding:1rem; text-align:center;">SR</th>
-                            <th style="padding:1rem; text-align:center;">Vueltas</th>
-                            <th style="padding:1rem; text-align:center;">Puntos</th>
-                            <th style="padding:1rem; text-align:center;">Carreras</th>
-                            <th style="padding:1rem; text-align:center; width:120px;">Actividad</th>
+                            <th style="padding:1rem; text-align:left;" onclick="sortTable('nombre')">Piloto ${getIcon('nombre')}</th>
+                            <th style="padding:1rem; text-align:center;" onclick="sortTable('sr')">SR ${getIcon('sr')}</th>
+                            <th style="padding:1rem; text-align:center;" onclick="sortTable('vueltas_totales')">Vueltas ${getIcon('vueltas_totales')}</th>
+                            <th style="padding:1rem; text-align:center;" onclick="sortTable('pts')">Puntos ${getIcon('pts')}</th>
+                            <th style="padding:1rem; text-align:center;" onclick="sortTable('races')">Carreras ${getIcon('races')}</th>
+                            <th style="padding:1rem; text-align:center; width:120px;" onclick="sortTable('actividad')">Actividad ${getIcon('actividad')}</th>
                         </tr>
                     </thead>
                     <tbody>`;
