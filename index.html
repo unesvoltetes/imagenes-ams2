@@ -376,7 +376,11 @@
                 <tr class="list-item-row" onclick="openProfile('${p.steam_id}')">
                     <td style="color:${posCol}; font-weight:900;">#${i+1}</td>
                     <td style="display:flex; align-items:center; gap:10px;">
-                        <img src="${p.avatar_url || 'https://avatars.akamai.steamstatic.com/fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb_full.jpg'}" data-sid="${p.steam_id}" ${!p.avatar_url ? 'data-pending="true"' : ''} style="width:25px; height:25px; border-radius:50%; opacity:0.7;">
+                        <img src="${p.avatar_url || 'https://avatars.akamai.steamstatic.com/fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb_full.jpg'}" 
+                             data-sid="${p.steam_id}" ${!p.avatar_url ? 'data-pending="true"' : ''} 
+                             title="Ver perfil de Steam"
+                             onclick="event.stopPropagation(); window.open('https://steamcommunity.com/profiles/${p.steam_id}', '_blank')"
+                             style="width:25px; height:25px; border-radius:50%; opacity:0.7; cursor:pointer;">
                         <span style="max-width:150px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${p.nombre}</span>
                     </td>
                     <td style="text-align:center;"><span class="badge" style="background:${p.sr > 80 ? '#238636' : '#f85149'}">${p.sr}%</span></td>
@@ -497,9 +501,9 @@
             <div style="display:flex; justify-content:space-between; align-items:center;">
                 <div style="display:flex; align-items:center; gap:15px;">
                     <img src="${avatar || 'https://avatars.akamai.steamstatic.com/fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb_full.jpg'}" 
-                         title="Clic para copiar ID: ${sid}" 
-                         onclick="copyID('${sid}')"
-                         style="width:45px; height:45px; border-radius:50%; border:2px solid ${isPermanent ? '#f85149' : '#ffa657'}; opacity:0.6; cursor:copy;">
+                         title="Ver perfil de Steam" 
+                         onclick="window.open('https://steamcommunity.com/profiles/${sid}', '_blank')"
+                         style="width:45px; height:45px; border-radius:50%; border:2px solid ${isPermanent ? '#f85149' : '#ffa657'}; opacity:0.6; cursor:pointer;">
                     <div>
                         <b style="font-size:1.1rem; color:#fff;">${nombre}</b>
                         <div style="color:${isPermanent ? '#f85149' : '#ffa657'}; font-size:0.65rem; font-weight:800; text-transform:uppercase; letter-spacing:1px;">
@@ -524,9 +528,9 @@
             body.innerHTML = `
                 <div style="display:flex; gap:1.5rem; align-items:center; margin-bottom:2rem;">
                     <img src="${p.avatar_url || 'https://avatars.akamai.steamstatic.com/fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb_full.jpg'}" 
-                         title="Clic para copiar ID: ${sid}"
-                         onclick="copyID('${sid}')"
-                         style="width:80px; height:80px; border-radius:50%; border:2px solid var(--accent); cursor:copy;">
+                         title="Ver perfil de Steam"
+                         onclick="window.open('https://steamcommunity.com/profiles/${sid}', '_blank')"
+                         style="width:80px; height:80px; border-radius:50%; border:2px solid var(--accent); cursor:pointer;">
                     <div><h2 style="font-weight:800;">${p.nombre}</h2></div>
                 </div>
                 <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:1rem; margin-bottom:2rem;">
