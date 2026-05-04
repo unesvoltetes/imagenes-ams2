@@ -342,8 +342,20 @@
             cont.innerHTML = '<div class="spinner"></div>';
             const { data } = await _supabase.from('resultados').select('*').eq('session_id', sid).eq('stage', stage).order('pos');
             
-            let html = '<table class="blogger-table"><thead><tr><th>Pos</th><th>Piloto</th><th>Vuelta</th><th>Incid.</th><th style="text-align:right">Total</th></tr></thead><tbody>';
+            if (!data) { cont.innerHTML = 'Error cargando datos.'; return; }
+
+            // FILTRO ANTI-DUPLICADOS: Solo un resultado por piloto
+            const uniqueResults = [];
+            const seen = new Set();
             data.forEach(r => {
+                if (!seen.has(r.steam_id)) {
+                    seen.add(r.steam_id);
+                    uniqueResults.push(r);
+                }
+            });
+
+            let html = '<table class="blogger-table"><thead><tr><th>Pos</th><th>Piloto</th><th>Vuelta</th><th>Incid.</th><th style="text-align:right">Total</th></tr></thead><tbody>';
+            uniqueResults.forEach(r => {
                 html += `<tr>
                     <td style="font-weight:800; color:${r.pos <= 3 ? 'var(--gold)' : '#fff'}">${r.pos}º</td>
                     <td><b style="cursor:pointer; color:var(--cyan)" onclick="openProfile('${r.steam_id}')">${r.name}</b></td>
@@ -444,15 +456,25 @@
                     </div>
                 </div>
                 <h4 style="color:var(--accent); margin-bottom:1rem;">HISTORIAL RECIENTE</h4>
-                <div id="profile-history">Cargando...</div>
+                <div id="profile-history">Cargando historial...</div>
             `;
             
-            const { data: recent } = await _supabase.from('resultados').select('track_name, car_name, pos, flt, session_id').eq('steam_id', sid).order('session_id', { ascending: false }).limit(5);
+            const { data: recent } = await _supabase.from('resultados').select('pos, flt, session_id').eq('steam_id', sid).order('session_id', { ascending: false }).limit(10);
+            
             let histHtml = '<table class="blogger-table"><tbody>';
+            const uniqueRecent = [];
+            const seenSids = new Set();
             (recent || []).forEach(r => {
+                if (!seenSids.has(r.session_id)) {
+                    seenSids.add(r.session_id);
+                    uniqueRecent.push(r);
+                }
+            });
+
+            uniqueRecent.slice(0, 5).forEach(r => {
+                const sInfo = fullData.history.find(s => s.session_id == r.session_id) || { track_name: 'Carrera Antigua', car_name: '---' };
                 histHtml += `<tr>
-                    <td>${r.track_name}</td>
-                    <td style="opacity:0.6;">${r.car_name}</td>
+                    <td><div style="font-weight:700;">${sInfo.track_name}</div><div style="font-size:0.6rem; opacity:0.5;">${sInfo.car_name}</div></td>
                     <td style="font-weight:800; color:var(--gold);">${r.pos}º</td>
                     <td style="color:var(--cyan); font-family:monospace;">${r.flt}</td>
                 </tr>`;
