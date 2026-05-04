@@ -169,17 +169,38 @@
         async function init() {
             lucide.createIcons();
             try {
-                // Cargar datos y blacklist en paralelo (con cache-busting para la blacklist)
-                const [pRes, sRes, ptsRes, blRes] = await Promise.all([
+                // Cargar datos y blacklist en paralelo
+                const [pRes, sRes, ptsRes] = await Promise.all([
                     _supabase.from('pilotos').select('*'),
                     _supabase.from('sesiones').select('*').order('end_time', { ascending: false }),
-                    _supabase.from('puntos_semanales').select('*'),
-                    fetch('blacklist.json?v=' + Date.now()).then(r => r.json()).catch(() => [])
+                    _supabase.from('puntos_semanales').select('*')
                 ]);
+
+                let blRes = [];
+                try {
+                    const r = await fetch('blacklist.json?v=' + Date.now());
+                    if (r.ok) {
+                        const rawText = await r.text();
+                        console.log("Archivo blacklist.json cargado. Analizando...");
+                        // Buscamos cualquier secuencia de 16 a 18 dígitos (formato SteamID64)
+                        const matches = rawText.match(/\d{16,18}/g);
+                        if (matches) {
+                            blRes = matches;
+                            console.log("IDs detectados en blacklist:", blRes.length);
+                        } else {
+                            console.warn("No se encontraron IDs de 16-18 dígitos en el archivo.");
+                        }
+                    } else {
+                        console.error("No se pudo encontrar el archivo blacklist.json (Error " + r.status + ")");
+                    }
+                } catch (e) { console.warn("Error crítico procesando blacklist.json", e); }
+
                 fullData.pilotos = pRes.data || [];
                 fullData.history = sRes.data || [];
                 fullData.puntos = ptsRes.data || [];
-                fullData.blacklist = blRes || [];
+                fullData.blacklist = blRes;
+                
+                console.log("Blacklist procesada:", fullData.blacklist.length, "IDs detectados");
 
                 populateSelectors();
                 document.getElementById('loader').style.display = 'none';
@@ -414,7 +435,8 @@
             
             // 1. Obtener pilotos conocidos que están baneados actualmente
             const knownBanned = fullData.pilotos.filter(p => 
-                (fullData.blacklist.includes(p.steam_id) || p.esta_baneado || p.baneado) && 
+                ( (fullData.blacklist && fullData.blacklist.includes(p.steam_id)) || 
+                  p.esta_baneado === 1 || p.esta_baneado === true || p.baneado === true ) && 
                 p.nombre.toLowerCase().includes(query)
             );
 
