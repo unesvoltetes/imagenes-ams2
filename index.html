@@ -246,11 +246,6 @@
         }
 
         function populateSelectors() {
-            const weeks = [...new Set(fullData.history.map(s => s.week))].sort().reverse();
-            const wSel = document.getElementById('timeFilter');
-            wSel.innerHTML = '<option value="all">Todo el tiempo</option>';
-            weeks.forEach(w => wSel.innerHTML += `<option value="${w}">Semana ${w.split('-W')[1] || w}</option>`);
-
             updateRecordSelectors();
         }
 
