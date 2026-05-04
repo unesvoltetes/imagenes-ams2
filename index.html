@@ -162,21 +162,24 @@
         const SUPABASE_KEY = "sb_publishable_hInXQ_vVR9K1FPEDyLOR9Q_eJDkVypo";
         const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-        let fullData = { history: [], pilotos: [], puntos: [], summary: {} };
+        let fullData = { history: [], pilotos: [], puntos: [], summary: {}, blacklist: [] };
         let activeTab = 'history';
         let sortConfig = { col: 'pts', dir: 'desc' };
 
         async function init() {
             lucide.createIcons();
             try {
-                const [pRes, sRes, ptsRes] = await Promise.all([
+                // Cargar datos y blacklist en paralelo
+                const [pRes, sRes, ptsRes, blRes] = await Promise.all([
                     _supabase.from('pilotos').select('*'),
                     _supabase.from('sesiones').select('*').order('end_time', { ascending: false }),
-                    _supabase.from('puntos_semanales').select('*')
+                    _supabase.from('puntos_semanales').select('*'),
+                    fetch('blacklist.json').then(r => r.json()).catch(() => [])
                 ]);
                 fullData.pilotos = pRes.data || [];
                 fullData.history = sRes.data || [];
                 fullData.puntos = ptsRes.data || [];
+                fullData.blacklist = blRes || [];
 
                 populateSelectors();
                 document.getElementById('loader').style.display = 'none';
@@ -351,16 +354,22 @@
         }
 
         async function loadRecords() {
-            const track = document.getElementById('recordTrack').value;
-            const car = document.getElementById('recordCar').value;
+            const tSel = document.getElementById('recordTrack');
+            const cSel = document.getElementById('recordCar');
+            if(!tSel || !cSel) return;
+            const track = tSel.value;
+            const car = cSel.value;
             const container = document.getElementById('content');
+            if (!track || !car) return;
             container.innerHTML = '<div class="spinner"></div>';
             const sids = fullData.history.filter(s => s.track_name === track && s.car_name === car).map(s => s.session_id);
-            if (sids.length === 0) { container.innerHTML = 'Sin datos.'; return; }
-            const { data } = await _supabase.from('resultados').select('*').in('session_id', sids).neq('flt', '--:--.---').order('flt').limit(10);
-            let html = `<h3>Top 10: ${track}</h3><table class="blogger-table"><thead><tr><th>#</th><th>Piloto</th><th>Tiempo</th></tr></thead><tbody>`;
-            (data || []).forEach((r, i) => {
-                html += `<tr><td>${i+1}º</td><td><b onclick="openProfile('${r.steam_id}')" style="cursor:pointer; color:var(--cyan)">${r.name}</b></td><td style="font-weight:800; color:var(--gold); font-family:monospace;">${r.flt}</td></tr>`;
+            if (sids.length === 0) { container.innerHTML = '<p style="text-align:center; padding:3rem; opacity:0.5;">No hay sesiones registradas.</p>'; return; }
+            const { data } = await _supabase.from('resultados').select('*').in('session_id', sids).neq('flt', '--:--.---').neq('flt', '0:00.000').order('flt').limit(100);
+            if (!data || data.length === 0) { container.innerHTML = '<p style="text-align:center; padding:3rem; opacity:0.5;">No hay récords válidos.</p>'; return; }
+            let html = `<h3 style="margin-bottom:1.5rem; color:var(--gold);">🏆 TOP 100: ${track}</h3><table class="blogger-table"><thead><tr><th>#</th><th>Piloto</th><th>Vuelta Rápida</th><th>Fecha</th></tr></thead><tbody>`;
+            data.forEach((r, i) => {
+                const sInfo = fullData.history.find(s => s.session_id == r.session_id) || {};
+                html += `<tr><td style="font-weight:800;">${i+1}º</td><td><b onclick="openProfile('${r.steam_id}')" style="cursor:pointer; color:var(--cyan)">${r.name}</b></td><td style="color:var(--cyan); font-weight:800; font-family:monospace;">${r.flt}</td><td style="opacity:0.5; font-size:0.7rem;">${sInfo.date || '---'}</td></tr>`;
             });
             container.innerHTML = html + '</tbody></table>';
         }
@@ -393,7 +402,7 @@
 
         function renderSancionados(query) {
             const container = document.getElementById('content');
-            const banned = fullData.pilotos.filter(p => (p.esta_baneado || p.baneado) && p.nombre.toLowerCase().includes(query));
+            const banned = fullData.pilotos.filter(p => (fullData.blacklist.includes(p.steam_id) || p.esta_baneado || p.baneado) && p.nombre.toLowerCase().includes(query));
             if (banned.length === 0) {
                 container.innerHTML = '<div style="text-align:center; padding:5rem; opacity:0.5;"><i data-lucide="check-circle" style="color:var(--cyan); width:48px; height:48px; margin-bottom:1rem;"></i><p>No hay pilotos sancionados actualmente.</p></div>';
                 lucide.createIcons();
