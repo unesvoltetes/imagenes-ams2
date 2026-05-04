@@ -278,23 +278,6 @@
             loadRecords();
         }
 
-        function timeAgo(dateString) {
-            if (!dateString) return '---';
-            try {
-                // Formato esperado: "03/05/2026 17:46:32"
-                const parts = dateString.split(/[\/\s:]/);
-                const date = new Date(parts[2], parts[1]-1, parts[0], parts[3], parts[4], parts[5]);
-                const now = new Date();
-                const diffMs = now - date;
-                const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-                const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
-                
-                if (diffDays > 0) return `Hace ${diffDays} día${diffDays > 1 ? 's' : ''}`;
-                if (diffHours > 0) return `Hace ${diffHours} hora${diffHours > 1 ? 's' : ''}`;
-                return 'Reciente';
-            } catch(e) { return dateString; }
-        }
-
         async function lazyLoadAvatars() {
             const placeholders = document.querySelectorAll('img[data-pending="true"]');
             for (let img of placeholders) {
