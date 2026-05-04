@@ -166,8 +166,11 @@
                 <i data-lucide="search" style="color: var(--text-dim)"></i>
                 <input type="text" id="mainSearch" placeholder="Buscar por piloto, circuito o coche..." oninput="render()">
                 
-                <select id="timeFilter" class="nav-btn" style="border:1px solid var(--border); padding:0.5rem 1rem; border-radius:8px;" onchange="render()">
-                    <option value="all">Todo el tiempo</option>
+                <select id="resultsLimit" onchange="render()" class="search-input" style="width: auto; cursor: pointer; background: transparent; border: 1px solid var(--border); color: #fff; padding: 0.5rem; border-radius: 8px;">
+                    <option value="20">Top 20</option>
+                    <option value="50">Top 50</option>
+                    <option value="100">Top 100</option>
+                    <option value="9999">Todos</option>
                 </select>
             </div>
         </div>
@@ -228,6 +231,7 @@
                 setInterval(lazyLoadAvatars, 2000);
                 
                 const recentIds = fullData.history.slice(0, 30).map(s => s.session_id);
+                render(); 
                 const { data: winRes } = await _supabase.from('resultados').select('session_id, stage, name, flt, pos').in('session_id', recentIds).eq('pos', 1);
                 (winRes || []).forEach(r => {
                     if (!fullData.summary[r.session_id]) fullData.summary[r.session_id] = {};
@@ -322,12 +326,12 @@
 
         function render() {
             const query = document.getElementById('mainSearch').value.toLowerCase();
-            const week = document.getElementById('timeFilter').value;
+            const limit = parseInt(document.getElementById('resultsLimit').value) || 20;
             const container = document.getElementById('content');
             container.innerHTML = '';
 
-            if (activeTab === 'history') renderHistory(query, week);
-            else if (activeTab === 'ranking') renderRanking(fullData.pilotos.filter(p => p.nombre.toLowerCase().includes(query)));
+            if (activeTab === 'history') renderHistory(query);
+            else if (activeTab === 'ranking') renderRanking(fullData.pilotos.filter(p => p.nombre.toLowerCase().includes(query)).slice(0, limit));
             else if (activeTab === 'analytics') renderAnalytics();
             else if (activeTab === 'sancionados') renderSancionados(query);
             
@@ -536,7 +540,7 @@
                             <th style="padding:1rem; text-align:center;">Vueltas</th>
                             <th style="padding:1rem; text-align:center;">Puntos</th>
                             <th style="padding:1rem; text-align:center;">Carreras</th>
-                            <th style="padding:1rem; text-align:right;">Actividad</th>
+                            <th style="padding:1rem; text-align:center; width:120px;">Actividad</th>
                         </tr>
                     </thead>
                     <tbody>`;
@@ -556,7 +560,7 @@
                         <td style="text-align:center; opacity:0.7;">${p.vueltas_totales}</td>
                         <td style="text-align:center; font-weight:900; color:var(--gold);">${p.pts}</td>
                         <td style="text-align:center; opacity:0.7;">${p.races}</td>
-                        <td style="text-align:right; font-size:0.8rem;" title="${p.ultima_conexion || ''}">${timeAgo(p.ultima_conexion)}</td>
+                        <td style="padding:1rem; text-align:center; font-size:0.8rem; color:var(--text-dim);" title="${p.ultima_conexion || ''}">${timeAgo(p.ultima_conexion)}</td>
                     </tr>`;
             });
 
