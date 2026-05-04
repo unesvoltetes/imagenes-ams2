@@ -1,1668 +1,1337 @@
-<div id="unes-combo-custom-container"
-    style="background: transparent; color: #fff; font-family: 'Inter', 'Segoe UI', sans-serif; max-width: 1000px; margin: 0 auto; padding: 10px;">
+<!DOCTYPE html>
+<html lang="es" translate="no">
 
-    <!-- Estilos Premium -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="google" content="notranslate">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UNES - Configurar Combo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        #unes-combo-custom-container {
-            --primary: #ffcc00;
-            --bg-panel: #1a1a24;
-            --bg-input: #0c0c0c;
-            --text-dim: #aaa;
-            --accent: #b416da;
-            --required: #ff8800;
-        }
-
-        #unes-combo-custom-container .main-title {
-            color: var(--primary);
-            text-align: center;
-            font-size: 2rem;
-            font-weight: 900;
-            margin-bottom: 30px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-        }
-
-        #unes-combo-custom-container .form-card {
-            background: var(--bg-panel);
-            border-radius: 15px;
-            padding: 25px;
-            border: 1px solid #333;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
-            margin-bottom: 20px;
-        }
-
-        #unes-combo-custom-container .section-header {
-            color: var(--primary);
-            font-weight: 800;
-            font-size: 1rem;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-transform: uppercase;
-        }
-
-        #unes-combo-custom-container .top-row {
-            display: flex;
-            gap: 25px;
-            margin-bottom: 25px;
-            flex-wrap: wrap;
-        }
-
-        #unes-combo-custom-container .pilot-info {
-            flex: 0 0 350px;
-            min-width: 300px;
-        }
-
-        #unes-combo-custom-container .preview-box {
-            flex: 1;
-            min-width: 400px;
-        }
-
-        #unes-combo-custom-container .form-grid {
-            display: grid;
-            gap: 15px;
-            margin-bottom: 15px;
-        }
-
-        #unes-combo-custom-container .grid-2 {
-            grid-template-columns: 1fr 1fr;
-        }
-
-        #unes-combo-custom-container .grid-3 {
-            grid-template-columns: 1fr 1fr 1fr;
-        }
-
-        #unes-combo-custom-container .grid-4 {
-            grid-template-columns: repeat(4, 1fr);
-        }
-
-        #unes-combo-custom-container label {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 0.8rem;
-            color: var(--text-dim);
-            font-weight: 700;
-            text-transform: uppercase;
-        }
-
-        #unes-combo-custom-container .req {
-            color: var(--required);
-            margin-left: 3px;
-        }
-
-        #unes-combo-custom-container input,
-        #unes-combo-custom-container select {
-            width: 100%;
-            padding: 10px;
-            background: var(--bg-input);
-            border: 1px solid #444;
-            border-radius: 6px;
-            color: #fff;
-            box-sizing: border-box;
-            outline: none;
-            transition: all 0.3s;
-            font-size: 0.9rem;
-        }
-
-        #unes-combo-custom-container input:focus,
-        #unes-combo-custom-container select:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 8px rgba(255, 204, 0, 0.3);
-        }
-
-        /* Discord Preview Card */
-        #unes-combo-custom-container .discord-preview {
-            background: #2f3136;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-            text-align: left;
-        }
-
-        #unes-combo-custom-container .card-header {
-            height: 180px;
-            background-size: cover;
-            background-position: center;
-            position: relative;
+        body {
             background-color: #000;
-        }
-
-        #unes-combo-custom-container .card-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 100%;
-            background: linear-gradient(to top, #2f3136 5%, transparent 60%);
-        }
-
-        #unes-combo-custom-container .card-num {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background: rgba(0, 0, 0, 0.8);
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 11px;
-            font-weight: 900;
-        }
-
-        #unes-combo-custom-container .card-author {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            color: #00c8ff;
-            font-size: 11px;
-            font-weight: 900;
-            text-shadow: 1px 1px 2px #000;
-        }
-
-        #unes-combo-custom-container .card-map {
-            position: absolute;
-            top: 35px;
-            left: 5px;
-            max-width: 100px;
-            max-height: 140px;
-            z-index: 20;
-            background-color: rgba(0, 0, 0, 0.3);
-            border-radius: 15px;
-            padding: 8px;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        #unes-combo-custom-container .card-map img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-            display: block;
-        }
-
-        #unes-combo-custom-container .card-car-img {
-            position: absolute;
-            bottom: -20px;
-            right: -0px;
-            width: 500px;
-            height: 260px;
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: bottom right;
-            z-index: 5;
-        }
-
-        #unes-combo-custom-container .card-lights {
-            position: absolute;
-            top: 60px;
-            right: 15px;
-            width: 30px;
-            height: 30px;
-            background-size: contain;
-            background-repeat: no-repeat;
-            z-index: 10;
-        }
-
-        #unes-combo-custom-container .lights-warning {
-            animation: blink-warning 1s infinite;
-            filter: drop-shadow(0 0 8px #f00);
-        }
-
-        #unes-combo-custom-container .lights-text-warning,
-        #unes-combo-custom-container .track-text-warning {
-            position: absolute;
-            top: 45px;
-            right: 60px;
-            color: #ff3333;
-            font-weight: 900;
-            font-size: 1.4rem;
-            text-transform: uppercase;
-            text-align: right;
-            line-height: 0.9;
-            display: none;
-            animation: blink-warning 1s infinite;
-            pointer-events: none;
-            width: 200px;
-            filter: drop-shadow(0 0 5px rgba(0,0,0,0.5));
-        }
-
-        @keyframes blink-warning {
-            0% { opacity: 1; }
-            50% { opacity: 0.3; }
-            100% { opacity: 1; }
-        }
-
-        #unes-combo-custom-container .card-body {
-            padding: 15px;
-            position: relative;
-        }
-
-        #unes-combo-custom-container .card-track {
-            font-size: 1.1rem;
-            font-weight: 900;
             color: #fff;
-            text-transform: uppercase;
-            margin-bottom: 2px;
+            margin: 0;
+            padding: 0;
+            font-family: 'Outfit', sans-serif;
+            min-height: 100vh;
         }
 
-        #unes-combo-custom-container .card-car {
-            color: var(--primary);
-            font-size: 0.9rem;
-            font-weight: 800;
-            margin-bottom: 2px;
-        }
-
-        #unes-combo-custom-container .card-rival {
-            color: #8c8c9b;
-            font-size: 0.7rem;
-            margin-bottom: 10px;
-        }
-
-        #unes-combo-custom-container .card-meta {
-            background: rgba(0, 210, 255, 0.08);
-            border-radius: 6px;
-            padding: 5px 10px;
+        .unes-nav-bar {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.7rem;
-            color: #fff;
-            margin-bottom: 15px;
-        }
-
-        #unes-combo-custom-container .card-weather {
-            display: flex;
-            gap: 4px;
-        }
-
-        #unes-combo-custom-container .card-weather img {
-            width: 18px;
-            height: 18px;
-            object-fit: contain;
-        }
-
-        #unes-combo-custom-container .card-badges {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-        }
-
-        #unes-combo-custom-container .badge-item {
-            text-align: center;
-        }
-
-        #unes-combo-custom-container .badge-circle {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            border: 3px solid #50505a;
-            background: #14141c;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 900;
-            font-size: 0.8rem;
-            margin: 0 auto 5px;
-            transition: all 0.3s;
-            cursor: help;
-        }
-
-        #unes-combo-custom-container .badge-label {
-            font-size: 0.6rem;
-            color: #8c8c9b;
-            text-transform: uppercase;
-            font-weight: 800;
-        }
-
-        /* Botón y Panel de Recientes */
-        #unes-combo-custom-container .recent-combos-btn {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #8c8c9b;
-            padding: 12px;
-            border-radius: 8px;
-            cursor: pointer;
-            width: 100%;
-            margin-bottom: 15px;
-            font-size: 0.9em;
-            font-weight: bold;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
             justify-content: center;
             gap: 10px;
-        }
-        #unes-combo-custom-container .recent-combos-btn:hover {
-            background: rgba(255, 255, 255, 0.12);
-            color: white;
-            border-color: var(--primary);
-        }
-        #unes-combo-custom-container .recent-panel {
-            display: none;
-            background: transparent;
-            padding: 10px 25px;
             margin-bottom: 30px;
-            border-left: 5px solid var(--primary);
-            animation: fadeInRecent 0.3s ease;
-        }
-        #unes-combo-custom-container .recent-item {
-            display: flex;
-            align-items: baseline;
-            gap: 10px;
-            padding: 4px 0;
-            font-size: 0.95rem;
-            color: #fff;
-            flex-wrap: wrap;
-        }
-        #unes-combo-custom-container .recent-item .track { font-weight: 800; color: white; }
-        #unes-combo-custom-container .recent-item .car { color: var(--primary); font-style: italic; font-weight: 500; }
-        #unes-combo-custom-container .recent-item .user { 
-            color: #00c8ff; 
-            font-size: 0.8em; 
-            font-weight: 700;
-        }
-        #unes-combo-custom-container .recent-item .date { 
-            color: #555; 
-            font-size: 0.7em; 
-            margin-left: auto;
-            font-weight: 500;
-        }
-        #unes-combo-custom-container .recent-item .sep { opacity: 0.6; font-weight: normal; }
-
-        @keyframes fadeInRecent {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 10px;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding-top: 15px;
         }
 
-        #unes-combo-custom-container .submit-btn {
-            width: 100%;
-            padding: 18px;
-            background: var(--primary);
-            color: #000;
+        .unes-nav-item {
+            background: transparent;
             border: none;
-            border-radius: 10px;
-            font-weight: 900;
-            font-size: 1.1rem;
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            transition: all 0.3s;
-            margin-top: 20px;
-        }
-
-        #unes-combo-custom-container .submit-btn:hover {
-            filter: brightness(1.1);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(255, 204, 0, 0.3);
-        }
-
-        #unes-combo-custom-container .form-legend {
-            margin: 20px 0;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 8px;
+            color: #8b949e;
+            font-family: 'Outfit', sans-serif;
             font-size: 0.85rem;
-            color: #8c8c9b;
-            line-height: 1.6;
-        }
-
-        #unes-combo-custom-container .form-legend div {
+            cursor: pointer;
+            padding: 0.6rem 1rem;
+            border-bottom: 2px solid transparent;
+            transition: 0.3s;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
+            font-weight: 600;
+            text-decoration: none;
         }
 
-        #unes-combo-custom-container .submit-btn:disabled {
-            background: #666;
-            cursor: not-allowed;
-            transform: none;
+        .unes-nav-item:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px 8px 0 0;
         }
 
-        #unes-combo-custom-container .success-panel {
-            display: none;
-            text-align: center;
-            padding: 40px;
+        .unes-nav-item.active {
+            color: #ffcc00;
+            border-bottom-color: #ffcc00;
         }
+    </style>
+</head>
 
-        #unes-combo-custom-container .class-cars-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            margin-top: 8px;
-            padding: 8px;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            max-height: 100px;
-            overflow-y: auto;
-        }
+<body>
+    <div id="page-bg"
+        style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.10; background-size: cover; background-position: center; transition: background 0.5s ease-in-out; filter: blur(5px);">
+    </div>
+    <div class="unes-nav-bar">
+        <a href="index.html" class="unes-nav-item">
+            <i data-lucide="calendar"></i> <span>CARRERAS</span>
+        </a>
+        <div class="unes-nav-item active">
+            <i data-lucide="plus-circle"></i> <span>ENVIAR COMBO</span>
+        </div>
+        <a href="index.html#ranking" class="unes-nav-item">
+            <i data-lucide="trophy"></i> <span>RANKING</span>
+        </a>
+    </div>
 
-        #unes-combo-custom-container .class-car-thumb {
-            width: 45px;
-            height: 28px;
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            background-color: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 4px;
-            transition: all 0.2s;
-            cursor: pointer;
-        }
+    <div id="unes-combo-custom-container"
+        style="background: transparent; color: #fff; font-family: 'Outfit', 'Inter', sans-serif; max-width: 1000px; margin: 0 auto; padding: 10px;">
 
-        #unes-combo-custom-container .class-car-thumb:hover,
-        #unes-combo-custom-container .track-variant-thumb:hover {
-            border-color: var(--primary);
-            background-color: rgba(255, 204, 0, 0.1);
-            transform: scale(1.1);
-            z-index: 10;
-        }
+        <!-- Estilos Premium -->
+        <style>
+            #unes-combo-custom-container {
+                --primary: #ffcc00;
+                --bg-panel: #1a1a24;
+                --bg-input: #0c0c0c;
+                --text-dim: #aaa;
+                --accent: #b416da;
+                --required: #ff8800;
+            }
 
-        #unes-combo-custom-container .track-variants-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 4px;
-            margin-top: 5px;
-            margin-bottom: 10px;
-        }
+            #unes-combo-custom-container .unes-nav-links a:hover {
+                color: #fff !important;
+            }
 
-        #unes-combo-custom-container .track-variant-thumb {
-            width: 35px;
-            height: 35px;
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            background-color: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.2s;
-            filter: grayscale(0.5);
-        }
+            #unes-combo-custom-container .main-title {
+                color: var(--primary);
+                text-align: center;
+                font-size: 2rem;
+                font-weight: 900;
+                margin-bottom: 30px;
+                text-transform: uppercase;
+                letter-spacing: 2px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 15px;
+            }
 
-        #unes-combo-custom-container .track-variant-thumb:hover {
-            filter: grayscale(0);
-        }
+            #unes-combo-custom-container .form-card {
+                background: var(--bg-panel);
+                border-radius: 15px;
+                padding: 25px;
+                border: 1px solid #333;
+                box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+                margin-bottom: 20px;
+            }
 
-        #unes-combo-custom-container .dice-btn {
-            cursor: pointer;
-            font-size: 0.9rem;
-            margin-left: 8px;
-            opacity: 0.4;
-            transition: all 0.2s;
-            display: inline-block;
-            vertical-align: middle;
-            user-select: none;
-        }
-        #unes-combo-custom-container .dice-btn:hover {
-            opacity: 1;
-            transform: scale(1.3) rotate(15deg);
-            filter: drop-shadow(0 0 5px var(--primary));
-        }
+            #unes-combo-custom-container .section-header {
+                color: var(--primary);
+                font-weight: 800;
+                font-size: 1rem;
+                margin-bottom: 20px;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                text-transform: uppercase;
+            }
 
-        @media (max-width: 800px) {
             #unes-combo-custom-container .top-row {
-                flex-direction: column;
+                display: flex;
+                gap: 25px;
+                margin-bottom: 25px;
+                flex-wrap: wrap;
+            }
+
+            #unes-combo-custom-container .pilot-info {
+                flex: 0 0 350px;
+                min-width: 300px;
             }
 
             #unes-combo-custom-container .preview-box {
                 flex: 1;
-                min-width: 100%;
+                min-width: 400px;
             }
 
-            #unes-combo-custom-container .grid-3,
-            #unes-combo-custom-container .grid-4 {
+            #unes-combo-custom-container .form-grid {
+                display: grid;
+                gap: 15px;
+                margin-bottom: 15px;
+            }
+
+            #unes-combo-custom-container .grid-2 {
                 grid-template-columns: 1fr 1fr;
             }
-        }
-    </style>
 
-    <div id="combo-form-wrapper">
-        
+            #unes-combo-custom-container .grid-3 {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
 
-        <div id="topActionButtons" style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; max-width: 800px; margin-left: auto; margin-right: auto;">
-           
-            <h1 class="main-title">🚀 CONFIGURAR COMBO</h1>
-          <button type="button" class="recent-combos-btn" onclick="randomizeForm()" 
-                style="flex: 1; min-width: 50px; margin: 0; background: rgba(180, 22, 218, 0.15); border-color: var(--accent); color: #e0a0ff;">
-                🎲 RELLENAR ALEATORIAMENTE
-            </button>
-        </div>
-        <div id="recentPanel" class="recent-panel" style="max-width: 600px; margin: 0 auto 20px;"></div>
+            #unes-combo-custom-container .grid-4 {
+                grid-template-columns: repeat(4, 1fr);
+            }
 
-        <form id="googleComboForm"
-            action="https://docs.google.com/forms/d/e/1FAIpQLSc-azaO0KOJwxWwlkApEtKJP4nJalklofgxqWz3WpGIa8pnZA/formResponse"
-            method="POST" target="hidden_iframe" onsubmit="return handleSubmit(event)">
+            #unes-combo-custom-container label {
+                display: block;
+                margin-bottom: 8px;
+                font-size: 0.8rem;
+                color: var(--text-dim);
+                font-weight: 700;
+                text-transform: uppercase;
+            }
 
-            <!-- Metadatos técnicos de Google Forms -->
-            <input type="hidden" name="fvv" value="1">
-            <input type="hidden" name="pageHistory" value="0">
-            <input type="hidden" name="fbzx" value="">
+            #unes-combo-custom-container .req {
+                color: var(--required);
+                margin-left: 3px;
+            }
 
-            <!-- Fila Superior: Piloto + Preview -->
-            <div class="top-row">
-                <div class="pilot-info form-card"
-                    style="margin-bottom:0; display: flex; flex-direction: column; gap: 20px;">
-                    <div>
-                        <div class="section-header">👤 INFORMACIÓN QUIEN ERES</div>
-                        <div class="form-group">
-                            <label>Tu Alias (Discord) <span class="req">⦿</span></label>
-                            <input type="text" id="inAuthor" name="entry.1605793444" required
-                                placeholder="Escribe tu nombre..." oninput="syncPreview()">
-                        </div>
-                    </div>
+            #unes-combo-custom-container input,
+            #unes-combo-custom-container select {
+                width: 100%;
+                padding: 10px;
+                background: var(--bg-input);
+                border: 1px solid #444;
+                border-radius: 6px;
+                color: #fff;
+                box-sizing: border-box;
+                outline: none;
+                transition: all 0.3s;
+                font-size: 0.9rem;
+            }
 
-                    <div>
-                        <div class="section-header">📶 COMBINACIÓN</div>
-                        <div class="form-grid">
-                            <div>
-                                <label>Circuito <span class="req">⦿</span> <span class="dice-btn" title="Aleatorio" onclick="randomizeField('inTrack')">🎲</span></label>
-                                <select id="inTrack" name="entry.1862948946" required onchange="syncPreview()">
-                                    <option value="">Cargando circuitos...</option>
-                                </select>
+            #unes-combo-custom-container input:focus,
+            #unes-combo-custom-container select:focus {
+                border-color: var(--primary);
+                box-shadow: 0 0 8px rgba(255, 204, 0, 0.3);
+            }
+
+            /* Discord Preview Card */
+            #unes-combo-custom-container .discord-preview {
+                background: #2f3136;
+                border-radius: 12px;
+                overflow: hidden;
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+                text-align: left;
+            }
+
+            #unes-combo-custom-container .card-header {
+                height: 180px;
+                background-size: cover;
+                background-position: center;
+                position: relative;
+                background-color: #000;
+            }
+
+            #unes-combo-custom-container .card-overlay {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                height: 100%;
+                background: linear-gradient(to top, #2f3136 5%, transparent 60%);
+            }
+
+            #unes-combo-custom-container .card-num {
+                position: absolute;
+                top: 10px;
+                left: 10px;
+                background: rgba(0, 0, 0, 0.8);
+                width: 24px;
+                height: 24px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 11px;
+                font-weight: 900;
+            }
+
+            #unes-combo-custom-container .card-author {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                color: #00c8ff;
+                font-size: 11px;
+                font-weight: 900;
+                text-shadow: 1px 1px 2px #000;
+            }
+
+            #unes-combo-custom-container .card-map {
+                position: absolute;
+                top: 35px;
+                left: 5px;
+                max-width: 100px;
+                max-height: 140px;
+                z-index: 20;
+                background-color: rgba(0, 0, 0, 0.3);
+                border-radius: 15px;
+                padding: 8px;
+                backdrop-filter: blur(5px);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            #unes-combo-custom-container .card-map img {
+                max-width: 100%;
+                max-height: 100%;
+                object-fit: contain;
+                display: block;
+            }
+
+            #unes-combo-custom-container .card-car-img {
+                position: absolute;
+                bottom: -20px;
+                right: -0px;
+                width: 500px;
+                height: 260px;
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: bottom right;
+                z-index: 5;
+            }
+
+            #unes-combo-custom-container .card-lights {
+                position: absolute;
+                top: 60px;
+                right: 15px;
+                width: 30px;
+                height: 30px;
+                background-size: contain;
+                background-repeat: no-repeat;
+                z-index: 10;
+            }
+
+            #unes-combo-custom-container .lights-warning {
+                animation: blink-warning 1s infinite;
+                filter: drop-shadow(0 0 8px #f00);
+            }
+
+            #unes-combo-custom-container .lights-text-warning,
+            #unes-combo-custom-container .track-text-warning {
+                position: absolute;
+                top: 45px;
+                right: 60px;
+                color: #ff3333;
+                font-weight: 900;
+                font-size: 1.4rem;
+                text-transform: uppercase;
+                text-align: right;
+                line-height: 0.9;
+                display: none;
+                animation: blink-warning 1s infinite;
+                pointer-events: none;
+                width: 200px;
+                filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.5));
+            }
+
+            @keyframes blink-warning {
+                0% {
+                    opacity: 1;
+                }
+
+                50% {
+                    opacity: 0.3;
+                }
+
+                100% {
+                    opacity: 1;
+                }
+            }
+
+            #unes-combo-custom-container .card-body {
+                padding: 15px;
+                position: relative;
+            }
+
+            #unes-combo-custom-container .card-track {
+                font-size: 1.1rem;
+                font-weight: 900;
+                color: #fff;
+                text-transform: uppercase;
+                margin-bottom: 2px;
+            }
+
+            #unes-combo-custom-container .card-car {
+                color: var(--primary);
+                font-size: 0.9rem;
+                font-weight: 800;
+                margin-bottom: 2px;
+            }
+
+            #unes-combo-custom-container .card-rival {
+                color: #8c8c9b;
+                font-size: 0.7rem;
+                margin-bottom: 10px;
+            }
+
+            #unes-combo-custom-container .card-meta {
+                background: rgba(0, 210, 255, 0.08);
+                border-radius: 6px;
+                padding: 5px 10px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                font-size: 0.7rem;
+                color: #fff;
+                margin-bottom: 15px;
+            }
+
+            #unes-combo-custom-container .card-weather {
+                display: flex;
+                gap: 4px;
+            }
+
+            #unes-combo-custom-container .card-weather img {
+                width: 18px;
+                height: 18px;
+                object-fit: contain;
+            }
+
+            #unes-combo-custom-container .card-badges {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 10px;
+            }
+
+            #unes-combo-custom-container .badge-item {
+                text-align: center;
+            }
+
+            #unes-combo-custom-container .badge-circle {
+                width: 45px;
+                height: 45px;
+                border-radius: 50%;
+                border: 3px solid #50505a;
+                background: #14141c;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: 900;
+                font-size: 0.8rem;
+                margin: 0 auto 5px;
+                transition: all 0.3s;
+                cursor: help;
+            }
+
+            #unes-combo-custom-container .badge-label {
+                font-size: 0.6rem;
+                color: #8c8c9b;
+                text-transform: uppercase;
+                font-weight: 800;
+            }
+
+            /* Botón y Panel de Recientes */
+            #unes-combo-custom-container .recent-combos-btn {
+                background: rgba(255, 255, 255, 0.05);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                color: #8c8c9b;
+                padding: 12px;
+                border-radius: 8px;
+                cursor: pointer;
+                width: 100%;
+                margin-bottom: 15px;
+                font-size: 0.9em;
+                font-weight: bold;
+                transition: all 0.3s;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+            }
+
+            #unes-combo-custom-container .recent-combos-btn:hover {
+                background: rgba(255, 255, 255, 0.12);
+                color: white;
+                border-color: var(--primary);
+            }
+
+            #unes-combo-custom-container .recent-panel {
+                display: none;
+                background: transparent;
+                padding: 10px 25px;
+                margin-bottom: 30px;
+                border-left: 5px solid var(--primary);
+                animation: fadeInRecent 0.3s ease;
+            }
+
+            #unes-combo-custom-container .recent-item {
+                display: flex;
+                align-items: baseline;
+                gap: 10px;
+                padding: 4px 0;
+                font-size: 0.95rem;
+                color: #fff;
+                flex-wrap: wrap;
+            }
+
+            #unes-combo-custom-container .recent-item .track {
+                font-weight: 800;
+                color: white;
+            }
+
+            #unes-combo-custom-container .recent-item .car {
+                color: var(--primary);
+                font-style: italic;
+                font-weight: 500;
+            }
+
+            #unes-combo-custom-container .recent-item .user {
+                color: #00c8ff;
+                font-size: 0.8em;
+                font-weight: 700;
+            }
+
+            #unes-combo-custom-container .recent-item .date {
+                color: #555;
+                font-size: 0.7em;
+                margin-left: auto;
+                font-weight: 500;
+            }
+
+            #unes-combo-custom-container .recent-item .sep {
+                opacity: 0.6;
+                font-weight: normal;
+            }
+
+            @keyframes fadeInRecent {
+                from {
+                    opacity: 0;
+                    transform: translateY(-10px);
+                }
+
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            #unes-combo-custom-container .submit-btn {
+                width: 100%;
+                padding: 18px;
+                background: var(--primary);
+                color: #000;
+                border: none;
+                border-radius: 10px;
+                font-weight: 900;
+                font-size: 1.1rem;
+                cursor: pointer;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+                transition: all 0.3s;
+                margin-top: 20px;
+            }
+
+            #unes-combo-custom-container .submit-btn:hover {
+                filter: brightness(1.1);
+                transform: translateY(-3px);
+                box-shadow: 0 10px 20px rgba(255, 204, 0, 0.3);
+            }
+
+            #unes-combo-custom-container .form-legend {
+                margin: 20px 0;
+                padding: 15px;
+                background: rgba(255, 255, 255, 0.03);
+                border-radius: 8px;
+                font-size: 0.85rem;
+                color: #8c8c9b;
+                line-height: 1.6;
+            }
+
+            #unes-combo-custom-container .form-legend div {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+
+            #unes-combo-custom-container .submit-btn:disabled {
+                background: #666;
+                cursor: not-allowed;
+                transform: none;
+            }
+
+            #unes-combo-custom-container .success-panel {
+                display: none;
+                text-align: center;
+                padding: 40px;
+            }
+
+            #unes-combo-custom-container .class-cars-container {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 6px;
+                margin-top: 8px;
+                padding: 8px;
+                background: rgba(0, 0, 0, 0.3);
+                border-radius: 8px;
+                border: 1px solid rgba(255, 255, 255, 0.05);
+                max-height: 100px;
+                overflow-y: auto;
+            }
+
+            #unes-combo-custom-container .class-car-thumb {
+                width: 45px;
+                height: 28px;
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: center;
+                background-color: rgba(255, 255, 255, 0.02);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 4px;
+                transition: all 0.2s;
+                cursor: pointer;
+            }
+
+            #unes-combo-custom-container .class-car-thumb:hover,
+            #unes-combo-custom-container .track-variant-thumb:hover {
+                border-color: var(--primary);
+                background-color: rgba(255, 204, 0, 0.1);
+                transform: scale(1.1);
+                z-index: 10;
+            }
+
+            #unes-combo-custom-container .track-variants-container {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 4px;
+                margin-top: 5px;
+                margin-bottom: 10px;
+            }
+
+            #unes-combo-custom-container .track-variant-thumb {
+                width: 35px;
+                height: 35px;
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: center;
+                background-color: rgba(255, 255, 255, 0.05);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 4px;
+                cursor: pointer;
+                transition: all 0.2s;
+                filter: grayscale(0.5);
+            }
+
+            #unes-combo-custom-container .track-variant-thumb:hover {
+                filter: grayscale(0);
+            }
+
+            #unes-combo-custom-container .dice-btn {
+                cursor: pointer;
+                font-size: 0.9rem;
+                margin-left: 8px;
+                opacity: 0.4;
+                transition: all 0.2s;
+                display: inline-block;
+                vertical-align: middle;
+                user-select: none;
+            }
+
+            #unes-combo-custom-container .dice-btn:hover {
+                opacity: 1;
+                transform: scale(1.3) rotate(15deg);
+                filter: drop-shadow(0 0 5px var(--primary));
+            }
+
+            @media (max-width: 800px) {
+                #unes-combo-custom-container .top-row {
+                    flex-direction: column;
+                }
+
+                #unes-combo-custom-container .preview-box {
+                    flex: 1;
+                    min-width: 100%;
+                }
+
+                #unes-combo-custom-container .grid-3,
+                #unes-combo-custom-container .grid-4 {
+                    grid-template-columns: 1fr 1fr;
+                }
+            }
+        </style>
+
+        <div id="combo-form-wrapper">
+
+
+            <div id="topActionButtons"
+                style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; max-width: 800px; margin-left: auto; margin-right: auto;">
+
+                <h1 class="main-title">🚀 CONFIGURAR COMBO</h1>
+                <button type="button" class="recent-combos-btn" onclick="randomizeForm()"
+                    style="flex: 1; min-width: 50px; margin: 0; background: rgba(255, 204, 0, 0.1); border-color: var(--primary); color: var(--primary);">
+                    🎲 RELLENAR ALEATORIAMENTE
+                </button>
+            </div>
+            <div id="recentPanel" class="recent-panel" style="max-width: 600px; margin: 0 auto 20px;"></div>
+
+            <form id="googleComboForm"
+                action="https://docs.google.com/forms/d/e/1FAIpQLSc-azaO0KOJwxWwlkApEtKJP4nJalklofgxqWz3WpGIa8pnZA/formResponse"
+                method="POST" target="hidden_iframe" onsubmit="return handleSubmit(event)">
+
+                <!-- Metadatos técnicos de Google Forms -->
+                <input type="hidden" name="fvv" value="1">
+                <input type="hidden" name="pageHistory" value="0">
+                <input type="hidden" name="fbzx" value="">
+
+                <!-- Fila Superior: Piloto + Preview -->
+                <div class="top-row">
+                    <div class="pilot-info form-card"
+                        style="margin-bottom:0; display: flex; flex-direction: column; gap: 20px;">
+                        <div>
+                            <div class="section-header">👤 INFORMACIÓN QUIEN ERES</div>
+                            <div class="form-group">
+                                <label>Tu Alias (Discord) <span class="req">⦿</span></label>
+                                <input type="text" id="inAuthor" name="entry.1605793444" required
+                                    placeholder="Escribe tu nombre..." oninput="syncPreview()">
                             </div>
+                        </div>
+
+                        <div>
+                            <div class="section-header">📶 COMBINACIÓN</div>
                             <div class="form-grid">
                                 <div>
-                                    <label>Clase de Rival <span class="dice-btn" title="Aleatorio" onclick="randomizeField('inRival')">🎲</span></label>
-                                    <select id="inRival" name="entry.522028550" onchange="syncPreview()">
-                                        <option value="Identico">Identico</option>
-                                        <option value="Misma Clase">Misma Clase</option>
+                                    <label>Circuito <span class="req">⦿</span> <span class="dice-btn" title="Aleatorio"
+                                            onclick="randomizeField('inTrack')">🎲</span></label>
+                                    <select id="inTrack" name="entry.1862948946" required onchange="syncPreview()">
+                                        <option value="">Cargando circuitos...</option>
                                     </select>
                                 </div>
-                              <div>
-                                    <label>Vehículo <span class="req">⦿</span> <span class="dice-btn" title="Aleatorio" onclick="randomizeField('inCar')">🎲</span></label>
-                                    <select id="inCar" name="entry.792361676" required onchange="syncPreview()">
-                                        <option value="">Cargando vehículos...</option>
-                                    </select>
+                                <div class="form-grid">
+                                    <div>
+                                        <label>Clase de Rival <span class="dice-btn" title="Aleatorio"
+                                                onclick="randomizeField('inRival')">🎲</span></label>
+                                        <select id="inRival" name="entry.522028550" onchange="syncPreview()">
+                                            <option value="Identico">Identico</option>
+                                            <option value="Misma Clase">Misma Clase</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label>Vehículo <span class="req">⦿</span> <span class="dice-btn"
+                                                title="Aleatorio" onclick="randomizeField('inCar')">🎲</span></label>
+                                        <select id="inCar" name="entry.792361676" required onchange="syncPreview()">
+                                            <option value="">Cargando vehículos...</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label title="SETUP">Configuración Auto <span class="dice-btn"
+                                                title="Aleatorio (SETUP abierto ó cerrado)"
+                                                onclick="randomizeField('inSetup')">🎲</span></label>
+                                        <select id="inSetup" name="entry.1776763336" onchange="syncPreview()">
+                                            <option value="Cerrada">Cerrada</option>
+                                            <option value="Abierta">Abierta</option>
+                                        </select>
+                                    </div>
+
                                 </div>
-                                <div>
-                                    <label title="SETUP">Configuración Auto <span class="dice-btn" title="Aleatorio (SETUP abierto ó cerrado)" onclick="randomizeField('inSetup')">🎲</span></label>
-                                    <select id="inSetup" name="entry.1776763336" onchange="syncPreview()">
-                                        <option value="Cerrada">Cerrada</option>
-                                        <option value="Abierta">Abierta</option>
-                                    </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="preview-box form-card" style="margin-bottom:0;">
+                        <div class="section-header">VISTA PREVIA DISCORD</div>
+                        <div class="discord-preview">
+                            <div class="card-header" id="pvHeader">
+                                <div
+                                    style="position:absolute; top:10px; left:10px; display:flex; align-items:center; gap:8px;">
+                                    <img src="https://raw.githubusercontent.com/unesvoltetes/imagenes-ams2/main/optimizadas/uneslog.png"
+                                        style="height:25px; filter: drop-shadow(0 0 5px rgba(0,0,0,0.5));">
+                                    <span id="pvAuthor" class="author-tag"></span>
+                                </div>
+                                <div id="pvMapContainer" class="card-map-container">
+                                    <img id="pvMap" class="card-map" src="" alt="Map">
+                                </div>
+                                <div id="pvCarImg" class="card-car-img"></div>
+                            </div>
+                            <div class="card-body">
+                                <div class="card-lights" id="pvLights"></div>
+                                <div id="pvLightsWarning" class="lights-text-warning">HORARIO NO PERMITIDO</div>
+                                <div id="pvTrackWarning" class="track-text-warning">CIRCUITO PEQUEÑO</div>
+                                <div class="card-track" id="pvTrackName">SELECCIONA CIRCUITO</div>
+                                <div id="pvTrackVariants" class="track-variants-container" style="display:none;"></div>
+                                <div class="card-car" id="pvCarName">SELECCIONA AUTO</div>
+                                <div class="card-rival">
+                                    <span id="pvRival">MISMA CLASE</span>
+                                    <span style="margin: 0 5px; opacity: 0.5;">|</span>
+                                    <span id="pvSetup">CERRADA</span>
+                                </div>
+                                <div id="pvClassCars" class="class-cars-container" style="display:none;"></div>
+
+                                <div class="card-meta">
+                                    <span id="pvDate">15/06/2024</span>
+                                    <span style="margin: 0 5px; opacity: 0.3;">|</span>
+                                    <img src="https://raw.githubusercontent.com/unesvoltetes/imagenes-ams2/main/optimizadas/vueltas.png"
+                                        style="width:12px; height:12px; opacity:0.7;">
+                                    <span style="font-size:0.65rem; opacity:0.6; margin-left:3px;">Pr.Ti.</span>
+                                    <span id="pvTimeX" style="color:#00ccff;">(Apagado)</span>
+                                    <span style="margin: 0 5px; opacity: 0.3;">|</span>
+                                    <span style="font-size:0.65rem; opacity:0.6;">Pr.Cl.</span>
+                                    <span id="pvWeatherX" style="color:#00ccff;">TIEMPO REAL</span>
+                                    <div id="pvWeatherSlots" class="card-weather"></div>
                                 </div>
 
+                                <div id="pvSchedule"
+                                    style="font-size: 0.75rem; color: #fff; margin: 10px 0; font-weight: 600; background: rgba(0,0,0,0.3); padding: 8px 15px; border-radius: 8px; display: block; border: 1px solid rgba(255,255,255,0.05); box-sizing: border-box;">
+                                    <div
+                                        style="color:var(--primary); font-size: 0.55rem; text-transform: uppercase; letter-spacing: 1.5px; opacity: 0.8; margin-bottom: 6px; font-weight: 900;">
+                                        🕒 Horarios virtuales</div>
+                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                                        <span>Inicio: <span id="pvTimeStart"
+                                                style="color:var(--primary)">14:00</span></span>
+                                        <span style="opacity:0.4">|</span>
+                                        <span>Duración: <span id="pvVirtualDur"
+                                                style="color:var(--primary)">10m</span></span>
+                                        <span style="opacity:0.4">|</span>
+                                        <span>Fin aprox: <span id="pvTimeEnd"
+                                                style="color:var(--primary)">14:10</span></span>
+                                    </div>
+                                </div>
+
+                                <div class="card-badges">
+                                    <div class="badge-item">
+                                        <div class="badge-circle" id="bgTires">REAL</div>
+                                        <div class="badge-label">Gomas</div>
+                                    </div>
+                                    <div class="badge-item">
+                                        <div class="badge-circle" id="bgFuel">REAL</div>
+                                        <div class="badge-label">Fuel</div>
+                                    </div>
+                                    <div class="badge-item">
+                                        <div class="badge-circle" id="bgGrip">REAL</div>
+                                        <div class="badge-label">Grip</div>
+                                    </div>
+                                    <div class="badge-item">
+                                        <div class="badge-circle" id="bgDamage">REAL</div>
+                                        <div class="badge-label">Daños</div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="preview-box form-card" style="margin-bottom:0;">
-                    <div class="section-header">VISTA PREVIA DISCORD</div>
-                    <div class="discord-preview">
-                        <div class="card-header" id="pvHeader">
-                            <div style="position:absolute; top:10px; left:10px; display:flex; align-items:center; gap:8px;">
-                                <img src="https://raw.githubusercontent.com/unesvoltetes/imagenes-ams2/main/optimizadas/uneslog.png" style="height:25px; filter: drop-shadow(0 0 5px rgba(0,0,0,0.5));">
-                                <span id="pvAuthor" class="author-tag"></span>
-                            </div>
-                            <div id="pvMapContainer" class="card-map-container">
-                                <img id="pvMap" class="card-map" src="" alt="Map">
-                            </div>
-                            <div id="pvCarImg" class="card-car-img"></div>
+                <!-- Sesión -->
+                <div class="form-card">
+                    <div class="section-header">🗓️ CONFIGURACIÓN DE SESIÓN</div>
+                    <div class="form-grid grid-4">
+                        <div>
+                            <label>Fecha Histórica <span class="dice-btn" title="Aleatorio"
+                                    onclick="randomizeField('inDate')">🎲</span></label>
+                            <input type="text" id="inDate" name="entry.506982970" placeholder="DD/MM/AAAA"
+                                oninput="syncPreview()">
                         </div>
-                        <div class="card-body">
-                            <div class="card-lights" id="pvLights"></div>
-                            <div id="pvLightsWarning" class="lights-text-warning">HORARIO NO PERMITIDO</div>
-                            <div id="pvTrackWarning" class="track-text-warning">CIRCUITO PEQUEÑO</div>
-                            <div class="card-track" id="pvTrackName">SELECCIONA CIRCUITO</div>
-                            <div id="pvTrackVariants" class="track-variants-container" style="display:none;"></div>
-                            <div class="card-car" id="pvCarName">SELECCIONA AUTO</div>
-                            <div class="card-rival">
-                                <span id="pvRival">MISMA CLASE</span>
-                                <span style="margin: 0 5px; opacity: 0.5;">|</span>
-                                <span id="pvSetup">CERRADA</span>
-                            </div>
-                            <div id="pvClassCars" class="class-cars-container" style="display:none;"></div>
-
-                            <div class="card-meta">
-                                <span id="pvDate">15/06/2024</span>
-                                <span style="margin: 0 5px; opacity: 0.3;">|</span>
-                                <img src="https://raw.githubusercontent.com/unesvoltetes/imagenes-ams2/main/optimizadas/vueltas.png" style="width:12px; height:12px; opacity:0.7;">
-                                <span style="font-size:0.65rem; opacity:0.6; margin-left:3px;">Pr.Ti.</span>
-                                <span id="pvTimeX" style="color:#00ccff;">(Apagado)</span>
-                                <span style="margin: 0 5px; opacity: 0.3;">|</span>
-                                <span style="font-size:0.65rem; opacity:0.6;">Pr.Cl.</span>
-                                <span id="pvWeatherX" style="color:#00ccff;">TIEMPO REAL</span>
-                                <div id="pvWeatherSlots" class="card-weather"></div>
-                            </div>
-
-                            <div id="pvSchedule" style="font-size: 0.75rem; color: #fff; margin: 10px 0; font-weight: 600; background: rgba(0,0,0,0.3); padding: 8px 15px; border-radius: 8px; display: block; border: 1px solid rgba(255,255,255,0.05); box-sizing: border-box;">
-                                <div style="color:var(--primary); font-size: 0.55rem; text-transform: uppercase; letter-spacing: 1.5px; opacity: 0.8; margin-bottom: 6px; font-weight: 900;">🕒 Horarios virtuales</div>
-                                <div style="display: flex; justify-content: space-between; align-items: center;">
-                                    <span>Inicio: <span id="pvTimeStart" style="color:var(--primary)">14:00</span></span>
-                                    <span style="opacity:0.4">|</span>
-                                    <span>Duración: <span id="pvVirtualDur" style="color:var(--primary)">10m</span></span>
-                                    <span style="opacity:0.4">|</span>
-                                    <span>Fin aprox: <span id="pvTimeEnd" style="color:var(--primary)">14:10</span></span>
-                                </div>
-                            </div>
-
-                            <div class="card-badges">
-                                <div class="badge-item">
-                                    <div class="badge-circle" id="bgTires">REAL</div>
-                                    <div class="badge-label">Gomas</div>
-                                </div>
-                                <div class="badge-item">
-                                    <div class="badge-circle" id="bgFuel">REAL</div>
-                                    <div class="badge-label">Fuel</div>
-                                </div>
-                                <div class="badge-item">
-                                    <div class="badge-circle" id="bgGrip">REAL</div>
-                                    <div class="badge-label">Grip</div>
-                                </div>
-                                <div class="badge-item">
-                                    <div class="badge-circle" id="bgDamage">REAL</div>
-                                    <div class="badge-label">Daños</div>
-                                </div>
-                            </div>
+                        <div>
+                            <label>Hora de Inicio <span class="dice-btn" title="Aleatorio"
+                                    onclick="randomizeField('inHour')">🎲</span></label>
+                            <select id="inHour" name="entry.1812840569" onchange="syncPreview()">
+                                <option value="9">09:00</option>
+                                <option value="10">10:00</option>
+                                <option value="11">11:00</option>
+                                <option value="12">12:00</option>
+                                <option value="13">13:00</option>
+                                <option value="14" selected>14:00</option>
+                                <option value="15">15:00</option>
+                                <option value="16">16:00</option>
+                                <option value="17">17:00</option>
+                                <option value="18">18:00</option>
+                                <option value="19">19:00</option>
+                                <option value="20">20:00</option>
+                                <option value="21">21:00</option>
+                                <option value="22">22:00</option>
+                                <option value="23">23:00</option>
+                                <option value="3">03:00</option>
+                                <option value="4">04:00</option>
+                                <option value="5">05:00</option>
+                                <option value="6">06:00</option>
+                                <option value="7">07:00</option>
+                                <option value="8">08:00</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label>Progreso Tiempo <span class="dice-btn" title="Aleatorio"
+                                    onclick="randomizeField('inTimeX')">🎲</span></label>
+                            <select id="inTimeX" name="entry.1342832211" onchange="syncPreview()">
+                                <option value=""></option>
+                                <option value="Apagado">Apagado</option>
+                                <option value="Tiempo Real">Tiempo Real</option>
+                                <option value="2x">2x</option>
+                                <option value="5x">5x</option>
+                                <option value="10x">10x</option>
+                                <option value="15x">15x</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label>Progreso Clima <span class="dice-btn" title="Aleatorio"
+                                    onclick="randomizeField('inWeatherX')">🎲</span></label>
+                            <select id="inWeatherX" name="entry.1830495907" onchange="syncPreview()">
+                                <option value="Sincronizar">Sincronizar</option>
+                                <option value="Tiempo Real">Tiempo Real</option>
+                                <option value="2x">2x</option>
+                                <option value="5x">5x</option>
+                                <option value="10x">10x</option>
+                                <option value="15x">15x</option>
+                            </select>
                         </div>
                     </div>
+                    <div style="margin-top:15px;">
+                        <label>Climas (4 slots) <span class="dice-btn" title="Aleatorio todo el clima"
+                                onclick="['w1','w2','w3','w4'].forEach(id=>randomizeField(id))">🎲</span> (para mas
+                            climas elige aleatorio)</label>
+                        <div class="form-grid grid-4" id="weatherControls">
+                            <select id="w1" name="entry.786862149" onchange="syncPreview()">
+                                <option value=""></option>
+                                <option value="Despejado">Despejado</option>
+                                <option value="Nube ligera">Nube ligera</option>
+                                <option value="Nube media">Nube media</option>
+                                <option value="Nube pesada">Nube pesada</option>
+                                <option value="Nublado">Nublado</option>
+                                <option value="Aleatorio">Aleatorio</option>
+                                <option value="Lluvia ligera">Lluvia ligera</option>
+                                <option value="Clima real">Clima real</option>
+                            </select>
+                            <select id="w2" name="entry.1287748076" onchange="syncPreview()">
+                                <option value=""></option>
+                                <option value="Despejado">Despejado</option>
+                                <option value="Nube ligera">Nube ligera</option>
+                                <option value="Nube media">Nube media</option>
+                                <option value="Nube pesada">Nube pesada</option>
+                                <option value="Nublado">Nublado</option>
+                                <option value="Lluvia ligera">Lluvia ligera</option>
+                                <option value="Aleatorio">Aleatorio</option>
+                                <option value="Clima real">Clima real</option>
+                            </select>
+                            <select id="w3" name="entry.1267476878" onchange="syncPreview()">
+                                <option value=""></option>
+                                <option value="Despejado">Despejado</option>
+                                <option value="Nube ligera">Nube ligera</option>
+                                <option value="Nube media">Nube media</option>
+                                <option value="Nube pesada">Nube pesada</option>
+                                <option value="Nublado">Nublado</option>
+                                <option value="Lluvia ligera">Lluvia ligera</option>
+                                <option value="Aleatorio">Aleatorio</option>
+                                <option value="Clima real">Clima real</option>
+                            </select>
+                            <select id="w4" name="entry.479476913" onchange="syncPreview()">
+                                <option value=""></option>
+                                <option value="Despejado">Despejado</option>
+                                <option value="Nube ligera">Nube ligera</option>
+                                <option value="Nube media">Nube media</option>
+                                <option value="Nube pesada">Nube pesada</option>
+                                <option value="Nublado">Nublado</option>
+                                <option value="Lluvia ligera">Lluvia ligera</option>
+                                <option value="Aleatorio">Aleatorio</option>
+                                <option value="Clima real">Clima real</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
+
+                <!-- Reglas -->
+                <div class="form-card">
+                    <div class="section-header">⚖️ REGLAS Y DAÑOS</div>
+                    <div class="form-grid grid-2">
+                        <div>
+                            <label>Parada obligatoria en box <span class="dice-btn" title="Aleatorio"
+                                    onclick="randomizeField('entry.1406522962')">🎲</span></label>
+                            <select name="entry.1406522962" onchange="syncPreview()">
+                                <option value=""></option>
+                                <option value="NO">NO</option>
+                                <option value="SI">SI</option>
+                                <option value="Si, neumaticos minimo (2-4 aleatorio)">Si, neumaticos minimo (2-4
+                                    aleatorio)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label>Carrera lanzada (modo manual) <span class="dice-btn" title="Aleatorio"
+                                    onclick="randomizeField('entry.2142131096')">🎲</span></label>
+                            <select name="entry.2142131096" onchange="syncPreview()">
+                                <option value=""></option>
+                                <option value="NO">NO</option>
+                                <option value="SI">SI</option>
+                                <option value="Si con vuelta en formacion">Si con vuelta en formacion</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-grid grid-4" style="margin-top:15px;">
+                        <div>
+                            <label>Desgaste Neumáticos <span class="dice-btn" title="Aleatorio"
+                                    onclick="randomizeField('inTires')">🎲</span></label>
+                            <select id="inTires" name="entry.860837850" onchange="syncPreview()">
+                                <option value=""></option>
+                                <option value="Real">Real</option>
+                                <option value="X2">X2</option>
+                                <option value="X3">X3</option>
+                                <option value="X4">X4</option>
+                                <option value="X5">X5</option>
+                                <option value="Sin Consumo">Sin Consumo</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label>Consumo Fuel <span class="dice-btn" title="Aleatorio"
+                                    onclick="randomizeField('inFuel')">🎲</span></label>
+                            <select id="inFuel" name="entry.1619029577" onchange="syncPreview()">
+                                <option value=""></option>
+                                <option value="Real">Real</option>
+                                <option value="Sin Consumo">Sin Consumo</option>
+                                <option value="X2">X2</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label>Tipo Daños <span class="dice-btn" title="Aleatorio"
+                                    onclick="randomizeField('inDamageType')">🎲</span></label>
+                            <select id="inDamageType" name="entry.645880899" onchange="syncPreview()">
+                                <option value=""></option>
+                                <option value="Apagado">Apagado</option>
+                                <option value="Visual">Visual</option>
+                                <option value="Rendimiento">Rendimiento</option>
+                                <option value="Todos">Todos</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label>Escala Daños <span class="dice-btn" title="Aleatorio"
+                                    onclick="randomizeField('inDamageScale')">🎲</span></label>
+                            <select id="inDamageScale" name="entry.1474839694" onchange="syncPreview()">
+                                <option value=""></option>
+                                <option value="Bajo">Bajo</option>
+                                <option value="Medio">Medio</option>
+                                <option value="Alto">Alto</option>
+                                <option value="Máximo">Máximo</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-grid grid-2" style="margin-top:15px;">
+                        <div>
+                            <label>Preajuste de LiveTrack (Grip) <span class="dice-btn" title="Aleatorio"
+                                    onclick="randomizeField('inGrip')">🎲</span></label>
+                            <select id="inGrip" name="entry.1830981214" onchange="syncPreview()">
+                                <option value=""></option>
+                                <option value="Progresivo">Progresivo</option>
+                                <option value="Mojado">Mojado</option>
+                                <option value="Humedo">Humedo</option>
+                                <option value="Limpio">Limpio</option>
+                                <option value="Ligero">Ligero</option>
+                                <option value="Promediado">Promediado</option>
+                                <option value="Saturado">Saturado</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label>Reagrupar carrera (% safetyCar) <span class="dice-btn" title="Aleatorio"
+                                    onclick="randomizeField('entry.1679901716')">🎲</span></label>
+                            <select name="entry.1679901716" onchange="syncPreview()">
+                                <option value=""></option>
+                                <option value="NO">NO</option>
+                                <option value="25%">25%</option>
+                                <option value="ALEATORIO">ALEATORIO</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+
+                <button type="submit" class="submit-btn" id="btnSubmit">📩 ENVIAR COMBO AL SERVIDOR</button>
+            </form>
+
+            <!-- Iframe oculto para envío sin recarga -->
+            <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="handleIframeLoad()"></iframe>
+
+            <div id="successView" class="form-card success-panel"
+                style="display:none; text-align: center; padding: 50px 20px;">
+                <h1 style="color:var(--primary); font-size: 2.5rem; margin-bottom: 10px;">¡COMBO ENVIADO! 🚀</h1>
+                <p style="color: #8c8c9b; margin-bottom: 30px;">Tu configuración ha sido registrada en el servidor.</p>
+
+                <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                    <button onclick="location.reload()" class="submit-btn"
+                        style="width:auto; margin: 0; padding: 12px 30px;">
+                        ➕ CONFIGURAR OTRO
+                    </button>
+
+                    <button onclick="toggleRecent()" class="submit-btn"
+                        style="width:auto; margin: 0; padding: 12px 30px; background: #2a2a35; border: 1px solid #444;">
+                        🔍 VERIFICAR EN LA LISTA
+                    </button>
+                </div>
+
+                <p style="font-size: 0.8rem; color: #555; margin-top: 20px;">
+                    * Los cambios pueden tardar hasta 1 minuto en aparecer en el historial público.
+                </p>
             </div>
-
-            <!-- Sesión -->
-            <div class="form-card">
-                <div class="section-header">🗓️ CONFIGURACIÓN DE SESIÓN</div>
-                <div class="form-grid grid-4">
-                    <div>
-                        <label>Fecha Histórica <span class="dice-btn" title="Aleatorio" onclick="randomizeField('inDate')">🎲</span></label>
-                        <input type="text" id="inDate" name="entry.506982970" placeholder="DD/MM/AAAA"
-                            oninput="syncPreview()">
-                    </div>
-                    <div>
-                        <label>Hora de Inicio <span class="dice-btn" title="Aleatorio" onclick="randomizeField('inHour')">🎲</span></label>
-                        <select id="inHour" name="entry.1812840569" onchange="syncPreview()">
-                            <option value="9">09:00</option>
-                            <option value="10">10:00</option>
-                            <option value="11">11:00</option>
-                            <option value="12">12:00</option>
-                            <option value="13">13:00</option>
-                            <option value="14" selected>14:00</option>
-                            <option value="15">15:00</option>
-                            <option value="16">16:00</option>
-                            <option value="17">17:00</option>
-                            <option value="18">18:00</option>
-                            <option value="19">19:00</option>
-                            <option value="20">20:00</option>
-                            <option value="21">21:00</option>
-                            <option value="22">22:00</option>
-                            <option value="23">23:00</option>
-                            <option value="3">03:00</option>
-                            <option value="4">04:00</option>
-                            <option value="5">05:00</option>
-                            <option value="6">06:00</option>
-                            <option value="7">07:00</option>
-                            <option value="8">08:00</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label>Progreso Tiempo <span class="dice-btn" title="Aleatorio" onclick="randomizeField('inTimeX')">🎲</span></label>
-                        <select id="inTimeX" name="entry.1342832211" onchange="syncPreview()">
-                            <option value=""></option>
-                            <option value="Apagado">Apagado</option>
-                            <option value="Tiempo Real">Tiempo Real</option>
-                            <option value="2x">2x</option>
-                            <option value="5x">5x</option>
-                            <option value="10x">10x</option>
-                            <option value="15x">15x</option>
-                            <!--  <option value="20x">20x</option>
-                            <option value="25x">25x</option>
-                            <option value="30x">30x</option>
-                            <option value="40x">40x</option>
-                            <option value="50x">50x</option>
-                            <option value="60x">60x</option> -->
-                        </select>
-                    </div>
-                    <div>
-                        <label>Progreso Clima <span class="dice-btn" title="Aleatorio" onclick="randomizeField('inWeatherX')">🎲</span></label>
-                        <select id="inWeatherX" name="entry.1830495907" onchange="syncPreview()">
-                            <option value="Sincronizar">Sincronizar</option>
-                            <option value="Tiempo Real">Tiempo Real</option>
-                            <option value="2x">2x</option>
-                            <option value="5x">5x</option>
-                            <option value="10x">10x</option>
-                            <option value="15x">15x</option>
-                           <!--   <option value="20x">20x</option>
-                            <option value="25x">25x</option>
-                            <option value="30x">30x</option>
-                            <option value="40x">40x</option>
-                            <option value="50x">50x</option>
-                            <option value="60x">60x</option> -->
-                        </select>
-                    </div>
-                </div>
-                <div style="margin-top:15px;">
-                    <label>Climas (4 slots) <span class="dice-btn" title="Aleatorio todo el clima" onclick="['w1','w2','w3','w4'].forEach(id=>randomizeField(id))">🎲</span> (para mas climas elige aleatorio)</label>
-                    <div class="form-grid grid-4" id="weatherControls">
-                        <select id="w1" name="entry.786862149" onchange="syncPreview()">
-                            <option value=""></option>
-                            <option value="Despejado">Despejado</option>
-                            <option value="Nube ligera">Nube ligera</option>
-                            <option value="Nube media">Nube media</option>
-                            <option value="Nube pesada">Nube pesada</option>
-                            <option value="Nublado">Nublado</option>
-                            <option value="Aleatorio">Aleatorio</option>
-                            <option value="Lluvia ligera">Lluvia ligera</option>
-                       <!-- <option value="Brumoso">Brumoso</option>
-                            <option value="Niebla">Niebla</option>
-                            <option value="Niebla densa">Niebla densa</option>
-                            <option value="Niebla con lluvia">Niebla con lluvia</option>
-                            <option value="Niebla pesada con lluvia">Niebla pesada con lluvia</option>
-                            <option value="Lluvia">Lluvia</option>
-                            <option value="Tormenta">Tormenta</option>
-                            <option value="Tormenta eléctrica">Tormenta eléctrica</option> -->
-                            <option value="Clima real">Clima real</option>
-                        </select>
-                        <select id="w2" name="entry.1287748076" onchange="syncPreview()">
-                            <option value=""></option>
-                            <option value="Despejado">Despejado</option>
-                            <option value="Nube ligera">Nube ligera</option>
-                            <option value="Nube media">Nube media</option>
-                            <option value="Nube pesada">Nube pesada</option>
-                            <option value="Nublado">Nublado</option>
-                            <option value="Lluvia ligera">Lluvia ligera</option>
-                            <option value="Aleatorio">Aleatorio</option>
-                         <!--  
-                            <option value="Brumoso">Brumoso</option>
-                            <option value="Niebla">Niebla</option>
-                            <option value="Niebla densa">Niebla densa</option>
-                            <option value="Niebla con lluvia">Niebla con lluvia</option>
-                            <option value="Niebla pesada con lluvia">Niebla pesada con lluvia</option>
-                            <option value="Lluvia">Lluvia</option>
-                            <option value="Tormenta">Tormenta</option>
-                            <option value="Tormenta eléctrica">Tormenta eléctrica</option> -->
-                            <option value="Clima real">Clima real</option>
-                        </select>
-                        <select id="w3" name="entry.1267476878" onchange="syncPreview()">
-                            <option value=""></option>
-                            <option value="Despejado">Despejado</option>
-                            <option value="Nube ligera">Nube ligera</option>
-                            <option value="Nube media">Nube media</option>
-                            <option value="Nube pesada">Nube pesada</option>
-                            <option value="Nublado">Nublado</option>
-                            <option value="Lluvia ligera">Lluvia ligera</option>                          
-                            <option value="Aleatorio">Aleatorio</option>
-                          <!-- 
-                            <option value="Brumoso">Brumoso</option>
-                            <option value="Niebla">Niebla</option>
-                            <option value="Niebla densa">Niebla densa</option>
-                            <option value="Niebla con lluvia">Niebla con lluvia</option>
-                            <option value="Niebla pesada con lluvia">Niebla pesada con lluvia</option>
-                            <option value="Lluvia">Lluvia</option>
-                            <option value="Tormenta">Tormenta</option>
-                            <option value="Tormenta eléctrica">Tormenta eléctrica</option> -->
-                            <option value="Clima real">Clima real</option>
-                        </select>
-                        <select id="w4" name="entry.479476913" onchange="syncPreview()">
-                            <option value=""></option>
-                            <option value="Despejado">Despejado</option>
-                            <option value="Nube ligera">Nube ligera</option>
-                            <option value="Nube media">Nube media</option>
-                            <option value="Nube pesada">Nube pesada</option>
-                            <option value="Nublado">Nublado</option>
-                            <option value="Lluvia ligera">Lluvia ligera</option>                          
-                            <option value="Aleatorio">Aleatorio</option>
-                          <!-- 
-                            <option value="Brumoso">Brumoso</option>
-                            <option value="Niebla">Niebla</option>
-                            <option value="Niebla densa">Niebla densa</option>
-                            <option value="Niebla con lluvia">Niebla con lluvia</option>
-                            <option value="Niebla pesada con lluvia">Niebla pesada con lluvia</option>
-
-                            <option value="Lluvia">Lluvia</option>
-                            <option value="Tormenta">Tormenta</option>
-                            <option value="Tormenta eléctrica">Tormenta eléctrica</option> -->
-                            <option value="Clima real">Clima real</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Reglas -->
-            <div class="form-card">
-                <div class="section-header">⚖️ REGLAS Y DAÑOS</div>
-                <div class="form-grid grid-2">
-                    <div>
-                        <label>Parada obligatoria en box <span class="dice-btn" title="Aleatorio" onclick="randomizeField('entry.1406522962')">🎲</span></label>
-                        <select name="entry.1406522962" onchange="syncPreview()">
-                            <option value=""></option>
-                            <option value="NO">NO</option>
-                            <option value="SI">SI</option>
-                            <option value="Si, neumaticos minimo (2-4 aleatorio)">Si, neumaticos minimo (2-4 aleatorio)</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label>Carrera lanzada (modo manual) <span class="dice-btn" title="Aleatorio" onclick="randomizeField('entry.2142131096')">🎲</span></label>
-                        <select name="entry.2142131096" onchange="syncPreview()">
-                            <option value=""></option>
-                            <option value="NO">NO</option>
-                            <option value="SI">SI</option>
-                            <option value="Si con vuelta en formacion">Si con vuelta en formacion</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-grid grid-4" style="margin-top:15px;">
-                    <div>
-                        <label>Desgaste Neumáticos <span class="dice-btn" title="Aleatorio" onclick="randomizeField('inTires')">🎲</span></label>
-                        <select id="inTires" name="entry.860837850" onchange="syncPreview()">
-                            <option value=""></option>
-                            <option value="Real">Real</option>
-                            <option value="X2">X2</option>
-                            <option value="X3">X3</option>
-                            <option value="X4">X4</option>
-                            <option value="X5">X5</option>
-                            <option value="Sin Consumo">Sin Consumo</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label>Consumo Fuel <span class="dice-btn" title="Aleatorio" onclick="randomizeField('inFuel')">🎲</span></label>
-                        <select id="inFuel" name="entry.1619029577" onchange="syncPreview()">
-                            <option value=""></option>
-                            <option value="Real">Real</option>
-                            <option value="Sin Consumo">Sin Consumo</option>
-                            <option value="X2">X2</option>
-                            <!--  <option value="X3">X3</option>
-                            <option value="X4">X4</option>
-                            <option value="X5">X5</option> -->
-                        </select>
-                    </div>
-                    <div>
-                        <label>Tipo Daños <span class="dice-btn" title="Aleatorio" onclick="randomizeField('inDamageType')">🎲</span></label>
-                        <select id="inDamageType" name="entry.645880899" onchange="syncPreview()">
-                            <option value=""></option>
-                            <option value="Apagado">Apagado</option>
-                            <option value="Visual">Visual</option>
-                            <option value="Rendimiento">Rendimiento</option>
-                            <option value="Todos">Todos</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label>Escala Daños <span class="dice-btn" title="Aleatorio" onclick="randomizeField('inDamageScale')">🎲</span></label>
-                        <select id="inDamageScale" name="entry.1474839694" onchange="syncPreview()">
-                            <option value=""></option>
-                            <option value="Bajo">Bajo</option>
-                            <option value="Medio">Medio</option>
-                            <option value="Alto">Alto</option>
-                            <option value="Máximo">Máximo</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-grid grid-2" style="margin-top:15px;">
-                    <div>
-                        <label>Preajuste de LiveTrack (Grip) <span class="dice-btn" title="Aleatorio" onclick="randomizeField('inGrip')">🎲</span></label>
-                        <select id="inGrip" name="entry.1830981214" onchange="syncPreview()">
-                            <option value=""></option>
-                            <option value="Progresivo">Progresivo</option>
-                            <option value="Mojado">Mojado</option>
-                            <option value="Humedo">Humedo</option>
-                            <option value="Limpio">Limpio</option>
-                            <option value="Ligero">Ligero</option>
-                            <option value="Promediado">Promediado</option>
-                            <option value="Saturado">Saturado</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label>Reagrupar carrera (% safetyCar) <span class="dice-btn" title="Aleatorio" onclick="randomizeField('entry.1679901716')">🎲</span></label>
-                        <select name="entry.1679901716" onchange="syncPreview()">
-                            <option value=""></option>
-                            <option value="NO">NO</option>
-                            <option value="25%">25%</option>
-                            <!--  <option value="50%">50%</option>
-                            <option value="75%">75%</option> -->
-                            <option value="ALEATORIO">ALEATORIO</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-
-            <button type="submit" class="submit-btn" id="btnSubmit">📩 ENVIAR COMBO AL SERVIDOR</button>
-        </form>
-        
-        <!-- Iframe oculto para envío sin recarga -->
-        <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" 
-            onload="handleIframeLoad()"></iframe>
-
-        <div id="successView" class="form-card success-panel" style="display:none; text-align: center; padding: 50px 20px;">
-            <h1 style="color:var(--primary); font-size: 2.5rem; margin-bottom: 10px;">¡COMBO ENVIADO! 🚀</h1>
-            <p style="color: #8c8c9b; margin-bottom: 30px;">Tu configuración ha sido registrada en el servidor.</p>
-            
-            <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-                <button onclick="location.reload()" class="submit-btn"
-                    style="width:auto; margin: 0; padding: 12px 30px;">
-                    ➕ CONFIGURAR OTRO
-                </button>
-                
-                <button onclick="toggleRecent()" class="submit-btn"
-                    style="width:auto; margin: 0; padding: 12px 30px; background: #2a2a35; border: 1px solid #444;">
-                    🔍 VERIFICAR EN LA LISTA
-                </button>
-            </div>
-
-            <p style="font-size: 0.8rem; color: #555; margin-top: 20px;">
-                * Los cambios pueden tardar hasta 1 minuto en aparecer en el historial público.
-            </p>
         </div>
+
     </div>
 
-</div>
+    <div class="form-legend">
+        <div><span>•</span> Los campos con un <span style="color: #ff7e00;">⦿</span> son obligados rellenarlos.</div>
+        <div><span>•</span> Todos los campos vacíos se rellenaran aleatoriamente.</div>
+    </div>
 
-            <div class="form-legend">
-                <div><span>•</span> Los campos con un <span  style="color: #ff7e00;">⦿</span> son obligados rellenarlos.</div>
-                <div><span>•</span> Todos los campos vacíos se rellenaran aleatoriamente.</div>
-            </div>
+    <script>
+        let submitted = false;
+        let carsData = [];
+        let tracksData = [];
 
-<script>
-    let submitted = false;
-    let carsData = [];
-    let tracksData = [];
+        // Listados embebidos para asegurar carga inmediata
+        const carNames = ["ARC Camaro", "Alpine A110 GT4 Evo", "Alpine A424", "Aston Martin DBR9", "Aston Martin Valkyrie", "Aston Martin Valkyrie Hypercar", "Aston Martin Vantage GT3 Evo", "Aston Martin Vantage GT4 Evo", "Aston Martin Vantage GTE", "Audi R8 LMP1", "Audi R8 LMS GT3", "Audi R8 LMS GT3 evo II", "Audi R8 LMS GT4", "Audi R8 V10 GT", "Audi V8 quattro DTM", "BMW 2002 Turbo", "BMW M Hybrid V8", "BMW M Hybrid V8 (LM24)", "BMW M1 Procar", "BMW M3 E46 GTR", "BMW M3 Sport Evo Group A", "BMW M4 GT3", "BMW M4 GT4", "BMW M6 GT3", "BMW M8 GTE", "Brabham Alfa Romeo BT46B", "Brabham BMW BT52", "Brabham BT26A", "Brabham BT44", "Brabham BT62", "Brabham Cosworth BT49", "Cadillac DPi-VR", "Cadillac V-Series.R", "Cadillac V-Series.R (LM24)", "Caterham 620R", "Caterham Academy", "Caterham Superlight", "Caterham Supersport", "Chevrolet Camaro GT4.R", "Chevrolet Camaro SS", "Chevrolet Chevette", "Chevrolet Corvette C3", "Chevrolet Corvette C3.R", "Chevrolet Corvette C3.R Convertible", "Chevrolet Corvette C5-R", "Chevrolet Corvette C8 Z06 (+Z07 Upgrade)", "Chevrolet Corvette C8.R", "Chevrolet Corvette GTP", "Chevrolet Corvette Z06 GT3.R", "Chevrolet Cruze Stock Car 2019", "Chevrolet Cruze Stock Car 2020", "Chevrolet Cruze Stock Car 2021", "Chevrolet Cruze Stock Car 2022", "Chevrolet Cruze Stock Car 2023", "Chevrolet Cruze Stock Car 2024", "Chevrolet Omega Stock Car 1999", "Chevrolet Opala Old Stock Race", "Chevrolet Opala Stock Cars 1979", "Chevrolet Opala Stock Cars 1986", "Citroen DS3 RX", "Copa Fusca", "Copa Montana", "Copa Uno", "Courage C60 Hybrid", "Dallara F301", "Dallara F309", "Dallara SP1", "Dodge Viper ACR", "Dodge Viper GTS-R", "Formula Classic Gen1 Model1", "Formula Classic Gen1 Model2", "Formula Classic Gen2 Model1", "Formula Classic Gen2 Model2", "Formula Classic Gen2 Model3", "Formula Classic Gen3 Model1", "Formula Classic Gen3 Model2", "Formula Classic Gen3 Model3", "Formula Classic Gen3 Model4", "Formula Classic Gen4 Model1", "Formula Classic Gen4 Model2", "Formula Classic Gen4 Model3", "Formula Dirt", "Formula Edge Model 1", "Formula Edge Model 2", "Formula Edge Model 3", "Formula HiTech Gen1 Model1", "Formula HiTech Gen1 Model2", "Formula HiTech Gen1 Model3", "Formula HiTech Gen1 Model4", "Formula HiTech Gen2 Model1", "Formula HiTech Gen2 Model2", "Formula HiTech Gen2 Model3", "Formula Inter MG-15", "Formula Junior", "Formula Retro Gen2", "Formula Retro Gen3 DFY", "Formula Retro Gen3 Turbo", "Formula Retro V12", "Formula Retro V8", "Formula Trainer", "Formula Trainer Advanced", "Formula USA 2023", "Formula Ultimate Hybrid Gen1", "Formula Ultimate Hybrid Gen2", "Formula Ultimate Hybrid Gen3", "Formula V10 Gen1", "Formula V10 Gen2", "Formula V8 Gen3", "Formula Vee Gen1", "Formula Vee Gen1 + Fin", "Formula Vee Gen2", "Formula Vintage Gen1 Model1", "Formula Vintage Gen1 Model2", "Formula Vintage Gen2 Model1", "Formula Vintage Gen2 Model2", "Fusca 1 Hot Cars", "Fusca 2 Hot Cars", "Fusca Classic FL", "Ginetta G40", "Ginetta G40 Cup", "Ginetta G55 GT3", "Ginetta G55 GT4", "Ginetta G55 GT4 Supercup", "Ginetta G58", "Ginetta G58 Gen2", "Gol Classic B", "Gol Classic FL", "Gol Hot Cars", "Iveco Stralis", "Kart 2-Stroke 125cc Direct", "Kart 2-Stroke 125cc Shifter", "Kart 4-Stroke Race", "Kart 4-Stroke Rental", "Kart Cross", "Lamborghini Diablo SV-R", "Lamborghini Huracan GT3 EVO2", "Lamborghini Huracan Super Trofeo EVO2", "Lamborghini Miura SV", "Lamborghini Murcielago R-GT", "Lamborghini Revuelto", "Lamborghini SC63", "Lamborghini Veneno Roadster", "Ligier JS P217", "Ligier JS P217 Gen1", "Ligier JS P320", "Ligier JS P4", "Ligier JS2 R", "Lola B05/40 Turbo", "Lola B05/40 V8", "Lola B2K00 Ford-Cosworth", "Lola B2K00 Mercedes-Benz", "Lola B2K00 Toyota", "Lola T95/00 Ford-Cosworth", "Lola T95/00 Mercedes-Benz", "Lola T98/00 Ford-Cosworth", "Lotus 23", "Lotus 49C", "Lotus 72E", "Lotus 79", "Lotus Renault 98T", "MAN TGX", "MCR S2000", "MINI Cooper JCW", "MINI Cooper S 1965", "MINI Cooper S 1965 B", "MINI Countryman R60 RX", "Maserati GT2 Stradale", "Maserati MC12 GT1", "McLaren 570S GT4", "McLaren 720S GT3", "McLaren 720S GT3 Evo", "McLaren Cosworth MP4/1C", "McLaren Cosworth MP4/8", "McLaren F1 GTR", "McLaren F1 LM", "McLaren Honda MP4/4", "McLaren Honda MP4/5B", "McLaren Honda MP4/6", "McLaren Honda MP4/7A", "McLaren M23", "McLaren Mercedes MP4/12", "McLaren Senna", "Mercedes-AMG GT3", "Mercedes-AMG GT3 Evo", "Mercedes-AMG GT4", "Mercedes-Benz 190E 2.5-16 Evo II DTM", "Mercedes-Benz Actros", "Mercedes-Benz CLK LM", "MetalMoro AJR Chevrolet", "MetalMoro AJR Gen2 Chevrolet", "MetalMoro AJR Gen2 Honda", "MetalMoro AJR Gen2 Nissan", "MetalMoro AJR Honda", "MetalMoro AJR Judd", "MetalMoro AJR Nissan", "MetalMoro MRX Duratec P4", "MetalMoro MRX Duratec Turbo P2", "MetalMoro MRX Duratec Turbo P3", "MetalMoro MRX Honda P3", "Milano GT36", "Mitsubishi Lancer Evo10 RX", "Mitsubishi Lancer R", "Mitsubishi Lancer RS", "Nissan GT-R Nismo GT3", "Nissan R390 GT1", "Nissan R89C", "Oreca 07", "Oreca 07 Gen1", "Passat Classic B", "Passat Classic FL", "Passat Hot Cars", "Porsche 911 GT1-98", "Porsche 911 GT3 Cup 3.8", "Porsche 911 GT3 Cup 4.0", "Porsche 911 GT3 R", "Porsche 911 RSR 1974", "Porsche 911 RSR GTE", "Porsche 962C", "Porsche 963", "Porsche 963 (LM24)", "Porsche 992 GT3 R", "Porsche 996 GT3 RSR", "Porsche Cayman GT4 Clubsport MR", "Puma GTB", "Puma GTE", "Puma P052", "Reynard 2Ki Ford-Cosworth", "Reynard 2Ki Honda", "Reynard 2Ki Mercedes-Benz", "Reynard 2Ki Toyota", "Reynard 95i Ford-Cosworth", "Reynard 95i Honda", "Reynard 95i Mercedes-Benz", "Reynard 98i Ford-Cosworth", "Reynard 98i Honda", "Reynard 98i Mercedes-Benz", "Reynard 98i Toyota", "Roco 001", "Sauber Mercedes C9", "Sigma P1", "Sigma P1 G5", "Sprint Race", "Stock USA Gen1", "Stock USA Gen2", "Stock USA Gen3", "Stock USA Gen3 LM", "Super Trophy Trucks", "Super V8", "Superkart 250cc", "Swift 009c Ford-Cosworth", "Toyota Corolla Stock Car 2020", "Toyota Corolla Stock Car 2021", "Toyota Corolla Stock Car 2022", "Toyota Corolla Stock Car 2023", "Toyota Corolla Stock Car 2024", "Ultima GTR", "Ultima GTR Race", "Uno Classic B", "Volkswagen Constellation", "Volkswagen Polo", "Volkswagen Polo GTS", "Volkswagen Polo RX", "Volkswagen Virtus", "Volkswagen Virtus GTS", "Vulkan Truck"];
+        const trackNames = ["Adelaide_Historic", "Adelaide_Modern", "Azure_Circuit_2021", "Barcelona_1991", "Bathurst_1983", "Bathurst_2020", "BrandsHatch_GP", "BrandsHatch_Indy", "Brasilia_Full", "Brasilia_Outer", "Buenos_Aires_Circuito_12", "Buenos_Aires_Circuito_15", "Buenos_Aires_Circuito_6", "Buenos_Aires_Circuito_6T", "Buenos_Aires_Circuito_7", "Buenos_Aires_Circuito_8", "Buenos_Aires_Circuito_9", "CadwellPark", "CampoGrande1", "Cascais", "Cascais_1988", "Cascais_Alternate", "Cascavel2", "Circuit_de_Catalunya_GP", "Circuit_de_Catalunya_GP_NC", "Circuit_de_Catalunya_NATL_NC", "Cleveland_GP", "CopaSaoPauloStage2", "Cordoba_GP", "Cordoba_International", "Cordoba_NATL", "CuritibaInternacional", "Curitiba_outer", "CurveloLong", "CurveloShort", "Daytona_Nascar_Road_Course", "Daytona_Road_Course", "Daytona_Speedway_Tri_Oval", "Donington_GP", "Donington_Nat", "Fontana_OVAL", "Fontana_OVAL_Historic", "Fontana_SCC", "Galeao_Airport", "Gateway_OVAL", "Gateway_RC1", "Gateway_RC2", "GoianiaMixed", "GoianiaOuter", "GoianiaShort", "GranjaVianaKart101", "GranjaVianaKart102", "GranjaVianaKart121", "Guapore", "Hockenheim_1977", "Hockenheim_1988", "Hockenheim_1988_short", "Hockenheim_2001", "Hockenheim_GP", "Hockenheim_National", "Hockenheim_ShortA", "Hockenheim_ShortB", "Ibarra2", "Ibarra_Reverse", "Imola_GP_1972", "Imola_GP_1988", "Imola_GP_2001", "Imola_GP_2018", "Indianapolis_2022_Oval", "Indianapolis_2022_RC", "InterlagosKart1", "InterlagosKart2", "InterlagosKart3", "Interlagos_1991", "Interlagos_1993", "Interlagos_GP", "Interlagos_Historic", "Interlagos_Historic_Outer", "Interlagos_SCB", "Jacarepagua_2005", "Jacarepagua_Historic", "Jacarepagua_OVAL", "Jacarepagua_SCB", "Jacarepagua_SHORT", "Jerez_GP1988", "Jerez_GP2019", "Jerez_Standard", "Kansai_Classic", "Kansai_East", "Kansai_GP", "Kansai_West", "Kyalami_2019", "Kyalami_Historic", "Laguna_Seca_2020", "Le_Mans_24h", "Le_Mans_24h_2005", "Le_Mans_Circuit_Bugatti", "LondrinaKart1", "LondrinaKart2", "Londrina_long", "Londrina_short", "Long_Beach", "Montreal_Historic", "Montreal_Historic_1991", "Montreal_Modern", "Monza_1971", "Monza_1971_10k", "Monza_1971_10knc", "Monza_1971_Junior", "Monza_1991", "Monza_2020", "Monza_2020_Junior", "Mosport", "Nordschleife_2020", "Nordschleife_2020_24hr", "Nordschleife_2025", "Nordschleife_2025_24hr", "Nordschleife_2025_tourist", "Nurb_1971_Beton", "Nurb_1971_Gesamt", "Nurb_1971_Nords", "Nurb_1971_Suds", "Nurb_GP_2020", "Nurb_GP_2020_Sprint", "Nurb_GP_2020_Sprint_S", "Nurb_GP_2020_Veedol", "Nurb_GP_2025", "Ortona1", "Ortona2", "Ortona3", "Ortona4", "OultonPark_Classic", "OultonPark_Fosters", "OultonPark_International", "OultonPark_Island", "Pocono_OVAL", "Pocono_RC1", "Pocono_RC2", "Pocono_RC3", "Pocono_RC4", "Pocono_RC5", "Pocono_RC6", "Road_America_RC", "Road_America_RCB", "Road_Atlanta", "Road_Atlanta_2005", "Road_Atlanta_2005_short", "Road_Atlanta_Moto", "Salvador_Street_Circuit", "SantaCruzDoSul", "Sebring", "Sebring_Club", "Sebring_School", "Silverstone_1975", "Silverstone_1975_No_Chicane", "Silverstone_1991", "Silverstone_2001", "Silverstone_2001_International", "Silverstone_2001_National", "Silverstone_GP", "Silverstone_Intl_2019", "Silverstone_Natl_2019", "Snetterton_100", "Snetterton_200", "Snetterton_300", "Spa_Francorchamps_1970", "Spa_Francorchamps_1970_1000km", "Spa_Francorchamps_1993", "Spa_Francorchamps_2005", "Spa_Francorchamps_2005_EC", "Spa_Francorchamps_2020", "Spa_Francorchamps_2022", "Spielberg_Historic", "Spielberg_Modern", "Spielberg_Short", "Spielberg_Vintage", "Taruma_Chicane", "Taruma_Internacional", "Termas_Rio_Hondo", "VeloCitta1", "VeloCittaClubDay", "VeloCittaTD", "Velopark_2010", "Velopark_2017", "Virginia_Full", "Virginia_Grand", "Virginia_North", "Virginia_South", "Watkins_Glen_GP", "Watkins_Glen_GPIL", "Watkins_Glen_S", "Watkins_Glen_SIL"];
 
-    // Listados embebidos para asegurar carga inmediata
-    const carNames = ["ARC Camaro", "Alpine A110 GT4 Evo", "Alpine A424", "Aston Martin DBR9", "Aston Martin Valkyrie", "Aston Martin Valkyrie Hypercar", "Aston Martin Vantage GT3 Evo", "Aston Martin Vantage GT4 Evo", "Aston Martin Vantage GTE", "Audi R8 LMP1", "Audi R8 LMS GT3", "Audi R8 LMS GT3 evo II", "Audi R8 LMS GT4", "Audi R8 V10 GT", "Audi V8 quattro DTM", "BMW 2002 Turbo", "BMW M Hybrid V8", "BMW M Hybrid V8 (LM24)", "BMW M1 Procar", "BMW M3 E46 GTR", "BMW M3 Sport Evo Group A", "BMW M4 GT3", "BMW M4 GT4", "BMW M6 GT3", "BMW M8 GTE", "Brabham Alfa Romeo BT46B", "Brabham BMW BT52", "Brabham BT26A", "Brabham BT44", "Brabham BT62", "Brabham Cosworth BT49", "Cadillac DPi-VR", "Cadillac V-Series.R", "Cadillac V-Series.R (LM24)", "Caterham 620R", "Caterham Academy", "Caterham Superlight", "Caterham Supersport", "Chevrolet Camaro GT4.R", "Chevrolet Camaro SS", "Chevrolet Chevette", "Chevrolet Corvette C3", "Chevrolet Corvette C3.R", "Chevrolet Corvette C3.R Convertible", "Chevrolet Corvette C5-R", "Chevrolet Corvette C8 Z06 (+Z07 Upgrade)", "Chevrolet Corvette C8.R", "Chevrolet Corvette GTP", "Chevrolet Corvette Z06 GT3.R", "Chevrolet Cruze Stock Car 2019", "Chevrolet Cruze Stock Car 2020", "Chevrolet Cruze Stock Car 2021", "Chevrolet Cruze Stock Car 2022", "Chevrolet Cruze Stock Car 2023", "Chevrolet Cruze Stock Car 2024", "Chevrolet Omega Stock Car 1999", "Chevrolet Opala Old Stock Race", "Chevrolet Opala Stock Cars 1979", "Chevrolet Opala Stock Cars 1986", "Citroen DS3 RX", "Copa Fusca", "Copa Montana", "Copa Uno", "Courage C60 Hybrid", "Dallara F301", "Dallara F309", "Dallara SP1", "Dodge Viper ACR", "Dodge Viper GTS-R", "Formula Classic Gen1 Model1", "Formula Classic Gen1 Model2", "Formula Classic Gen2 Model1", "Formula Classic Gen2 Model2", "Formula Classic Gen2 Model3", "Formula Classic Gen3 Model1", "Formula Classic Gen3 Model2", "Formula Classic Gen3 Model3", "Formula Classic Gen3 Model4", "Formula Classic Gen4 Model1", "Formula Classic Gen4 Model2", "Formula Classic Gen4 Model3", "Formula Dirt", "Formula Edge Model 1", "Formula Edge Model 2", "Formula Edge Model 3", "Formula HiTech Gen1 Model1", "Formula HiTech Gen1 Model2", "Formula HiTech Gen1 Model3", "Formula HiTech Gen1 Model4", "Formula HiTech Gen2 Model1", "Formula HiTech Gen2 Model2", "Formula HiTech Gen2 Model3", "Formula Inter MG-15", "Formula Junior", "Formula Retro Gen2", "Formula Retro Gen3 DFY", "Formula Retro Gen3 Turbo", "Formula Retro V12", "Formula Retro V8", "Formula Trainer", "Formula Trainer Advanced", "Formula USA 2023", "Formula Ultimate Hybrid Gen1", "Formula Ultimate Hybrid Gen2", "Formula Ultimate Hybrid Gen3", "Formula V10 Gen1", "Formula V10 Gen2", "Formula V8 Gen3", "Formula Vee Gen1", "Formula Vee Gen1 + Fin", "Formula Vee Gen2", "Formula Vintage Gen1 Model1", "Formula Vintage Gen1 Model2", "Formula Vintage Gen2 Model1", "Formula Vintage Gen2 Model2", "Fusca 1 Hot Cars", "Fusca 2 Hot Cars", "Fusca Classic FL", "Ginetta G40", "Ginetta G40 Cup", "Ginetta G55 GT3", "Ginetta G55 GT4", "Ginetta G55 GT4 Supercup", "Ginetta G58", "Ginetta G58 Gen2", "Gol Classic B", "Gol Classic FL", "Gol Hot Cars", "Iveco Stralis", "Kart 2-Stroke 125cc Direct", "Kart 2-Stroke 125cc Shifter", "Kart 4-Stroke Race", "Kart 4-Stroke Rental", "Kart Cross", "Lamborghini Diablo SV-R", "Lamborghini Huracan GT3 EVO2", "Lamborghini Huracan Super Trofeo EVO2", "Lamborghini Miura SV", "Lamborghini Murcielago R-GT", "Lamborghini Revuelto", "Lamborghini SC63", "Lamborghini Veneno Roadster", "Ligier JS P217", "Ligier JS P217 Gen1", "Ligier JS P320", "Ligier JS P4", "Ligier JS2 R", "Lola B05/40 Turbo", "Lola B05/40 V8", "Lola B2K00 Ford-Cosworth", "Lola B2K00 Mercedes-Benz", "Lola B2K00 Toyota", "Lola T95/00 Ford-Cosworth", "Lola T95/00 Mercedes-Benz", "Lola T98/00 Ford-Cosworth", "Lotus 23", "Lotus 49C", "Lotus 72E", "Lotus 79", "Lotus Renault 98T", "MAN TGX", "MCR S2000", "MINI Cooper JCW", "MINI Cooper S 1965", "MINI Cooper S 1965 B", "MINI Countryman R60 RX", "Maserati GT2 Stradale", "Maserati MC12 GT1", "McLaren 570S GT4", "McLaren 720S GT3", "McLaren 720S GT3 Evo", "McLaren Cosworth MP4/1C", "McLaren Cosworth MP4/8", "McLaren F1 GTR", "McLaren F1 LM", "McLaren Honda MP4/4", "McLaren Honda MP4/5B", "McLaren Honda MP4/6", "McLaren Honda MP4/7A", "McLaren M23", "McLaren Mercedes MP4/12", "McLaren Senna", "Mercedes-AMG GT3", "Mercedes-AMG GT3 Evo", "Mercedes-AMG GT4", "Mercedes-Benz 190E 2.5-16 Evo II DTM", "Mercedes-Benz Actros", "Mercedes-Benz CLK LM", "MetalMoro AJR Chevrolet", "MetalMoro AJR Gen2 Chevrolet", "MetalMoro AJR Gen2 Honda", "MetalMoro AJR Gen2 Nissan", "MetalMoro AJR Honda", "MetalMoro AJR Judd", "MetalMoro AJR Nissan", "MetalMoro MRX Duratec P4", "MetalMoro MRX Duratec Turbo P2", "MetalMoro MRX Duratec Turbo P3", "MetalMoro MRX Honda P3", "Milano GT36", "Mitsubishi Lancer Evo10 RX", "Mitsubishi Lancer R", "Mitsubishi Lancer RS", "Nissan GT-R Nismo GT3", "Nissan R390 GT1", "Nissan R89C", "Oreca 07", "Oreca 07 Gen1", "Passat Classic B", "Passat Classic FL", "Passat Hot Cars", "Porsche 911 GT1-98", "Porsche 911 GT3 Cup 3.8", "Porsche 911 GT3 Cup 4.0", "Porsche 911 GT3 R", "Porsche 911 RSR 1974", "Porsche 911 RSR GTE", "Porsche 962C", "Porsche 963", "Porsche 963 (LM24)", "Porsche 992 GT3 R", "Porsche 996 GT3 RSR", "Porsche Cayman GT4 Clubsport MR", "Puma GTB", "Puma GTE", "Puma P052", "Reynard 2Ki Ford-Cosworth", "Reynard 2Ki Honda", "Reynard 2Ki Mercedes-Benz", "Reynard 2Ki Toyota", "Reynard 95i Ford-Cosworth", "Reynard 95i Honda", "Reynard 95i Mercedes-Benz", "Reynard 98i Ford-Cosworth", "Reynard 98i Honda", "Reynard 98i Mercedes-Benz", "Reynard 98i Toyota", "Roco 001", "Sauber Mercedes C9", "Sigma P1", "Sigma P1 G5", "Sprint Race", "Stock USA Gen1", "Stock USA Gen2", "Stock USA Gen3", "Stock USA Gen3 LM", "Super Trophy Trucks", "Super V8", "Superkart 250cc", "Swift 009c Ford-Cosworth", "Toyota Corolla Stock Car 2020", "Toyota Corolla Stock Car 2021", "Toyota Corolla Stock Car 2022", "Toyota Corolla Stock Car 2023", "Toyota Corolla Stock Car 2024", "Ultima GTR", "Ultima GTR Race", "Uno Classic B", "Volkswagen Constellation", "Volkswagen Polo", "Volkswagen Polo GTS", "Volkswagen Polo RX", "Volkswagen Virtus", "Volkswagen Virtus GTS", "Vulkan Truck"];
-    const trackNames = ["Adelaide_Historic", "Adelaide_Modern", "Azure_Circuit_2021", "Barcelona_1991", "Bathurst_1983", "Bathurst_2020", "BrandsHatch_GP", "BrandsHatch_Indy", "Brasilia_Full", "Brasilia_Outer", "Buenos_Aires_Circuito_12", "Buenos_Aires_Circuito_15", "Buenos_Aires_Circuito_6", "Buenos_Aires_Circuito_6T", "Buenos_Aires_Circuito_7", "Buenos_Aires_Circuito_8", "Buenos_Aires_Circuito_9", "CadwellPark", "CampoGrande1", "Cascais", "Cascais_1988", "Cascais_Alternate", "Cascavel2", "Circuit_de_Catalunya_GP", "Circuit_de_Catalunya_GP_NC", "Circuit_de_Catalunya_NATL_NC", "Cleveland_GP", "CopaSaoPauloStage2", "Cordoba_GP", "Cordoba_International", "Cordoba_NATL", "CuritibaInternacional", "Curitiba_outer", "CurveloLong", "CurveloShort", "Daytona_Nascar_Road_Course", "Daytona_Road_Course", "Daytona_Speedway_Tri_Oval", "Donington_GP", "Donington_Nat", "Fontana_OVAL", "Fontana_OVAL_Historic", "Fontana_SCC", "Galeao_Airport", "Gateway_OVAL", "Gateway_RC1", "Gateway_RC2", "GoianiaMixed", "GoianiaOuter", "GoianiaShort", "GranjaVianaKart101", "GranjaVianaKart102", "GranjaVianaKart121", "Guapore", "Hockenheim_1977", "Hockenheim_1988", "Hockenheim_1988_short", "Hockenheim_2001", "Hockenheim_GP", "Hockenheim_National", "Hockenheim_ShortA", "Hockenheim_ShortB", "Ibarra2", "Ibarra_Reverse", "Imola_GP_1972", "Imola_GP_1988", "Imola_GP_2001", "Imola_GP_2018", "Indianapolis_2022_Oval", "Indianapolis_2022_RC", "InterlagosKart1", "InterlagosKart2", "InterlagosKart3", "Interlagos_1991", "Interlagos_1993", "Interlagos_GP", "Interlagos_Historic", "Interlagos_Historic_Outer", "Interlagos_SCB", "Jacarepagua_2005", "Jacarepagua_Historic", "Jacarepagua_OVAL", "Jacarepagua_SCB", "Jacarepagua_SHORT", "Jerez_GP1988", "Jerez_GP2019", "Jerez_Standard", "Kansai_Classic", "Kansai_East", "Kansai_GP", "Kansai_West", "Kyalami_2019", "Kyalami_Historic", "Laguna_Seca_2020", "Le_Mans_24h", "Le_Mans_24h_2005", "Le_Mans_Circuit_Bugatti", "LondrinaKart1", "LondrinaKart2", "Londrina_long", "Londrina_short", "Long_Beach", "Montreal_Historic", "Montreal_Historic_1991", "Montreal_Modern", "Monza_1971", "Monza_1971_10k", "Monza_1971_10knc", "Monza_1971_Junior", "Monza_1991", "Monza_2020", "Monza_2020_Junior", "Mosport", "Nordschleife_2020", "Nordschleife_2020_24hr", "Nordschleife_2025", "Nordschleife_2025_24hr", "Nordschleife_2025_tourist", "Nurb_1971_Beton", "Nurb_1971_Gesamt", "Nurb_1971_Nords", "Nurb_1971_Suds", "Nurb_GP_2020", "Nurb_GP_2020_Sprint", "Nurb_GP_2020_Sprint_S", "Nurb_GP_2020_Veedol", "Nurb_GP_2025", "Ortona1", "Ortona2", "Ortona3", "Ortona4", "OultonPark_Classic", "OultonPark_Fosters", "OultonPark_International", "OultonPark_Island", "Pocono_OVAL", "Pocono_RC1", "Pocono_RC2", "Pocono_RC3", "Pocono_RC4", "Pocono_RC5", "Pocono_RC6", "Road_America_RC", "Road_America_RCB", "Road_Atlanta", "Road_Atlanta_2005", "Road_Atlanta_2005_short", "Road_Atlanta_Moto", "Salvador_Street_Circuit", "SantaCruzDoSul", "Sebring", "Sebring_Club", "Sebring_School", "Silverstone_1975", "Silverstone_1975_No_Chicane", "Silverstone_1991", "Silverstone_2001", "Silverstone_2001_International", "Silverstone_2001_National", "Silverstone_GP", "Silverstone_Intl_2019", "Silverstone_Natl_2019", "Snetterton_100", "Snetterton_200", "Snetterton_300", "Spa_Francorchamps_1970", "Spa_Francorchamps_1970_1000km", "Spa_Francorchamps_1993", "Spa_Francorchamps_2005", "Spa_Francorchamps_2005_EC", "Spa_Francorchamps_2020", "Spa_Francorchamps_2022", "Spielberg_Historic", "Spielberg_Modern", "Spielberg_Short", "Spielberg_Vintage", "Taruma_Chicane", "Taruma_Internacional", "Termas_Rio_Hondo", "VeloCitta1", "VeloCittaClubDay", "VeloCittaTD", "Velopark_2010", "Velopark_2017", "Virginia_Full", "Virginia_Grand", "Virginia_North", "Virginia_South", "Watkins_Glen_GP", "Watkins_Glen_GPIL", "Watkins_Glen_S", "Watkins_Glen_SIL"];
-
-    function randomizeForm() {
-        const form = document.getElementById('googleComboForm');
-        
-        // 1. Aleatorizar todos los SELECTS
-        const selects = form.querySelectorAll('select');
-        selects.forEach(sel => {
-            const options = Array.from(sel.options).filter(opt => opt.value !== "");
-            if (options.length > 0) {
-                const randomOpt = options[Math.floor(Math.random() * options.length)];
-                sel.value = randomOpt.value;
-            }
-        });
-
-        // 2. Aleatorizar Fecha (inDate)
-        const dateInput = document.getElementById('inDate');
-        if (dateInput) {
-            const randomDay = Math.floor(Math.random() * 28) + 1;
-            const randomMonth = Math.floor(Math.random() * 12) + 1;
-            const year = 2024;
-            dateInput.value = `${randomDay.toString().padStart(2, '0')}/${randomMonth.toString().padStart(2, '0')}/${year}`;
-        }
-
-        // 3. El Alias (inAuthor) NO se toca (se mantiene lo que haya escrito el usuario)
-
-        // 4. Actualizar la vista previa
-        syncPreview();
-        
-        // Pequeño feedback visual en el botón
-        const btn = event ? event.target : null;
-        if(btn && btn.classList.contains('recent-combos-btn')) {
-            const originalText = btn.innerHTML;
-            btn.innerHTML = '✨ ¡LISTO!';
-            setTimeout(() => btn.innerHTML = originalText, 1000);
-        }
-    }
-
-    function randomizeField(idOrName) {
-        let el = document.getElementById(idOrName);
-        if (!el) {
-            // Si no tiene ID, buscar por name (útil para campos de Google Forms sin ID manual)
-            el = document.querySelector(`[name="${idOrName}"]`);
-        }
-        
-        if (!el) return;
-
-        if (el.tagName === 'SELECT') {
-            const options = Array.from(el.options).filter(opt => opt.value !== "");
-            if (options.length > 0) {
-                el.value = options[Math.floor(Math.random() * options.length)].value;
-            }
-        } else if (idOrName === 'inDate') {
-            const randomDay = Math.floor(Math.random() * 28) + 1;
-            const randomMonth = Math.floor(Math.random() * 12) + 1;
-            el.value = `${randomDay.toString().padStart(2, '0')}/${randomMonth.toString().padStart(2, '0')}/2024`;
-        }
-        
-        syncPreview();
-    }
-
-    // Nueva función para obtener el historial reciente
-    async function fetchRecentHistory(limit = 10) {
-        try {
-            const url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ3cHE1Ew3bBKZ1P-MlVcL5h08tQiGM7kNQORORfpLclUMVDCU7LfQ37G0fGIYrY1Ma8KbEQGlZeqcj/pub?output=csv&cachebuster=' + Date.now();
-            const response = await fetch(url);
-            const csvText = await response.text();
-            
-            const rows = csvText.split('\n').map(row => {
-                return row.split(',').map(cell => cell.trim().replace(/^"(.*)"$/, '$1'));
-            });
-            
-            const validRows = rows.slice(1).filter(r => r.length > 5 && r[3] && r[3] !== '');
-            return validRows.reverse().slice(0, limit);
-        } catch (e) {
-            console.error("Error al obtener historial:", e);
-            return [];
-        }
-    }
-
-    async function initForm() {
-        // Restaurar botones y estado
-        document.getElementById('topActionButtons').style.display = 'flex';
-        document.querySelector('.main-title').style.display = 'block';
-        document.getElementById('googleComboForm').style.display = 'block';
-        document.querySelector('.top-row').style.display = 'flex';
-        document.getElementById('successView').style.display = 'none';
-        
-        // Restaurar nombres por si se borraron en un envío anterior
-        document.getElementById('inDate').name = 'entry.506982970';
-        document.getElementById('googleComboForm').reset();
-        const carSel = document.getElementById('inCar');
-        const trackSel = document.getElementById('inTrack');
-
-        carSel.innerHTML = '<option value="">⏳ Consultando historial...</option>';
-        trackSel.innerHTML = '<option value="">⏳ Consultando historial...</option>';
-
-        // 1. Obtener historial para bloquear los últimos 10
-        const recentHistory = await fetchRecentHistory(10);
-        const blockedTracks = new Set(recentHistory.map(r => r[3])); // Con guiones bajos
-        const blockedCars = new Set(recentHistory.map(r => r[5]));
-
-        // Poblar con datos embebidos filtrando RX, Karts y BLOQUEADOS
-        const filterFn = (name, isTrack) => {
-            const n = name.toUpperCase();
-            const isExcluded = n.includes('RX') || n.includes('KART') || n.includes('KARTING') || n.includes('SUPERKART');
-            if (isExcluded) return false;
-
-            // Bloqueo por historial
-            if (isTrack && blockedTracks.has(name)) return false;
-            if (!isTrack && blockedCars.has(name)) return false;
-
-            return true;
-        };
-
-        carSel.innerHTML = '<option value="">Selecciona un auto...</option>';
-        carNames.filter(c => filterFn(c, false)).forEach(c => {
-            const opt = document.createElement('option');
-            opt.value = opt.textContent = c;
-            carSel.appendChild(opt);
-        });
-
-        trackSel.innerHTML = '<option value="">Selecciona un circuito...</option>';
-        trackNames.filter(t => filterFn(t, true)).forEach(t => {
-            const opt = document.createElement('option');
-            opt.value = opt.textContent = t;
-            trackSel.appendChild(opt);
-        });
-
-        // Intentar cargar datos completos (LUCES, etc.) de GitHub de fondo
-        try {
-            const carsRes = await fetch('https://raw.githubusercontent.com/unesvoltetes/imagenes-ams2/main/js/autos.json');
-            const tracksRes = await fetch('https://raw.githubusercontent.com/unesvoltetes/imagenes-ams2/main/js/circuitos.json');
-
-            carsData = await carsRes.json();
-            tracksData = await tracksRes.json();
-        } catch (e) {
-            console.warn("Cargando modo offline: No se pudo obtener la base de datos de luces.");
-        }
-        syncPreview();
-    }
-
-    function syncPreview() {
-        // Lógica de bloqueo de climas
-        const w1 = document.getElementById('w1');
-        const w2 = document.getElementById('w2');
-        const w3 = document.getElementById('w3');
-        const w4 = document.getElementById('w4');
-
-        if (w1.value === 'Clima real') {
-            w2.value = w3.value = w4.value = '';
-            w2.disabled = w3.disabled = w4.disabled = true;
-            w2.style.opacity = w3.style.opacity = w4.style.opacity = '0.5';
-        } else {
-            w2.disabled = w3.disabled = w4.disabled = false;
-            w2.style.opacity = w3.style.opacity = w4.style.opacity = '1';
-        }
-
-        const author = document.getElementById('inAuthor').value || '';
-        const track = document.getElementById('inTrack').value;
-        const car = document.getElementById('inCar').value;
-        const hourValue = document.getElementById('inHour').value || '14';
-        const hourInt = parseInt(hourValue);
-        
-        // Auxiliares para tiempo
-        const timeToMinutes = (t) => {
-            if (!t) return 0;
-            const parts = t.split(':');
-            return parseInt(parts[0]) * 60 + parseInt(parts[1] || 0);
-        };
-        const getMultiplier = (val) => {
-            if (!val || val === 'Apagado' || val === '0x') return 0;
-            if (val === 'Tiempo Real' || val === '1x') return 1;
-            const num = parseInt(val.replace(/[^0-9]/g, ''));
-            return isNaN(num) ? 1 : num;
-        };
-        const getSeasonSuffix = (month) => {
-            if (month == 12 || month == 1 || month == 2) return 'INVIERNO';
-            if (month >= 3 && month <= 5) return 'PRIMAVERA';
-            if (month >= 6 && month <= 8) return 'VERANO';
-            return 'OTONO';
-        };
-
-        // Datos de fecha y temporada
-        const dateStr = document.getElementById('inDate').value || '15/06/2024';
-        const month = parseInt(dateStr.split('/')[1]) || 6;
-        const season = getSeasonSuffix(month);
-
-        // Amanecer y anochecer (default 6am a 8pm si no hay datos)
-        const trackObj = tracksData.find(t => t.CIRCUITO === track);
-        let sunrise = 6 * 60; 
-        let sunset = 20 * 60; 
-
-        if (trackObj) {
-            sunrise = timeToMinutes(trackObj['AMANECER_' + season]);
-            sunset = timeToMinutes(trackObj['ANOCHECER_' + season]);
-        }
-
-        // Cálculo de fin de carrera
-        const startMinutes = hourInt * 60;
-        const timeX = getMultiplier(document.getElementById('inTimeX').value);
-        const duration = 10; // Todas las carreras son de 10 min reales
-        const virtualMinutes = duration * (timeX || 1); // Si está apagado, se asume 1x para el fin real
-        const endMinutesTotal = startMinutes + virtualMinutes;
-        const endMinutesDay = endMinutesTotal % 1440;
-
-        const formatTime = (m) => {
-            const h = Math.floor(m / 60) % 24;
-            const min = Math.floor(m % 60);
-            return `${h.toString().padStart(2, '0')}:${min.toString().padStart(2, '0')}`;
-        };
-
-        // ¿Es de noche? (Si empieza o termina fuera de sunrise/sunset, o si dura más de un día)
-        let isNight = false;
-        if (virtualMinutes >= 1440) {
-            isNight = true;
-        } else if (startMinutes <= endMinutesDay) {
-            if (startMinutes < sunrise || endMinutesDay > sunset) isNight = true;
-        } else {
-            // Cruza medianoche
-            isNight = true;
-        }
-
-        // Obtener datos del auto seleccionado para validaciones
-        const carObj = carsData.find(c => c.AUTO === car);
-        const hasLights = carObj ? carObj.LUCES === "SI" : true;
-
-        document.getElementById('pvAuthor').textContent = author ? 'por ' + author.toUpperCase() : '';
-        document.getElementById('pvTrackName').textContent = track || 'SELECCIONA CIRCUITO';
-        document.getElementById('pvCarName').textContent = car || 'SELECCIONA AUTO';
-        document.getElementById('pvRival').textContent = document.getElementById('inRival').value.toUpperCase();
-        document.getElementById('pvSetup').textContent = document.getElementById('inSetup').value.toUpperCase();
-        document.getElementById('pvDate').textContent = dateStr;
-        // La hora superior pvHour ya no existe en el HTML
-        document.getElementById('pvTimeX').textContent = `(${document.getElementById('inTimeX').value || 'Apagado'})`;
-        document.getElementById('pvWeatherX').textContent = document.getElementById('inWeatherX').value;
-        
-        // Actualizar horario en el póster
-        document.getElementById('pvTimeStart').textContent = formatTime(startMinutes);
-        document.getElementById('pvTimeEnd').textContent = formatTime(endMinutesDay);
-
-        // Formatear duración virtual (ej: 10h 30m o 15m)
-        let durTxt = "";
-        if (virtualMinutes >= 60) {
-            const h = Math.floor(virtualMinutes / 60);
-            const m = virtualMinutes % 60;
-            durTxt = h + "h" + (m > 0 ? " " + m + "m" : "");
-        } else {
-            durTxt = virtualMinutes + "m";
-        }
-        document.getElementById('pvVirtualDur').textContent = durTxt;
-
-        // Climas dinámicos con fallbacks (minúsculas, guiones bajos)
-        const weatherSlots = document.getElementById('pvWeatherSlots');
-        weatherSlots.innerHTML = '';
-        const weatherBaseUrl = 'https://raw.githubusercontent.com/unesvoltetes/imagenes-ams2/main/optimizadas/climas/';
-        
-        for (let i = 1; i <= 4; i++) {
-            const val = document.getElementById('w' + i).value;
-            if (val) {
-                const img = document.createElement('img');
-                const encoded = encodeURIComponent(val);
-                img.src = `${weatherBaseUrl}${encoded}.png`;
-                
-                img.onerror = function() {
-                    // Intento 2: Minúsculas
-                    const low = val.toLowerCase();
-                    if (!this.src.includes(encodeURIComponent(low))) {
-                        this.src = `${weatherBaseUrl}${encodeURIComponent(low)}.png`;
-                        this.onerror = function() {
-                            // Intento 3: Guiones bajos
-                            const und = val.replace(/ /g, '_');
-                            if (!this.src.includes(encodeURIComponent(und))) {
-                                this.src = `${weatherBaseUrl}${encodeURIComponent(und)}.png`;
-                                this.onerror = function() {
-                                    // Intento 4: Minúsculas + Guiones bajos
-                                    this.src = `${weatherBaseUrl}${encodeURIComponent(und.toLowerCase())}.png`;
-                                    this.onerror = null;
-                                };
-                            }
-                        };
-                    }
-                };
-                weatherSlots.appendChild(img);
-            }
-        }
-
-        let currentBoxes = 32;
-
-        // Imágenes dinámicas con codificación y fallbacks
-        if (track) {
-            const encodedTrack = encodeURIComponent(track);
-            const trackImg = `https://raw.githubusercontent.com/unesvoltetes/imagenes-ams2/main/optimizadas/circuitoA/${encodedTrack}.jpg`;
-            const trackMap = `https://raw.githubusercontent.com/unesvoltetes/imagenes-ams2/main/optimizadas/circuitos/${encodedTrack}.png`;
-
-            const header = document.getElementById('pvHeader');
-            header.style.backgroundImage = `url("${trackImg}")`;
-
-            const imgTester = new Image();
-            imgTester.src = trackImg;
-            imgTester.onerror = () => {
-                header.style.backgroundImage = `url("https://raw.githubusercontent.com/unesvoltetes/imagenes-ams2/main/optimizadas/circuitoA/${encodedTrack}.png")`;
-            };
-
-            const mapImgEl = document.getElementById('pvMap');
-            mapImgEl.src = trackMap;
-            mapImgEl.onload = () => {
-                document.getElementById('pvMapContainer').style.display = 'flex';
-            };
-            mapImgEl.onerror = () => {
-                document.getElementById('pvMapContainer').style.display = 'none';
-            };
-
-            // Lógica de variantes de circuito
-            const variantsDiv = document.getElementById('pvTrackVariants');
-            const baseName = track.split('_')[0];
-            const variants = trackNames.filter(t => t.startsWith(baseName) && t !== track);
-            
-            if (variants.length > 0) {
-                variantsDiv.innerHTML = '';
-                variants.forEach(v => {
-                    const thumb = document.createElement('div');
-                    thumb.className = 'track-variant-thumb';
-                    thumb.title = v.replace(/_/g, ' ');
-                    const vUrl = `https://raw.githubusercontent.com/unesvoltetes/imagenes-ams2/main/optimizadas/circuitos/${encodeURIComponent(v)}.png`;
-                    thumb.style.backgroundImage = `url("${vUrl}")`;
-                    
-                    thumb.onclick = () => {
-                        document.getElementById('inTrack').value = v;
-                        syncPreview();
-                    };
-                    variantsDiv.appendChild(thumb);
-                });
-                variantsDiv.style.display = 'flex';
-            } else {
-                variantsDiv.style.display = 'none';
-            }
-
-            // Validar capacidad de boxes
-            const trackObj = tracksData.find(t => t.CIRCUITO === track);
-            currentBoxes = trackObj ? trackObj.BOXES : 32;
-            const trackWarning = document.getElementById('pvTrackWarning');
-
-            if (currentBoxes < 26) {
-                trackWarning.style.display = 'block';
-                trackWarning.innerHTML = `POCO ESPACIO<br><span style="font-size:0.8rem; opacity:0.8;">(${currentBoxes} BOXES)</span>`;
-            } else {
-                trackWarning.style.display = 'none';
-            }
-        }
-        if (car) {
-            const encodedCar = encodeURIComponent(car);
-            const carImgUrl = `https://raw.githubusercontent.com/unesvoltetes/imagenes-ams2/main/optimizadas/cars/${encodedCar}.png`;
-            const carEl = document.getElementById('pvCarImg');
-            
-            carEl.style.backgroundImage = `url("${carImgUrl}")`;
-            
-            const carTester = new Image();
-            carTester.src = carImgUrl;
-            carTester.onerror = () => {
-                // Intento 1.5: Probar reemplazando barra / por espacio (común en Lola)
-                const slashToSpace = car.replace(/\//g, ' ');
-                const urlSlash = `https://raw.githubusercontent.com/unesvoltetes/imagenes-ams2/main/optimizadas/cars/${encodeURIComponent(slashToSpace)}.png`;
-                carEl.style.backgroundImage = `url("${urlSlash}")`;
-                
-                const carTesterSlash = new Image();
-                carTesterSlash.src = urlSlash;
-                carTesterSlash.onerror = () => {
-                    // Intento 2: Probar todo en MAYÚSCULAS
-                    const upperName = car.toUpperCase();
-                    const urlUpper = `https://raw.githubusercontent.com/unesvoltetes/imagenes-ams2/main/optimizadas/cars/${encodeURIComponent(upperName)}.png`;
-                    carEl.style.backgroundImage = `url("${urlUpper}")`;
-
-                    const carTesterUpper = new Image();
-                    carTesterUpper.src = urlUpper;
-                    carTesterUpper.onerror = () => {
-                        // Intento 3: Probar reemplazando 'Evo' por 'EVO'
-                        const evoUpper = car.replace(/Evo/g, 'EVO');
-                        const url4 = `https://raw.githubusercontent.com/unesvoltetes/imagenes-ams2/main/optimizadas/cars/${encodeURIComponent(evoUpper)}.png`;
-                        carEl.style.backgroundImage = `url("${url4}")`;
-
-                        const carTester4 = new Image();
-                        carTester4.src = url4;
-                        carTester4.onerror = () => {
-                            // Intento 5: Probar JPG como último recurso
-                            carEl.style.backgroundImage = `url("https://raw.githubusercontent.com/unesvoltetes/imagenes-ams2/main/optimizadas/cars/${encodedCar}.jpg")`;
-                        };
-                    };
-                };
-            };
-            
-            const lightIcon = hasLights ? 'https://raw.githubusercontent.com/unesvoltetes/imagenes-ams2/main/optimizadas/con_luz.png' : 'https://raw.githubusercontent.com/unesvoltetes/imagenes-ams2/main/optimizadas/sin_luz.png';
-            const lightDiv = document.getElementById('pvLights');
-            lightDiv.style.backgroundImage = `url("${lightIcon}")`;
-            
-            // Si es de noche y no hay luces, parpadear en rojo
-            const warningText = document.getElementById('pvLightsWarning');
-
-            if (!hasLights && isNight) {
-                lightDiv.classList.add('lights-warning');
-                warningText.style.display = 'block';
-                lightDiv.title = "⚠️ ATENCIÓN: El coche no tiene luces y es de noche. Ajusta el horario.";
-            } else {
-                lightDiv.classList.remove('lights-warning');
-                warningText.style.display = 'none';
-                lightDiv.title = hasLights ? "Coche con luces" : "Coche sin luces (día)";
-            }
-
-            // Miniaturas de la misma clase
-            const rivalType = document.getElementById('inRival').value;
-            const classCarsDiv = document.getElementById('pvClassCars');
-            
-            if (rivalType === 'Misma Clase') {
-                if (!carsData || carsData.length === 0) {
-                    // Si aún no han cargado los datos de GitHub
-                    classCarsDiv.innerHTML = '<div style="font-size:0.65rem; color:#666; padding:5px; width:100%; text-align:center;">⏳ Cargando base de datos de clases...</div>';
-                    classCarsDiv.style.display = 'flex';
-                } else if (carObj) {
-                    const sameClass = carsData.filter(c => c.CLASE === carObj.CLASE && c.AUTO !== car);
-                    classCarsDiv.innerHTML = '';
-                    if (sameClass.length > 0) {
-                        sameClass.forEach(other => {
-                            const thumb = document.createElement('div');
-                            thumb.className = 'class-car-thumb';
-                            thumb.title = other.AUTO;
-                            const encodedOther = encodeURIComponent(other.AUTO);
-                            const imgUrl = `https://raw.githubusercontent.com/unesvoltetes/imagenes-ams2/main/optimizadas/cars/${encodedOther}.png`;
-                            thumb.style.backgroundImage = `url("${imgUrl}")`;
-                            
-                            // Cambiar coche al hacer clic
-                            thumb.onclick = () => {
-                                document.getElementById('inCar').value = other.AUTO;
-                                syncPreview();
-                            };
-
-                            // Fallback por si la miniatura no carga
-                            const imgTest = new Image();
-                            imgTest.src = imgUrl;
-                            imgTest.onerror = () => {
-                                thumb.style.backgroundImage = `url("https://raw.githubusercontent.com/unesvoltetes/imagenes-ams2/main/optimizadas/cars/${encodedOther}.jpg")`;
-                            };
-                            
-                            classCarsDiv.appendChild(thumb);
-                        });
-                        classCarsDiv.style.display = 'flex';
-                    } else {
-                        classCarsDiv.innerHTML = '<div style="font-size:0.65rem; color:#666; padding:5px; width:100%; text-align:center;">No hay más coches en esta clase.</div>';
-                    }
+        function randomizeForm() {
+            const form = document.getElementById('googleComboForm');
+            const selects = form.querySelectorAll('select');
+            selects.forEach(sel => {
+                const options = Array.from(sel.options).filter(opt => opt.value !== "");
+                if (options.length > 0) {
+                    const randomOpt = options[Math.floor(Math.random() * options.length)];
+                    sel.value = randomOpt.value;
                 }
-            } else {
-                classCarsDiv.style.display = 'none';
+            });
+            const dateInput = document.getElementById('inDate');
+            if (dateInput) {
+                const randomDay = Math.floor(Math.random() * 28) + 1;
+                const randomMonth = Math.floor(Math.random() * 12) + 1;
+                const year = 2024;
+                dateInput.value = `${randomDay.toString().padStart(2, '0')}/${randomMonth.toString().padStart(2, '0')}/${year}`;
+            }
+            syncPreview();
+            const btn = event ? event.target : null;
+            if (btn && btn.classList.contains('recent-combos-btn')) {
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '✨ ¡LISTO!';
+                setTimeout(() => btn.innerHTML = originalText, 1000);
             }
         }
 
-        // Badges y Colores
-        const updateBadge = (id, val) => {
-            const el = document.getElementById(id);
+        function randomizeField(idOrName) {
+            let el = document.getElementById(idOrName);
+            if (!el) el = document.querySelector(`[name="${idOrName}"]`);
             if (!el) return;
-            const parent = el.parentElement;
-
-            let fullVal = (val || "").toUpperCase().trim();
-            if (fullVal === "") fullVal = "POR DEFECTO";
-            
-            // Guardar el nombre completo en el title para mostrar al pasar el ratón
-            parent.title = fullVal;
-            
-            let v = fullVal;
-            
-            // Mapeo de términos largos a abreviaturas de 4 letras
-            if (v === 'SIN CONSUMO' || v === 'APAGADO') v = 'OFF';
-            if (v === 'PROGRESIVO') v = 'PROG';
-            if (v === 'MOJADO') v = 'MOJA';
-            if (v === 'HUMEDO' || v === 'HÚMEDO') v = 'HUME';
-            if (v === 'LIMPIO') v = 'LIMP';
-            if (v === 'RENDIMIENTO') v = 'REND';
-            if (v === 'VISUAL') v = 'VISU';
-            if (v === 'MÁXIMO') v = 'MAXI';
-            
-            // Truncar a 4 caracteres máximo
-            if (v.length > 4) v = v.substring(0, 4);
-            el.textContent = v;
-
-            // Lógica de colores según el valor
-            let color = '#50505a'; 
-            if (['REAL', 'ALTO', 'X2', 'X3', 'X4', 'X5', 'TODO', 'MAXI'].includes(v)) color = '#ff3333';
-            if (['MEDI', 'PROG', 'HUME', 'MOJA', 'REND'].includes(v)) color = '#ffcc00';
-            if (['LIMP', 'BAJO', 'OFF', 'VISU', 'LIGE'].includes(v)) color = '#00ff66';
-
-            el.style.borderColor = color;
-            el.style.color = color;
-        };
-
-        updateBadge('bgTires', document.getElementById('inTires').value);
-        updateBadge('bgFuel', document.getElementById('inFuel').value);
-        updateBadge('bgGrip', document.getElementById('inGrip').value);
-        updateBadge('bgDamage', document.getElementById('inDamageScale').value);
-    }
-
-    function handleSubmit(event) {
-        // Re-validar todo antes de dejar pasar el envío (ya se hace en syncPreview pero por seguridad repetimos la extracción de variables clave)
-        const car = document.getElementById('inCar').value;
-        const track = document.getElementById('inTrack').value;
-        const hourValue = document.getElementById('inHour').value || '14';
-        const hourInt = parseInt(hourValue);
-        
-        // Re-ejecutar cálculo de noche (mismo código que en syncPreview)
-        const timeToMinutes = (t) => {
-            if (!t) return 0;
-            const parts = t.split(':');
-            return parseInt(parts[0]) * 60 + parseInt(parts[1] || 0);
-        };
-        const getMultiplier = (val) => {
-            if (!val || val === 'Apagado' || val === '0x') return 0;
-            if (val === 'Tiempo Real' || val === '1x') return 1;
-            const num = parseInt(val.replace(/[^0-9]/g, ''));
-            return isNaN(num) ? 1 : num;
-        };
-        const getSeasonSuffix = (month) => {
-            if (month == 12 || month == 1 || month == 2) return 'INVIERNO';
-            if (month >= 3 && month <= 5) return 'PRIMAVERA';
-            if (month >= 6 && month <= 8) return 'VERANO';
-            return 'OTONO';
-        };
-
-        const dateStr = document.getElementById('inDate').value || '15/06/2024';
-        const month = parseInt(dateStr.split('/')[1]) || 6;
-        const season = getSeasonSuffix(month);
-
-        const trackObj = tracksData.find(t => t.CIRCUITO === track);
-        let sunrise = 6 * 60; 
-        let sunset = 20 * 60; 
-        if (trackObj) {
-            sunrise = timeToMinutes(trackObj['AMANECER_' + season]);
-            sunset = timeToMinutes(trackObj['ANOCHECER_' + season]);
+            if (el.tagName === 'SELECT') {
+                const options = Array.from(el.options).filter(opt => opt.value !== "");
+                if (options.length > 0) el.value = options[Math.floor(Math.random() * options.length)].value;
+            } else if (idOrName === 'inDate') {
+                const randomDay = Math.floor(Math.random() * 28) + 1;
+                const randomMonth = Math.floor(Math.random() * 12) + 1;
+                el.value = `${randomDay.toString().padStart(2, '0')}/${randomMonth.toString().padStart(2, '0')}/2024`;
+            }
+            syncPreview();
         }
 
-        const startMinutes = hourInt * 60;
-        const timeX = getMultiplier(document.getElementById('inTimeX').value);
-        const duration = 10; // Todas las carreras son de 10 min reales
-        const virtualMinutes = duration * (timeX || 1);
-        const endMinutesTotal = startMinutes + virtualMinutes;
-        const endMinutesDay = endMinutesTotal % 1440;
-
-        let isNight = false;
-        if (virtualMinutes >= 1440) {
-            isNight = true;
-        } else if (startMinutes <= endMinutesDay) {
-            if (startMinutes < sunrise || endMinutesDay > sunset) isNight = true;
-        } else {
-            isNight = true;
+        async function fetchRecentHistory(limit = 10) {
+            try {
+                const url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ3cHE1Ew3bBKZ1P-MlVcL5h08tQiGM7kNQORORfpLclUMVDCU7LfQ37G0fGIYrY1Ma8KbEQGlZeqcj/pub?output=csv&cachebuster=' + Date.now();
+                const response = await fetch(url);
+                const csvText = await response.text();
+                const rows = csvText.split('\n').map(row => row.split(',').map(cell => cell.trim().replace(/^"(.*)"$/, '$1')));
+                const validRows = rows.slice(1).filter(r => r.length > 5 && r[3] && r[3] !== '');
+                return validRows.reverse().slice(0, limit);
+            } catch (e) { return []; }
         }
 
-        const carObj = carsData.find(c => c.AUTO === car);
-        const hasLights = carObj ? carObj.LUCES === "SI" : true;
-        const boxes = trackObj ? trackObj.BOXES : 32;
-
-        if (!hasLights && isNight) {
-            alert("⚠️ ENVÍO BLOQUEADO: El coche elegido no tiene luces y el horario es nocturno (o termina de noche). Por favor, cambia la hora, reduce el progreso de tiempo o elige otro coche.");
-            return false;
+        async function initForm() {
+            document.getElementById('topActionButtons').style.display = 'flex';
+            document.querySelector('.main-title').style.display = 'block';
+            document.getElementById('googleComboForm').style.display = 'block';
+            document.querySelector('.top-row').style.display = 'flex';
+            document.getElementById('successView').style.display = 'none';
+            document.getElementById('inDate').name = 'entry.506982970';
+            document.getElementById('googleComboForm').reset();
+            const carSel = document.getElementById('inCar');
+            const trackSel = document.getElementById('inTrack');
+            carSel.innerHTML = '<option value="">⏳ Consultando historial...</option>';
+            trackSel.innerHTML = '<option value="">⏳ Consultando historial...</option>';
+            const recentHistory = await fetchRecentHistory(10);
+            const blockedTracks = new Set(recentHistory.map(r => r[3]));
+            const blockedCars = new Set(recentHistory.map(r => r[5]));
+            const filterFn = (name, isTrack) => {
+                const n = name.toUpperCase();
+                if (n.includes('RX') || n.includes('KART')) return false;
+                if (isTrack && blockedTracks.has(name)) return false;
+                if (!isTrack && blockedCars.has(name)) return false;
+                return true;
+            };
+            carSel.innerHTML = '<option value="">Selecciona un auto...</option>';
+            carNames.filter(c => filterFn(c, false)).forEach(c => {
+                const opt = document.createElement('option');
+                opt.value = opt.textContent = c;
+                carSel.appendChild(opt);
+            });
+            trackSel.innerHTML = '<option value="">Selecciona un circuito...</option>';
+            trackNames.filter(t => filterFn(t, true)).forEach(t => {
+                const opt = document.createElement('option');
+                opt.value = opt.textContent = t;
+                trackSel.appendChild(opt);
+            });
+            try {
+                const [carsRes, tracksRes] = await Promise.all([
+                    fetch('https://raw.githubusercontent.com/unesvoltetes/imagenes-ams2/main/js/autos.json'),
+                    fetch('https://raw.githubusercontent.com/unesvoltetes/imagenes-ams2/main/js/circuitos.json')
+                ]);
+                carsData = await carsRes.json();
+                tracksData = await tracksRes.json();
+            } catch (e) { }
+            syncPreview();
         }
 
-        if (boxes < 26) {
-            alert(`⚠️ ENVÍO BLOQUEADO: El circuito elegido solo tiene ${boxes} boxes y se requieren mínimo 26. Por favor, elige otra variante o circuito.`);
-            return false;
-        }
+        function syncPreview() {
+            const w1 = document.getElementById('w1');
+            const w2 = document.getElementById('w2');
+            const w3 = document.getElementById('w3');
+            const w4 = document.getElementById('w4');
+            if (w1.value === 'Clima real') {
+                w2.value = w3.value = w4.value = '';
+                w2.disabled = w3.disabled = w4.disabled = true;
+                w2.style.opacity = w3.style.opacity = w4.style.opacity = '0.5';
+            } else {
+                w2.disabled = w3.disabled = w4.disabled = false;
+                w2.style.opacity = w3.style.opacity = w4.style.opacity = '1';
+            }
+            const author = document.getElementById('inAuthor').value || '';
+            const track = document.getElementById('inTrack').value;
+            const car = document.getElementById('inCar').value;
+            const hourValue = document.getElementById('inHour').value || '14';
+            const hourInt = parseInt(hourValue);
+            const timeToMinutes = (t) => { if (!t) return 0; const parts = t.split(':'); return parseInt(parts[0]) * 60 + parseInt(parts[1] || 0); };
+            const getMultiplier = (val) => { if (!val || val === 'Apagado') return 0; if (val === 'Tiempo Real') return 1; return parseInt(val.replace(/[^0-9]/g, '')) || 1; };
+            const getSeasonSuffix = (m) => { if (m == 12 || m <= 2) return 'INVIERNO'; if (m <= 5) return 'PRIMAVERA'; if (m <= 8) return 'VERANO'; return 'OTONO'; };
+            const dateStr = document.getElementById('inDate').value || '15/06/2024';
+            const month = parseInt(dateStr.split('/')[1]) || 6;
+            const season = getSeasonSuffix(month);
+            const trackObj = tracksData.find(t => t.CIRCUITO === track);
+            let sunrise = 6 * 60, sunset = 20 * 60;
+            if (trackObj) { sunrise = timeToMinutes(trackObj['AMANECER_' + season]); sunset = timeToMinutes(trackObj['ANOCHECER_' + season]); }
+            const startMinutes = hourInt * 60;
+            const timeX = getMultiplier(document.getElementById('inTimeX').value);
+            const virtualMinutes = 10 * (timeX || 1);
+            const endMinutesTotal = startMinutes + virtualMinutes;
+            const endMinutesDay = endMinutesTotal % 1440;
+            let isNight = virtualMinutes >= 1440 || (startMinutes <= endMinutesDay ? (startMinutes < sunrise || endMinutesDay > sunset) : true);
+            const carObj = carsData.find(c => c.AUTO === car);
+            const hasLights = carObj ? carObj.LUCES === "SI" : true;
+            document.getElementById('pvAuthor').textContent = author ? 'por ' + author.toUpperCase() : '';
+            document.getElementById('pvTrackName').textContent = track || 'SELECCIONA CIRCUITO';
+            document.getElementById('pvCarName').textContent = car || 'SELECCIONA AUTO';
+            document.getElementById('pvRival').textContent = document.getElementById('inRival').value.toUpperCase();
+            document.getElementById('pvSetup').textContent = document.getElementById('inSetup').value.toUpperCase();
+            document.getElementById('pvDate').textContent = dateStr;
+            document.getElementById('pvTimeX').textContent = `(${document.getElementById('inTimeX').value || 'Apagado'})`;
+            document.getElementById('pvWeatherX').textContent = document.getElementById('inWeatherX').value;
+            const formatTime = (m) => `${(Math.floor(m / 60) % 24).toString().padStart(2, '0')}:${Math.floor(m % 60).toString().padStart(2, '0')}`;
+            document.getElementById('pvTimeStart').textContent = formatTime(startMinutes);
+            document.getElementById('pvTimeEnd').textContent = formatTime(endMinutesDay);
+            document.getElementById('pvVirtualDur').textContent = virtualMinutes >= 60 ? Math.floor(virtualMinutes / 60) + "h" + (virtualMinutes % 60 > 0 ? " " + (virtualMinutes % 60) + "m" : "") : virtualMinutes + "m";
+            const weatherSlots = document.getElementById('pvWeatherSlots'); weatherSlots.innerHTML = '';
+            for (let i = 1; i <= 4; i++) {
+                const val = document.getElementById('w' + i).value;
+                if (val) {
+                    const img = document.createElement('img');
+                    img.src = `https://raw.githubusercontent.com/unesvoltetes/imagenes-ams2/main/optimizadas/climas/${encodeURIComponent(val)}.png`;
+                    weatherSlots.appendChild(img);
+                }
+            }
+            if (track) {
+                const enc = encodeURIComponent(track);
+                const trackImg = `https://raw.githubusercontent.com/unesvoltetes/imagenes-ams2/main/optimizadas/circuitoA/${enc}.jpg`;
+                const header = document.getElementById('pvHeader');
+                header.style.backgroundImage = `url("${trackImg}")`;
 
-        submitted = true;
-        const btn = document.getElementById('btnSubmit');
-        btn.disabled = true;
-        btn.innerHTML = '🚀 ENVIANDO...';
-        const form = document.getElementById('googleComboForm');
-
-        // LÓGICA DE FECHA PARA GOOGLE FORMS (Tipo 9)
-        const dateInput = document.getElementById('inDate');
-        if (dateInput && dateInput.value.includes('/')) {
-            const parts = dateInput.value.split('/');
-            if (parts.length === 3) {
-                const day = parts[0].trim().padStart(2, '0');
-                const month = parts[1].trim().padStart(2, '0');
-                const year = parts[2].trim();
-                
-                // 1. Quitar el nombre al input original para que no choque
-                dateInput.removeAttribute('name');
-                
-                // 2. Crear los 3 campos que Google SI espera
-                const createHidden = (name, val) => {
-                    let input = document.createElement('input');
-                    input.type = 'hidden';
-                    input.name = name;
-                    input.value = val;
-                    input.className = 'temp-date-fix';
-                    form.appendChild(input);
+                const imgTester = new Image();
+                imgTester.src = trackImg;
+                imgTester.onerror = () => {
+                    const pngUrl = `https://raw.githubusercontent.com/unesvoltetes/imagenes-ams2/main/optimizadas/circuitoA/${enc}.png`;
+                    header.style.backgroundImage = `url("${pngUrl}")`;
+                    const bg = document.getElementById('page-bg');
+                    if (bg) bg.style.backgroundImage = `url("${pngUrl}")`;
                 };
-                
-                // Limpiar parches anteriores por si acaso
-                document.querySelectorAll('.temp-date-fix').forEach(el => el.remove());
-                
-                createHidden('entry.506982970_day', day);
-                createHidden('entry.506982970_month', month);
-                createHidden('entry.506982970_year', year);
+                imgTester.onload = () => {
+                    const bg = document.getElementById('page-bg');
+                    if (bg) bg.style.backgroundImage = `url("${trackImg}")`;
+                };
+
+                document.getElementById('pvMap').src = `https://raw.githubusercontent.com/unesvoltetes/imagenes-ams2/main/optimizadas/circuitos/${enc}.png`;
+                const variantsDiv = document.getElementById('pvTrackVariants');
+                const baseName = track.split('_')[0];
+                const variants = trackNames.filter(t => t.startsWith(baseName) && t !== track);
+                if (variants.length > 0) {
+                    variantsDiv.innerHTML = '';
+                    variants.forEach(v => {
+                        const thumb = document.createElement('div'); thumb.className = 'track-variant-thumb'; thumb.style.backgroundImage = `url("https://raw.githubusercontent.com/unesvoltetes/imagenes-ams2/main/optimizadas/circuitos/${encodeURIComponent(v)}.png")`;
+                        thumb.onclick = () => { document.getElementById('inTrack').value = v; syncPreview(); };
+                        variantsDiv.appendChild(thumb);
+                    });
+                    variantsDiv.style.display = 'flex';
+                } else variantsDiv.style.display = 'none';
+                const boxes = trackObj ? trackObj.BOXES : 32;
+                document.getElementById('pvTrackWarning').style.display = boxes < 26 ? 'block' : 'none';
             }
-        }
-
-        // Failsafe: Mostramos éxito tras unos segundos
-        setTimeout(() => {
-            if (submitted && document.getElementById('googleComboForm').style.display !== 'none') {
-                showSuccess();
+            if (car) {
+                const enc = encodeURIComponent(car);
+                document.getElementById('pvCarImg').style.backgroundImage = `url("https://raw.githubusercontent.com/unesvoltetes/imagenes-ams2/main/optimizadas/cars/${enc}.png")`;
+                const lightDiv = document.getElementById('pvLights');
+                lightDiv.style.backgroundImage = `url("https://raw.githubusercontent.com/unesvoltetes/imagenes-ams2/main/optimizadas/${hasLights ? 'con_luz' : 'sin_luz'}.png")`;
+                if (!hasLights && isNight) { lightDiv.classList.add('lights-warning'); document.getElementById('pvLightsWarning').style.display = 'block'; }
+                else { lightDiv.classList.remove('lights-warning'); document.getElementById('pvLightsWarning').style.display = 'none'; }
+                const rivalType = document.getElementById('inRival').value;
+                const classCarsDiv = document.getElementById('pvClassCars');
+                if (rivalType === 'Misma Clase' && carObj) {
+                    classCarsDiv.innerHTML = '';
+                    carsData.filter(c => c.CLASE === carObj.CLASE && c.AUTO !== car).forEach(other => {
+                        const thumb = document.createElement('div'); thumb.className = 'class-car-thumb'; thumb.style.backgroundImage = `url("https://raw.githubusercontent.com/unesvoltetes/imagenes-ams2/main/optimizadas/cars/${encodeURIComponent(other.AUTO)}.png")`;
+                        thumb.onclick = () => { document.getElementById('inCar').value = other.AUTO; syncPreview(); };
+                        classCarsDiv.appendChild(thumb);
+                    });
+                    classCarsDiv.style.display = 'flex';
+                } else classCarsDiv.style.display = 'none';
             }
-        }, 5000);
-        
-        return true; 
-    }
-
-    function handleIframeLoad() {
-        if (submitted) {
-            showSuccess();
+            const updateBadge = (id, val) => {
+                const el = document.getElementById(id); if (!el) return;
+                let v = (val || "").toUpperCase().trim() || "POR DEFECTO";
+                if (v === 'SIN CONSUMO' || v === 'APAGADO') v = 'OFF';
+                if (v.length > 4) v = v.substring(0, 4);
+                el.textContent = v;
+                let color = '#50505a';
+                if (['REAL', 'ALTO', 'X2', 'X3', 'X4', 'X5', 'TODO', 'MAXI'].includes(v)) color = '#ff3333';
+                else if (['PROG', 'HUME', 'MOJA'].includes(v)) color = '#ffcc00';
+                else if (['LIMP', 'BAJO', 'OFF'].includes(v)) color = '#00ff66';
+                el.style.borderColor = el.style.color = color;
+            };
+            updateBadge('bgTires', document.getElementById('inTires').value);
+            updateBadge('bgFuel', document.getElementById('inFuel').value);
+            updateBadge('bgGrip', document.getElementById('inGrip').value);
+            updateBadge('bgDamage', document.getElementById('inDamageScale').value);
         }
-    }
 
-    function showSuccess() {
-        // Ocultar todo lo innecesario
-        document.getElementById('googleComboForm').style.display = 'none';
-        document.querySelector('.main-title').style.display = 'none';
-        document.getElementById('topActionButtons').style.display = 'none';
-        document.getElementById('recentPanel').style.display = 'none';
-        
-        document.querySelector('.top-row').style.display = 'none';
-        document.getElementById('successView').style.display = 'block';
-        
-        // Hacer scroll al contenedor para que el mensaje sea visible
-        document.getElementById('unes-combo-custom-container').scrollIntoView({ behavior: 'smooth', block: 'start' });
-        
-        updateLimit();
-    }
-
-    function updateLimit() {
-        const today = new Date().toISOString().split('T')[0];
-        const stats = JSON.parse(localStorage.getItem('combo_submissions') || '{"date":"","count":0}');
-        if (stats.date === today) {
-            stats.count++;
-        } else {
-            stats.date = today;
-            stats.count = 1;
+        function handleSubmit(event) {
+            const car = document.getElementById('inCar').value;
+            const track = document.getElementById('inTrack').value;
+            const trackObj = tracksData.find(t => t.CIRCUITO === track);
+            const boxes = trackObj ? trackObj.BOXES : 32;
+            if (boxes < 26) { alert(`⚠️ CIRCUITO PEQUEÑO: Solo ${boxes} boxes.`); return false; }
+            submitted = true;
+            document.getElementById('btnSubmit').disabled = true;
+            document.getElementById('btnSubmit').innerHTML = '🚀 ENVIANDO...';
+            const dateInput = document.getElementById('inDate');
+            if (dateInput && dateInput.value.includes('/')) {
+                const parts = dateInput.value.split('/');
+                const form = document.getElementById('googleComboForm');
+                const createHidden = (name, val) => { let input = document.createElement('input'); input.type = 'hidden'; input.name = name; input.value = val; form.appendChild(input); };
+                createHidden('entry.506982970_day', parts[0]);
+                createHidden('entry.506982970_month', parts[1]);
+                createHidden('entry.506982970_year', parts[2]);
+                dateInput.removeAttribute('name');
+            }
+            return true;
         }
-        localStorage.setItem('combo_submissions', JSON.stringify(stats));
-    }
 
-    async function toggleRecent() {
-        const panel = document.getElementById('recentPanel');
-        if (panel.style.display === 'block') {
-            panel.style.display = 'none';
-            return;
+        function handleIframeLoad() { if (submitted) showSuccess(); }
+        function showSuccess() {
+            document.getElementById('googleComboForm').style.display = 'none';
+            document.querySelector('.main-title').style.display = 'none';
+            document.getElementById('topActionButtons').style.display = 'none';
+            document.getElementById('recentPanel').style.display = 'none';
+            document.querySelector('.top-row').style.display = 'none';
+            document.getElementById('successView').style.display = 'block';
         }
-        
-        panel.style.display = 'block';
-        panel.innerHTML = '<p style="text-align:center; color:#8c8c9b; font-size:0.9em;">🔍 Consultando servidor...</p>';
-        
-        const last5 = await fetchRecentHistory(5);
-        
-        if (last5.length === 0) {
-            panel.innerHTML = '<p style="text-align:center; color:#8c8c9b;">No hay combos registrados aún o error de conexión.</p>';
-            return;
-        }
-        
-        panel.innerHTML = '<h4 style="margin:0 0 15px 0; color:#8c8c9b; font-size:0.75rem; text-transform:uppercase; letter-spacing:2px; font-weight:900;">HISTORIAL RECIENTE</h4>';
-        last5.forEach(row => {
-            const timestamp = row[0] || '';
-            const user = row[2] || 'Piloto';
-            const track = (row[3] || '???').replace(/_/g, ' ');
-            const car = row[5] || '???';
-            
-            const dateParts = timestamp.split(' ');
-            const shortDate = dateParts.length > 1 ? 
-                `${dateParts[0].substring(0, 5)} ${dateParts[1].substring(0, 5)}` : '';
 
-            const item = document.createElement('div');
-            item.className = 'recent-item';
-            item.innerHTML = `
-                <span class="track">${track}</span>
-                <span class="sep">—</span>
-                <span class="car">${car}</span>
-                <span class="sep">—</span>
-                <span class="user">por ${user.toUpperCase()}</span>
-                <span class="date">${shortDate}</span>
-            `;
-            panel.appendChild(item);
-        });
-    }
+        initForm();
+    </script>
+    </div>
+</body>
 
-    initForm();
-</script>
-</div>
+</html>
