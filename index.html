@@ -478,13 +478,14 @@
             card.innerHTML = `
             <div style="display:flex; justify-content:space-between; align-items:center;">
                 <div style="display:flex; align-items:center; gap:15px;">
-                    <img src="${avatar || 'https://avatars.akamai.steamstatic.com/fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb_full.jpg'}" style="width:45px; height:45px; border-radius:50%; border:2px solid ${isPermanent ? '#f85149' : '#ffa657'}; opacity:0.6;">
+                    <img src="${avatar || 'https://avatars.akamai.steamstatic.com/fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb_full.jpg'}" 
+                         title="SteamID: ${sid}" 
+                         style="width:45px; height:45px; border-radius:50%; border:2px solid ${isPermanent ? '#f85149' : '#ffa657'}; opacity:0.6; cursor:help;">
                     <div>
                         <b style="font-size:1.1rem; color:#fff;">${nombre}</b>
                         <div style="color:${isPermanent ? '#f85149' : '#ffa657'}; font-size:0.65rem; font-weight:800; text-transform:uppercase; letter-spacing:1px;">
                             ${isPermanent ? 'Acceso Denegado / Blacklist' : 'Sanción en Historial (' + veces + ')'}
                         </div>
-                        <div style="font-size:0.6rem; opacity:0.4;">ID: ${sid}</div>
                     </div>
                 </div>
                 <i data-lucide="${isPermanent ? 'shield-alert' : 'history'}" style="color:${isPermanent ? '#f85149' : '#ffa657'}; width:24px; height:24px;"></i>
@@ -503,8 +504,10 @@
             const sr = p.vueltas_totales > 0 ? Math.round((p.vueltas_limpias / p.vueltas_totales) * 100) : 0;
             body.innerHTML = `
                 <div style="display:flex; gap:1.5rem; align-items:center; margin-bottom:2rem;">
-                    <img src="${p.avatar_url || 'https://avatars.akamai.steamstatic.com/fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb_full.jpg'}" style="width:80px; height:80px; border-radius:50%; border:2px solid var(--accent);">
-                    <div><h2 style="font-weight:800;">${p.nombre}</h2><div style="font-size:0.8rem; opacity:0.5;">ID: ${sid}</div></div>
+                    <img src="${p.avatar_url || 'https://avatars.akamai.steamstatic.com/fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb_full.jpg'}" 
+                         title="SteamID: ${sid}"
+                         style="width:80px; height:80px; border-radius:50%; border:2px solid var(--accent); cursor:help;">
+                    <div><h2 style="font-weight:800;">${p.nombre}</h2></div>
                 </div>
                 <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:1rem; margin-bottom:2rem;">
                     <div style="text-align:center; background:rgba(255,255,255,0.03); padding:1rem; border-radius:10px;"><div style="color:var(--gold); font-weight:900; font-size:1.5rem;">${totalPts}</div><div style="font-size:0.6rem; opacity:0.5;">PUNTOS</div></div>
