@@ -549,7 +549,7 @@
 
         function renderSancionados(query) {
             const container = document.getElementById('content');
-            const banned = fullData.pilotos.filter(p => (p.veces_baneado || 0) > 0 && p.nombre.toLowerCase().includes(query));
+            const banned = fullData.pilotos.filter(p => (p.esta_baneado === 1 || p.esta_baneado === true) && p.nombre.toLowerCase().includes(query));
 
             if (banned.length === 0) {
                 container.innerHTML = `
