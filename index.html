@@ -224,6 +224,9 @@
                 fullData.puntos = ptsRes.data || [];
                 fullData.blacklist = bRes || [];
 
+                // Lanzar buscador de avatares reales
+                setTimeout(loadAllAvatars, 1000);
+
                 populateSelectors();
                 
                 // Cargar resumen de ganadores para el historial rápido
@@ -273,6 +276,34 @@
                 cSel.innerHTML = allCars.map(c => `<option value="${c}">${c}</option>`).join('');
             }
             loadRecords();
+        }
+
+        async function loadAllAvatars() {
+            const uniqueIds = [...new Set(fullData.pilotos.map(p => p.steam_id))];
+            for (const id of uniqueIds) {
+                await fetchSteamAvatar(id);
+                // Pequeña pausa para no saturar
+                await new Promise(r => setTimeout(r, 100));
+            }
+        }
+
+        async function fetchSteamAvatar(sid) {
+            try {
+                // Usamos un proxy rápido para obtener el XML oficial de Steam
+                const proxy = `https://api.codetabs.com/v1/proxy?quest=`;
+                const res = await fetch(proxy + encodeURIComponent(`https://steamcommunity.com/profiles/${sid}/?xml=1`));
+                const text = await res.text();
+                
+                // Extraer la URL de la imagen del XML
+                const match = text.match(/<avatarFull><!\[CDATA\[(.*?)\]\]><\/avatarFull>/);
+                if (match && match[1]) {
+                    const realUrl = match[1];
+                    document.querySelectorAll(`img[data-sid="${sid}"]`).forEach(img => {
+                        img.src = realUrl;
+                        img.style.opacity = "1";
+                    });
+                }
+            } catch (e) { console.error("Error avatar:", sid); }
         }
 
         function showTab(tab) {
@@ -427,9 +458,9 @@
 
             body.innerHTML = `
                 <div style="display:flex; gap:2rem; align-items:center; margin-bottom:2rem;">
-                    <img src="https://steam-avatar.vercel.app/api/${sid}" 
-                         onerror="this.src='https://avatars.akamai.steamstatic.com/fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb_full.jpg'"
-                         style="width:100px; height:100px; border-radius:50%; border:3px solid var(--accent); object-fit:cover; background:#111;">
+                    <img src="https://avatars.akamai.steamstatic.com/fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb_full.jpg" 
+                         data-sid="${sid}"
+                         style="width:100px; height:100px; border-radius:50%; border:3px solid var(--accent); object-fit:cover; background:#111; opacity:0.5; transition:opacity 0.5s;">
                     <div>
                         <h2 style="font-size:2rem; font-weight:800;">${p.nombre || 'Piloto'}</h2>
                         <div style="color:var(--text-dim); font-size:0.8rem;">ID: ${sid}</div>
@@ -503,9 +534,9 @@
                 const card = document.createElement('div');
                 card.className = 'list-item';
                 card.onclick = () => openProfile(p.steam_id);
-                card.innerHTML = `<img src="https://steam-avatar.vercel.app/api/${p.steam_id}" 
-                                       onerror="this.src='https://avatars.akamai.steamstatic.com/fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb_full.jpg'"
-                                       style="width:40px; height:40px; border-radius:50%; object-fit:cover; background:#111;">
+                card.innerHTML = `<img src="https://avatars.akamai.steamstatic.com/fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb_full.jpg" 
+                                       data-sid="${p.steam_id}"
+                                       style="width:40px; height:40px; border-radius:50%; object-fit:cover; background:#111; opacity:0.5;">
                     <div><div style="font-weight:800; color:#fff;">${p.nombre}</div><div style="font-size:0.7rem; color:var(--text-dim);">ID: ${p.steam_id}</div></div>
                     <div><div style="font-weight:900; color:var(--gold); text-align:center;">${p.pts}</div><div style="font-size:0.6rem; color:var(--text-dim); text-align:center;">PUNTOS</div></div>
                     <div><div style="font-weight:800; text-align:center;">${p.races}</div><div style="font-size:0.6rem; color:var(--text-dim); text-align:center;">CARRERAS</div></div>
@@ -522,9 +553,9 @@
                 const sr = p.vueltas_totales > 0 ? Math.round((p.vueltas_limpias / p.vueltas_totales) * 100) : 0;
                 html += `<tr style="border-bottom:1px solid var(--border); cursor:pointer;" onclick="openProfile('${p.steam_id}')">
                     <td style="padding:1rem; display:flex; align-items:center; gap:10px;">
-                        <img src="https://steam-avatar.vercel.app/api/${p.steam_id}" 
-                             onerror="this.src='https://avatars.akamai.steamstatic.com/fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb_full.jpg'"
-                             style="width:24px; height:24px; border-radius:50%; object-fit:cover; background:#111;">
+                        <img src="https://avatars.akamai.steamstatic.com/fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb_full.jpg" 
+                             data-sid="${p.steam_id}"
+                             style="width:24px; height:24px; border-radius:50%; object-fit:cover; background:#111; opacity:0.5;">
                         ${p.nombre}
                     </td>
                     <td><span class="badge" style="background:${sr > 80 ? '#238636' : '#f85149'}">${sr}%</span></td>
@@ -552,9 +583,9 @@
             banned.forEach(p => {
                 const card = document.createElement('div');
                 card.className = 'list-item'; card.style.border = '1px solid #f85149';
-                card.innerHTML = `<img src="https://steam-avatar.vercel.app/api/${p.steam_id}" 
-                                       onerror="this.src='https://avatars.akamai.steamstatic.com/fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb_full.jpg'"
-                                       style="width:40px; height:40px; border-radius:50%; object-fit:cover; background:#111;">
+                card.innerHTML = `<img src="https://avatars.akamai.steamstatic.com/fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb_full.jpg" 
+                                       data-sid="${p.steam_id}"
+                                       style="width:40px; height:40px; border-radius:50%; object-fit:cover; background:#111; opacity:0.5;">
                                   <div><div style="color:#f85149; font-weight:800;">${p.nombre}</div></div><div>BLACKLIST</div><i data-lucide="alert-triangle" style="color:#f85149"></i>`;
                 container.appendChild(card);
             });
