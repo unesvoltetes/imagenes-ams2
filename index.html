@@ -416,10 +416,21 @@
             container.innerHTML = '<div class="spinner"></div>';
             const sids = fullData.history.filter(s => s.track_name === track && s.car_name === car).map(s => s.session_id);
             if (sids.length === 0) { container.innerHTML = '<p style="text-align:center; padding:3rem; opacity:0.5;">No hay sesiones registradas.</p>'; return; }
-            const { data } = await _supabase.from('resultados').select('*').in('session_id', sids).neq('flt', '--:--.---').neq('flt', '0:00.000').order('flt').limit(100);
+            const { data } = await _supabase.from('resultados').select('*').in('session_id', sids).neq('flt', '--:--.---').neq('flt', '0:00.000').order('flt').limit(500);
             if (!data || data.length === 0) { container.innerHTML = '<p style="text-align:center; padding:3rem; opacity:0.5;">No hay récords válidos.</p>'; return; }
+            
+            const seenPilots = new Set();
+            const uniqueData = [];
+            for (const r of data) {
+                if (!seenPilots.has(r.steam_id)) {
+                    seenPilots.add(r.steam_id);
+                    uniqueData.push(r);
+                    if (uniqueData.length === 100) break; // Top 100 real
+                }
+            }
+
             let html = `<h3 style="margin-bottom:1.5rem; color:var(--gold);">🏆 TOP 100: ${track}</h3><table class="blogger-table"><thead><tr><th>#</th><th>Piloto</th><th>Vuelta Rápida</th><th>Fecha</th></tr></thead><tbody>`;
-            data.forEach((r, i) => {
+            uniqueData.forEach((r, i) => {
                 const sInfo = fullData.history.find(s => s.session_id == r.session_id) || {};
                 html += `<tr><td style="font-weight:800;">${i+1}º</td><td><b onclick="openProfile('${r.steam_id}')" style="cursor:pointer; color:var(--cyan)">${r.name}</b></td><td style="color:var(--cyan); font-weight:800; font-family:monospace;">${r.flt}</td><td style="opacity:0.5; font-size:0.7rem;">${sInfo.date || '---'}</td></tr>`;
             });
@@ -438,7 +449,13 @@
             const tracks = {}; fullData.history.forEach(s => tracks[s.track_name] = (tracks[s.track_name] || 0) + 1);
             const topTracks = Object.entries(tracks).sort((a,b) => b[1]-a[1]).slice(0, 5);
 
-            const last7 = [...Array(7)].map((_, i) => { const d = new Date(); d.setDate(d.getDate() - i); return d.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit' }); }).reverse();
+            const last7 = [...Array(7)].map((_, i) => { 
+                const d = new Date(); 
+                d.setDate(d.getDate() - i); 
+                const dd = String(d.getDate()).padStart(2, '0');
+                const mm = String(d.getMonth() + 1).padStart(2, '0');
+                return `${dd}/${mm}`;
+            }).reverse();
             const days = {}; last7.forEach(d => days[d] = 0);
             fullData.history.forEach(s => { const d = s.date.split(' ')[0].substring(0, 5); if (days[d] !== undefined) days[d]++; });
             
