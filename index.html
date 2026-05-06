@@ -144,7 +144,7 @@
             <button class="nav-btn" id="btn-records" onclick="showTab('records')"><i data-lucide="gauge"></i> <span>Récords</span></button>
             <button class="nav-btn" id="btn-ranking" onclick="showTab('ranking')"><i data-lucide="trophy"></i> <span>Ranking</span></button>
             <button class="nav-btn" id="btn-analytics" onclick="showTab('analytics')"><i data-lucide="bar-chart-3"></i> <span>Stats</span></button>
-            <button class="nav-btn" id="btn-sancionados" onclick="showTab('sancionados')"><i data-lucide="user-x"></i> <span>Baneados</span></button>
+           <!-- <button class="nav-btn" id="btn-sancionados" onclick="showTab('sancionados')"><i data-lucide="user-x"></i> <span>Baneados</span></button> -->
         </nav>
     </header>
 
@@ -346,10 +346,58 @@
             const cont = document.getElementById(`table-${idx}`);
             cont.innerHTML = '<div class="spinner"></div>';
             const { data } = await _supabase.from('resultados').select('*').eq('session_id', sid).eq('stage', stage).order('pos');
-            if (!data) return;
-            let html = '<table class="blogger-table"><thead><tr><th>Pos</th><th>Piloto</th><th>Vuelta</th><th>🧱</th><th style="text-align:right">Total</th></tr></thead><tbody>';
+            if (!data || data.length === 0) {
+                cont.innerHTML = '<p style="text-align:center; padding:1rem; opacity:0.5;">No hay datos disponibles para esta sesión.</p>';
+                return;
+            }
+
+            // Identificar la mejor vuelta (excluyendo "--:--.---" y "0:00.000")
+            let bestTime = "9:99.999";
             data.forEach(r => {
-                html += `<tr><td>${r.pos}º</td><td><b onclick="openProfile('${r.steam_id}')" style="cursor:pointer; color:var(--cyan)">${r.name}</b></td><td>${r.flt}</td><td>${r.iv||0}</td><td style="text-align:right; opacity:0.6;">${r.totalt||'--'}</td></tr>`;
+                if (r.flt && r.flt !== '--:--.---' && r.flt !== '0:00.000' && r.flt < bestTime) {
+                    bestTime = r.flt;
+                }
+            });
+
+            let html = `
+            <table class="blogger-table">
+                <thead>
+                    <tr>
+                        <th style="width:40px;">Pos</th>
+                        <th>Piloto / Coche</th>
+                        <th style="text-align:center">Vuelta</th>
+                        <th style="text-align:center" title="Colisiones entre vehículos">🚗</th>
+                        <th style="text-align:center" title="Impactos con el entorno">🧱</th>
+                        <th style="text-align:center" title="Cortes de pista">⚠️</th>
+                        <th style="text-align:right">Total</th>
+                    </tr>
+                </thead>
+                <tbody>`;
+
+            data.forEach(r => {
+                const isClean = r.clean === true || r.clean === 1;
+                const cleanTag = isClean ? '<span style="background:#22c55e; color:white; font-size:0.55rem; padding:1px 4px; border-radius:3px; margin-left:5px; font-weight:800;">✨ LIMPIO</span>' : '';
+                const isBestLap = r.flt === bestTime;
+                const lapStyle = isBestLap ? 'background:var(--accent); color:white; padding:2px 8px; border-radius:4px; font-weight:800;' : 'color:var(--cyan); font-weight:700;';
+                
+                html += `
+                <tr>
+                    <td style="font-weight:800; color:#fff;">${r.pos}º</td>
+                    <td>
+                        <div style="display:flex; flex-direction:column;">
+                            <div style="display:flex; align-items:center;">
+                                <b onclick="openProfile('${r.steam_id}')" style="cursor:pointer; color:#fff;">${r.name}</b>
+                                ${cleanTag}
+                            </div>
+                            <span style="font-size:0.7rem; color:var(--text-dim);">${r.car_name || '---'}</span>
+                        </div>
+                    </td>
+                    <td style="text-align:center;"><span style="${lapStyle}">${r.flt || '--:--.---'}</span></td>
+                    <td style="text-align:center; opacity:0.7;">${r.iv || 0}</td>
+                    <td style="text-align:center; opacity:0.7;">${r.io || 0}</td>
+                    <td style="text-align:center; opacity:0.7; color:#eaa308;">${r.c || 0}</td>
+                    <td style="text-align:right; font-family:monospace; opacity:0.6;">${r.tot || r.totalt || '--'}</td>
+                </tr>`;
             });
             cont.innerHTML = html + '</tbody></table>';
         }
@@ -429,10 +477,36 @@
                 }
             }
 
-            let html = `<h3 style="margin-bottom:1.5rem; color:var(--gold);">🏆 TOP 100: ${track}</h3><table class="blogger-table"><thead><tr><th>#</th><th>Piloto</th><th>Vuelta Rápida</th><th>Fecha</th></tr></thead><tbody>`;
+            let html = `
+            <div style="margin-bottom:1.5rem; display:flex; justify-content:space-between; align-items:center;">
+                <h3 style="color:var(--gold); margin:0;">🏆 TOP 100: ${track}</h3>
+                <span style="font-size:0.7rem; color:var(--cyan); font-weight:800;">${car}</span>
+            </div>
+            <table class="blogger-table">
+                <thead>
+                    <tr>
+                        <th style="width:50px;">#</th>
+                        <th>Piloto / Coche</th>
+                        <th>Vuelta Rápida</th>
+                        <th style="text-align:right">Fecha</th>
+                    </tr>
+                </thead>
+                <tbody>`;
+
             uniqueData.forEach((r, i) => {
                 const sInfo = fullData.history.find(s => s.session_id == r.session_id) || {};
-                html += `<tr><td style="font-weight:800;">${i+1}º</td><td><b onclick="openProfile('${r.steam_id}')" style="cursor:pointer; color:var(--cyan)">${r.name}</b></td><td style="color:var(--cyan); font-weight:800; font-family:monospace;">${r.flt}</td><td style="opacity:0.5; font-size:0.7rem;">${sInfo.date || '---'}</td></tr>`;
+                html += `
+                <tr>
+                    <td style="font-weight:900; color:${i < 3 ? 'var(--gold)' : 'inherit'};">#${i+1}</td>
+                    <td>
+                        <div style="display:flex; flex-direction:column;">
+                            <b onclick="openProfile('${r.steam_id}')" style="cursor:pointer; color:#fff;">${r.name}</b>
+                            <span style="font-size:0.65rem; color:var(--text-dim);">${r.car_name || car}</span>
+                        </div>
+                    </td>
+                    <td><span style="color:var(--cyan); font-weight:800; font-family:monospace;">${r.flt}</span></td>
+                    <td style="opacity:0.5; font-size:0.7rem; text-align:right;">${sInfo.date || '---'}</td>
+                </tr>`;
             });
             container.innerHTML = html + '</tbody></table>';
         }
@@ -443,12 +517,27 @@
             const uniquePilots = fullData.pilotos.length;
             const totalLaps = fullData.pilotos.reduce((s, p) => s + (p.vueltas_totales || 0), 0);
             
-            const cars = {}; fullData.history.forEach(s => cars[s.car_name] = (cars[s.car_name] || 0) + 1);
+            // Filtrar y contar coches
+            const cars = {}; 
+            fullData.history.forEach(s => {
+                const name = s.car_name;
+                if (name && name !== 'Unknown' && name !== '---' && !name.includes('Vehículo')) {
+                    cars[name] = (cars[name] || 0) + 1;
+                }
+            });
             const topCars = Object.entries(cars).sort((a,b) => b[1]-a[1]).slice(0, 5);
             
-            const tracks = {}; fullData.history.forEach(s => tracks[s.track_name] = (tracks[s.track_name] || 0) + 1);
+            // Filtrar y contar circuitos
+            const tracks = {}; 
+            fullData.history.forEach(s => {
+                const name = s.track_name;
+                if (name && name !== 'Unknown' && name !== '---' && !name.includes('Track')) {
+                    tracks[name] = (tracks[name] || 0) + 1;
+                }
+            });
             const topTracks = Object.entries(tracks).sort((a,b) => b[1]-a[1]).slice(0, 5);
 
+            // Actividad últimos 7 días
             const last7 = [...Array(7)].map((_, i) => { 
                 const d = new Date(); 
                 d.setDate(d.getDate() - i); 
@@ -456,26 +545,101 @@
                 const mm = String(d.getMonth() + 1).padStart(2, '0');
                 return `${dd}/${mm}`;
             }).reverse();
-            const days = {}; last7.forEach(d => days[d] = 0);
-            fullData.history.forEach(s => { const d = s.date.split(' ')[0].substring(0, 5); if (days[d] !== undefined) days[d]++; });
+            
+            const days = {}; 
+            last7.forEach(d => days[d] = 0);
+            fullData.history.forEach(s => { 
+                if (s.date) {
+                    const d = s.date.split(' ')[0].substring(0, 5); 
+                    if (days[d] !== undefined) days[d]++; 
+                }
+            });
             
             container.innerHTML = `
             <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:1rem; margin-bottom:2rem;">
-                <div class="session-card-pro" style="padding:1.5rem; text-align:center;"><div style="font-size:0.7rem; color:var(--text-dim);">CARRERAS</div><div style="font-size:2rem; font-weight:900; color:var(--accent);">${totalRaces}</div></div>
-                <div class="session-card-pro" style="padding:1.5rem; text-align:center;"><div style="font-size:0.7rem; color:var(--text-dim);">VUELTAS ACUM.</div><div style="font-size:2rem; font-weight:900; color:var(--gold);">${totalLaps}</div></div>
-                <div class="session-card-pro" style="padding:1.5rem; text-align:center;"><div style="font-size:0.7rem; color:var(--text-dim);">PILOTOS</div><div style="font-size:2rem; font-weight:900; color:var(--cyan);">${uniquePilots}</div></div>
+                <div class="session-card-pro" style="padding:1.5rem; text-align:center;"><div style="font-size:0.7rem; color:var(--text-dim); text-transform:uppercase;">Carreras Registradas</div><div style="font-size:2rem; font-weight:900; color:var(--accent);">${totalRaces}</div></div>
+                <div class="session-card-pro" style="padding:1.5rem; text-align:center;"><div style="font-size:0.7rem; color:var(--text-dim); text-transform:uppercase;">Vueltas Acumuladas</div><div style="font-size:2rem; font-weight:900; color:var(--gold);">${totalLaps}</div></div>
+                <div class="session-card-pro" style="padding:1.5rem; text-align:center;"><div style="font-size:0.7rem; color:var(--text-dim); text-transform:uppercase;">Pilotos en Ranking</div><div style="font-size:2rem; font-weight:900; color:var(--cyan);">${uniquePilots}</div></div>
             </div>
             <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:2rem;">
-                <div class="session-card-pro" style="padding:1.5rem;"><h3 style="font-size:0.8rem; margin-bottom:1rem;">ACTIVIDAD SEMANAL</h3><canvas id="chartActivity" height="220"></canvas></div>
-                <div class="session-card-pro" style="padding:1.5rem;"><h3 style="font-size:0.8rem; margin-bottom:1rem;">TOP 5 VEHÍCULOS</h3><canvas id="chartCars" height="220"></canvas></div>
-                <div class="session-card-pro" style="padding:1.5rem;"><h3 style="font-size:0.8rem; margin-bottom:1rem;">TOP 5 CIRCUITOS</h3><canvas id="chartTracks" height="220"></canvas></div>
+                <div class="session-card-pro" style="padding:1.5rem;">
+                    <h3 style="font-size:0.8rem; margin-bottom:1.5rem; color:var(--text-dim);">ACTIVIDAD RECIENTE (7 DÍAS)</h3>
+                    <div style="height:250px; position:relative;"><canvas id="chartActivity"></canvas></div>
+                </div>
+                <div class="session-card-pro" style="padding:1.5rem;">
+                    <h3 style="font-size:0.8rem; margin-bottom:1.5rem; color:var(--text-dim);">TOP 5 VEHÍCULOS MÁS USADOS</h3>
+                    <div style="height:250px; position:relative;"><canvas id="chartCars"></canvas></div>
+                </div>
+                <div class="session-card-pro" style="padding:1.5rem;">
+                    <h3 style="font-size:0.8rem; margin-bottom:1.5rem; color:var(--text-dim);">TOP 5 CIRCUITOS PREFERIDOS</h3>
+                    <div style="height:250px; position:relative;"><canvas id="chartTracks"></canvas></div>
+                </div>
             </div>`;
             
-            const chartOptions = { plugins: { legend: { position: 'bottom', labels: { color: '#fff', boxWidth: 10, font: { size: 10 } } } } };
+            const chartOptions = { 
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { 
+                    legend: { 
+                        position: 'bottom', 
+                        labels: { color: '#8b949e', boxWidth: 12, font: { size: 10, weight: 'bold' } } 
+                    } 
+                } 
+            };
 
-            new Chart(document.getElementById('chartActivity'), { type: 'line', data: { labels: last7, datasets: [{ label: 'Sesiones', data: last7.map(d => days[d]), borderColor: '#b314da', backgroundColor: 'rgba(179, 20, 218, 0.1)', fill: true, tension: 0.4 }] }, options: { plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.05)' } } } } });
-            new Chart(document.getElementById('chartCars'), { type: 'doughnut', data: { labels: topCars.map(c => c[0]), datasets: [{ data: topCars.map(c => c[1]), backgroundColor: ['#ff7b72', '#a5d6ff', '#ffa657', '#7ee787', '#d2a8ff'], borderWidth: 0 }] }, options: chartOptions });
-            new Chart(document.getElementById('chartTracks'), { type: 'doughnut', data: { labels: topTracks.map(t => t[0]), datasets: [{ data: topTracks.map(t => t[1]), backgroundColor: ['#58a6ff', '#3fb1ff', '#56d364', '#f2cc60', '#f78166'], borderWidth: 0 }] }, options: chartOptions });
+            new Chart(document.getElementById('chartActivity'), { 
+                type: 'line', 
+                data: { 
+                    labels: last7, 
+                    datasets: [{ 
+                        label: 'Sesiones', 
+                        data: last7.map(d => days[d]), 
+                        borderColor: '#b314da', 
+                        backgroundColor: 'rgba(179, 20, 218, 0.1)', 
+                        borderWidth: 3,
+                        pointBackgroundColor: '#b314da',
+                        fill: true, 
+                        tension: 0.4 
+                    }] 
+                }, 
+                options: { 
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } }, 
+                    scales: { 
+                        y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#8b949e' } },
+                        x: { grid: { display: false }, ticks: { color: '#8b949e' } }
+                    } 
+                } 
+            });
+
+            new Chart(document.getElementById('chartCars'), { 
+                type: 'doughnut', 
+                data: { 
+                    labels: topCars.map(c => c[0]), 
+                    datasets: [{ 
+                        data: topCars.map(c => c[1]), 
+                        backgroundColor: ['#b314da', '#00ffcc', '#ffcc00', '#f85149', '#58a6ff'], 
+                        borderWidth: 0,
+                        hoverOffset: 10
+                    }] 
+                }, 
+                options: chartOptions 
+            });
+
+            new Chart(document.getElementById('chartTracks'), { 
+                type: 'doughnut', 
+                data: { 
+                    labels: topTracks.map(t => t[0]), 
+                    datasets: [{ 
+                        data: topTracks.map(t => t[1]), 
+                        backgroundColor: ['#00ffcc', '#b314da', '#58a6ff', '#ffcc00', '#f85149'], 
+                        borderWidth: 0,
+                        hoverOffset: 10
+                    }] 
+                }, 
+                options: chartOptions 
+            });
         }
 
         function renderSancionados(query) {
