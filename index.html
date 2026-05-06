@@ -393,7 +393,7 @@
                         </div>
                     </td>
                     <td style="text-align:center;"><span style="${lapStyle}">${r.flt || '--:--.---'}</span></td>
-                    <td style="text-align:center; opacity:0.7;">${r.iv || 0}</td>
+                    <td style="text-align:center; opacity:0.7; cursor:help;" title="${r.ivt ? 'Colisionó con: ' + r.ivt : 'Sin colisiones con vehículos'}">${r.iv || 0}</td>
                     <td style="text-align:center; opacity:0.7;">${r.io || 0}</td>
                     <td style="text-align:center; opacity:0.7; color:#eaa308;">${r.c || 0}</td>
                     <td style="text-align:right; font-family:monospace; opacity:0.6;">${r.tot || r.totalt || '--'}</td>
