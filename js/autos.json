@@ -174,7 +174,7 @@
     "ID_CLASE": -1418553548,
     "CV": 419,
     "ANYO": 1975,
-    "MODELOS": 1,
+    "MODELOS": 26,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Procar"
@@ -186,7 +186,7 @@
     "ID_CLASE": -1270088329,
     "CV": 328,
     "ANYO": 1989,
-    "MODELOS": 2,
+    "MODELOS": 10,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Group A"
@@ -222,7 +222,7 @@
     "ID_CLASE": -1270088329,
     "CV": 340,
     "ANYO": 1992,
-    "MODELOS": 2,
+    "MODELOS": 12,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Group A"
@@ -234,7 +234,7 @@
     "ID_CLASE": 1357714335,
     "CV": 108,
     "ANYO": 1965,
-    "MODELOS": 2,
+    "MODELOS": 16,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Vintage Cars - Tier 2"
@@ -246,7 +246,7 @@
     "ID_CLASE": -1276839914,
     "CV": 117,
     "ANYO": 1965,
-    "MODELOS": 6,
+    "MODELOS": 2,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Copa Classic B"
@@ -258,7 +258,7 @@
     "ID_CLASE": 1357714335,
     "CV": 95,
     "ANYO": 1963,
-    "MODELOS": 2,
+    "MODELOS": 4,
     "LUCES": "NO",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Vintage Cars - Tier 2"
@@ -270,7 +270,7 @@
     "ID_CLASE": -1983642801,
     "CV": 278,
     "ANYO": 2014,
-    "MODELOS": 1,
+    "MODELOS": 24,
     "LUCES": "NO",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Mini JCW UK"
@@ -354,7 +354,7 @@
     "ID_CLASE": -1372148105,
     "CV": 582,
     "ANYO": 2017,
-    "MODELOS": 1,
+    "MODELOS": 17,
     "LUCES": "SI",
     "DLC": "SI",
     "CLASE_TRANSLATE": "DPI"
@@ -378,7 +378,7 @@
     "ID_CLASE": 122211381,
     "CV": 121,
     "ANYO": 2015,
-    "MODELOS": 1,
+    "MODELOS": 24,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Caterham Academy"
@@ -390,7 +390,7 @@
     "ID_CLASE": 538991900,
     "CV": 300,
     "ANYO": 2013,
-    "MODELOS": 1,
+    "MODELOS": 26,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Caterham 620R"
@@ -402,7 +402,7 @@
     "ID_CLASE": -382267785,
     "CV": 177,
     "ANYO": 2017,
-    "MODELOS": 1,
+    "MODELOS": 26,
     "LUCES": "NO",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Caterham Superlight"
@@ -414,7 +414,7 @@
     "ID_CLASE": -72151851,
     "CV": 122,
     "ANYO": 2017,
-    "MODELOS": 1,
+    "MODELOS": 24,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Caterham Supersport"
@@ -426,7 +426,7 @@
     "ID_CLASE": 430049282,
     "CV": 446,
     "ANYO": 2017,
-    "MODELOS": 1,
+    "MODELOS": 20,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Street"
@@ -438,7 +438,7 @@
     "ID_CLASE": 1043219688,
     "CV": 260,
     "ANYO": 2001,
-    "MODELOS": 2,
+    "MODELOS": 12,
     "LUCES": "NO",
     "DLC": "NO",
     "CLASE_TRANSLATE": "F3 Brasil"
@@ -450,7 +450,7 @@
     "ID_CLASE": 1043219688,
     "CV": 260,
     "ANYO": 2009,
-    "MODELOS": 2,
+    "MODELOS": 17,
     "LUCES": "NO",
     "DLC": "NO",
     "CLASE_TRANSLATE": "F3 Brasil"
@@ -462,7 +462,7 @@
     "ID_CLASE": 520250275,
     "CV": 401,
     "ANYO": 1967,
-    "MODELOS": 2,
+    "MODELOS": 10,
     "LUCES": "NO",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Formula Vintage Gen1"
@@ -474,7 +474,7 @@
     "ID_CLASE": 520250275,
     "CV": 411,
     "ANYO": 1967,
-    "MODELOS": 2,
+    "MODELOS": 10,
     "LUCES": "NO",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Formula Vintage Gen1"
@@ -486,7 +486,7 @@
     "ID_CLASE": 227192681,
     "CV": 417,
     "ANYO": 1978,
-    "MODELOS": 4,
+    "MODELOS": 8,
     "LUCES": "NO",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Formula Vintage Gen2"
@@ -498,7 +498,7 @@
     "ID_CLASE": 227192681,
     "CV": 428,
     "ANYO": 1978,
-    "MODELOS": 4,
+    "MODELOS": 10,
     "LUCES": "NO",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Formula Vintage Gen2"
@@ -570,7 +570,7 @@
     "ID_CLASE": 913480074,
     "CV": 1190,
     "ANYO": 1986,
-    "MODELOS": 3,
+    "MODELOS": 10,
     "LUCES": "NO",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Formula Classic Gen1"
@@ -582,7 +582,7 @@
     "ID_CLASE": 913480074,
     "CV": 1300,
     "ANYO": 1986,
-    "MODELOS": 3,
+    "MODELOS": 14,
     "LUCES": "NO",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Formula Classic Gen1"
@@ -594,7 +594,7 @@
     "ID_CLASE": 843858811,
     "CV": 626,
     "ANYO": 1986,
-    "MODELOS": 4,
+    "MODELOS": 8,
     "LUCES": "NO",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Formula Classic Gen2"
@@ -606,7 +606,7 @@
     "ID_CLASE": 843858811,
     "CV": 662,
     "ANYO": 1988,
-    "MODELOS": 4,
+    "MODELOS": 8,
     "LUCES": "NO",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Formula Classic Gen2"
@@ -618,7 +618,7 @@
     "ID_CLASE": 843858811,
     "CV": 675,
     "ANYO": 1988,
-    "MODELOS": 4,
+    "MODELOS": 8,
     "LUCES": "NO",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Formula Classic Gen2"
@@ -630,7 +630,7 @@
     "ID_CLASE": 1255629241,
     "CV": 725,
     "ANYO": 1989,
-    "MODELOS": 5,
+    "MODELOS": 6,
     "LUCES": "NO",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Formula Classic Gen3"
@@ -642,7 +642,7 @@
     "ID_CLASE": 1255629241,
     "CV": 632,
     "ANYO": 1989,
-    "MODELOS": 5,
+    "MODELOS": 6,
     "LUCES": "NO",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Formula Classic Gen3"
@@ -654,7 +654,7 @@
     "ID_CLASE": 1255629241,
     "CV": 734,
     "ANYO": 1989,
-    "MODELOS": 5,
+    "MODELOS": 2,
     "LUCES": "NO",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Formula Classic Gen3"
@@ -666,7 +666,7 @@
     "ID_CLASE": 1255629241,
     "CV": 661,
     "ANYO": 1989,
-    "MODELOS": 5,
+    "MODELOS": 10,
     "LUCES": "NO",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Formula Classic Gen3"
@@ -678,7 +678,7 @@
     "ID_CLASE": -1068384799,
     "CV": 727,
     "ANYO": 1991,
-    "MODELOS": 4,
+    "MODELOS": 8,
     "LUCES": "NO",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Formula Classic Gen4"
@@ -690,7 +690,7 @@
     "ID_CLASE": -1068384799,
     "CV": 707,
     "ANYO": 1991,
-    "MODELOS": 4,
+    "MODELOS": 8,
     "LUCES": "NO",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Formula Classic Gen4"
@@ -702,7 +702,7 @@
     "ID_CLASE": -1068384799,
     "CV": 662,
     "ANYO": 1991,
-    "MODELOS": 4,
+    "MODELOS": 8,
     "LUCES": "NO",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Formula Classic Gen4"
@@ -714,7 +714,7 @@
     "ID_CLASE": -900542257,
     "CV": 727,
     "ANYO": 1992,
-    "MODELOS": 5,
+    "MODELOS": 8,
     "LUCES": "NO",
     "DLC": "SI",
     "CLASE_TRANSLATE": "F-Hitech Gen1"
@@ -726,7 +726,7 @@
     "ID_CLASE": -900542257,
     "CV": 707,
     "ANYO": 1992,
-    "MODELOS": 5,
+    "MODELOS": 2,
     "LUCES": "NO",
     "DLC": "SI",
     "CLASE_TRANSLATE": "F-Hitech Gen1"
@@ -738,7 +738,7 @@
     "ID_CLASE": -900542257,
     "CV": 707,
     "ANYO": 1992,
-    "MODELOS": 5,
+    "MODELOS": 8,
     "LUCES": "NO",
     "DLC": "SI",
     "CLASE_TRANSLATE": "F-Hitech Gen1"
@@ -750,7 +750,7 @@
     "ID_CLASE": -900542257,
     "CV": 662,
     "ANYO": 1992,
-    "MODELOS": 5,
+    "MODELOS": 6,
     "LUCES": "NO",
     "DLC": "SI",
     "CLASE_TRANSLATE": "F-Hitech Gen1"
@@ -762,7 +762,7 @@
     "ID_CLASE": -610085299,
     "CV": 727,
     "ANYO": 1992,
-    "MODELOS": 4,
+    "MODELOS": 6,
     "LUCES": "NO",
     "DLC": "SI",
     "CLASE_TRANSLATE": "F-Hitech Gen2"
@@ -774,7 +774,7 @@
     "ID_CLASE": -610085299,
     "CV": 707,
     "ANYO": 1992,
-    "MODELOS": 4,
+    "MODELOS": 12,
     "LUCES": "NO",
     "DLC": "SI",
     "CLASE_TRANSLATE": "F-Hitech Gen2"
@@ -786,7 +786,7 @@
     "ID_CLASE": -610085299,
     "CV": 662,
     "ANYO": 1992,
-    "MODELOS": 4,
+    "MODELOS": 6,
     "LUCES": "NO",
     "DLC": "SI",
     "CLASE_TRANSLATE": "F-Hitech Gen2"
@@ -798,7 +798,7 @@
     "ID_CLASE": 730866387,
     "CV": 660,
     "ANYO": 1995,
-    "MODELOS": 3,
+    "MODELOS": 4,
     "LUCES": "NO",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Formula Edge Gen1"
@@ -810,7 +810,7 @@
     "ID_CLASE": 730866387,
     "CV": 655,
     "ANYO": 1995,
-    "MODELOS": 3,
+    "MODELOS": 12,
     "LUCES": "NO",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Formula Edge Gen1"
@@ -822,7 +822,7 @@
     "ID_CLASE": 730866387,
     "CV": 645,
     "ANYO": 1995,
-    "MODELOS": 3,
+    "MODELOS": 10,
     "LUCES": "NO",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Formula Edge Gen1"
@@ -834,7 +834,7 @@
     "ID_CLASE": -22587363,
     "CV": 730,
     "ANYO": 1997,
-    "MODELOS": 2,
+    "MODELOS": 20,
     "LUCES": "NO",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Formula V10 Gen1"
@@ -870,7 +870,7 @@
     "ID_CLASE": -944188099,
     "CV": 750,
     "ANYO": 2011,
-    "MODELOS": 1,
+    "MODELOS": 10,
     "LUCES": "NO",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Formula V8 Gen1"
@@ -882,7 +882,7 @@
     "ID_CLASE": -944188099,
     "CV": 750,
     "ANYO": 2011,
-    "MODELOS": 1,
+    "MODELOS": 10,
     "LUCES": "NO",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Formula V8 Gen1"
@@ -894,7 +894,7 @@
     "ID_CLASE": -1027000403,
     "CV": 750,
     "ANYO": 2012,
-    "MODELOS": 1,
+    "MODELOS": 18,
     "LUCES": "NO",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Formula V8 Gen2"
@@ -906,7 +906,7 @@
     "ID_CLASE": 1242038633,
     "CV": 816,
     "ANYO": 2000,
-    "MODELOS": 1,
+    "MODELOS": 10,
     "LUCES": "NO",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Formula V10 Gen2"
@@ -918,7 +918,7 @@
     "ID_CLASE": 1242038633,
     "CV": 816,
     "ANYO": 2000,
-    "MODELOS": 1,
+    "MODELOS": 10,
     "LUCES": "NO",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Formula V10 Gen2"
@@ -930,7 +930,7 @@
     "ID_CLASE": -2134685000,
     "CV": 900,
     "ANYO": 2005,
-    "MODELOS": 1,
+    "MODELOS": 10,
     "LUCES": "NO",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Formula V10 Gen3"
@@ -942,7 +942,7 @@
     "ID_CLASE": -2134685000,
     "CV": 900,
     "ANYO": 2005,
-    "MODELOS": 1,
+    "MODELOS": 6,
     "LUCES": "NO",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Formula V10 Gen3"
@@ -978,7 +978,7 @@
     "ID_CLASE": -4032086,
     "CV": 754,
     "ANYO": 2012,
-    "MODELOS": 1,
+    "MODELOS": 24,
     "LUCES": "NO",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Formula V8 Gen3"
@@ -990,7 +990,7 @@
     "ID_CLASE": -502453437,
     "CV": 1000,
     "ANYO": 2014,
-    "MODELOS": 1,
+    "MODELOS": 22,
     "LUCES": "NO",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Formula Ultimate Gen1"
@@ -1014,7 +1014,7 @@
     "ID_CLASE": 49926370,
     "CV": 965,
     "ANYO": 2022,
-    "MODELOS": 1,
+    "MODELOS": 20,
     "LUCES": "NO",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Formula Ultimate Gen3"
@@ -1026,7 +1026,7 @@
     "ID_CLASE": -1039818744,
     "CV": 126,
     "ANYO": 1961,
-    "MODELOS": 1,
+    "MODELOS": 20,
     "LUCES": "NO",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Formula Junior"
@@ -1038,7 +1038,7 @@
     "ID_CLASE": -403229570,
     "CV": 685,
     "ANYO": 2023,
-    "MODELOS": 1,
+    "MODELOS": 32,
     "LUCES": "NO",
     "DLC": "SI",
     "CLASE_TRANSLATE": "Formula USA 2023"
@@ -1074,7 +1074,7 @@
     "ID_CLASE": 1214699363,
     "CV": 480,
     "ANYO": 1974,
-    "MODELOS": 5,
+    "MODELOS": 4,
     "LUCES": "NO",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Formula Retro Gen1"
@@ -1098,7 +1098,7 @@
     "ID_CLASE": 1214699363,
     "CV": 480,
     "ANYO": 1974,
-    "MODELOS": 5,
+    "MODELOS": 4,
     "LUCES": "NO",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Formula Retro Gen1"
@@ -1110,7 +1110,7 @@
     "ID_CLASE": 1214699363,
     "CV": 480,
     "ANYO": 1978,
-    "MODELOS": 5,
+    "MODELOS": 8,
     "LUCES": "NO",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Formula Retro Gen1"
@@ -1122,7 +1122,7 @@
     "ID_CLASE": 1214699363,
     "CV": 516,
     "ANYO": 1978,
-    "MODELOS": 5,
+    "MODELOS": 7,
     "LUCES": "NO",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Formula Retro Gen1"
@@ -1134,7 +1134,7 @@
     "ID_CLASE": 1214699363,
     "CV": 480,
     "ANYO": 1974,
-    "MODELOS": 5,
+    "MODELOS": 3,
     "LUCES": "NO",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Formula Retro Gen1"
@@ -1146,7 +1146,7 @@
     "ID_CLASE": 719172364,
     "CV": 501,
     "ANYO": 1978,
-    "MODELOS": 4,
+    "MODELOS": 12,
     "LUCES": "NO",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Formula Retro Gen2"
@@ -1158,7 +1158,7 @@
     "ID_CLASE": 719172364,
     "CV": 501,
     "ANYO": 1978,
-    "MODELOS": 4,
+    "MODELOS": 6,
     "LUCES": "NO",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Formula Retro Gen2"
@@ -1218,7 +1218,7 @@
     "ID_CLASE": 477739468,
     "CV": 526,
     "ANYO": 1978,
-    "MODELOS": 4,
+    "MODELOS": 10,
     "LUCES": "NO",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Formula Retro Gen3"
@@ -1230,7 +1230,7 @@
     "ID_CLASE": 477739468,
     "CV": 830,
     "ANYO": 1983,
-    "MODELOS": 4,
+    "MODELOS": 10,
     "LUCES": "NO",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Formula Retro Gen3"
@@ -1242,7 +1242,7 @@
     "ID_CLASE": 1559064669,
     "CV": 93,
     "ANYO": 2024,
-    "MODELOS": 2,
+    "MODELOS": 10,
     "LUCES": "NO",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Formula Vee Brazil Gen1"
@@ -1254,7 +1254,7 @@
     "ID_CLASE": 1559064669,
     "CV": 92,
     "ANYO": 2025,
-    "MODELOS": 2,
+    "MODELOS": 11,
     "LUCES": "NO",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Formula Vee Brazil Gen1"
@@ -1266,7 +1266,7 @@
     "ID_CLASE": -1936509418,
     "CV": 96,
     "ANYO": 2025,
-    "MODELOS": 23,
+    "MODELOS": 17,
     "LUCES": "NO",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Formula Vee Brazil Gen2"
@@ -1278,7 +1278,7 @@
     "ID_CLASE": 1754258698,
     "CV": 113,
     "ANYO": 2015,
-    "MODELOS": 1,
+    "MODELOS": 27,
     "LUCES": "NO",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Formula Trainer"
@@ -1290,7 +1290,7 @@
     "ID_CLASE": 1342781418,
     "CV": 155,
     "ANYO": 2015,
-    "MODELOS": 1,
+    "MODELOS": 27,
     "LUCES": "NO",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Formula Trainer Advanced"
@@ -1302,7 +1302,7 @@
     "ID_CLASE": -37194732,
     "CV": 161,
     "ANYO": 2015,
-    "MODELOS": 1,
+    "MODELOS": 21,
     "LUCES": "NO",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Formula Inter"
@@ -1368,13 +1368,25 @@
     "CLASE_TRANSLATE": "Copa Truck"
   },
   {
+    "AUTO": "Gillet Vertigo Streiff",
+    "ID_AUTO": -1807987305,
+    "CLASE": "GTR_04",
+    "ID_CLASE": -1265729887,
+    "CV": 360,
+    "ANYO": 2004,
+    "MODELOS": 4,
+    "LUCES": "SI",
+    "DLC": "SI",
+    "CLASE_TRANSLATE": "GTR 2004"
+  },
+  {
     "AUTO": "Ginetta G40",
     "ID_AUTO": 310900789,
     "CLASE": "GT5",
     "ID_CLASE": -1358908608,
     "CV": 159,
     "ANYO": 2010,
-    "MODELOS": 2,
+    "MODELOS": 20,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "GT5"
@@ -1386,7 +1398,7 @@
     "ID_CLASE": -1070382248,
     "CV": 142,
     "ANYO": 2010,
-    "MODELOS": 1,
+    "MODELOS": 23,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "G40Cup"
@@ -1398,7 +1410,7 @@
     "ID_CLASE": 382290110,
     "CV": 370,
     "ANYO": 2012,
-    "MODELOS": 1,
+    "MODELOS": 24,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "G55 Supercup"
@@ -1410,7 +1422,7 @@
     "ID_CLASE": 1553262379,
     "CV": 373,
     "ANYO": 2012,
-    "MODELOS": 6,
+    "MODELOS": 5,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "GT4"
@@ -1422,7 +1434,7 @@
     "ID_CLASE": 801463365,
     "CV": 536,
     "ANYO": 2012,
-    "MODELOS": 2,
+    "MODELOS": 8,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "GT Open"
@@ -1434,7 +1446,7 @@
     "ID_CLASE": 1347575036,
     "CV": 564,
     "ANYO": 2017,
-    "MODELOS": 5,
+    "MODELOS": 6,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "P1"
@@ -1446,7 +1458,7 @@
     "ID_CLASE": 1282629711,
     "CV": 564,
     "ANYO": 2023,
-    "MODELOS": 5,
+    "MODELOS": 6,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "P1 Gen2"
@@ -1462,6 +1474,18 @@
     "LUCES": "SI",
     "DLC": "SI",
     "CLASE_TRANSLATE": "LMP2 Gen2"
+  },
+  {
+    "AUTO": "Ligier JS P217",
+    "ID_AUTO": 1679105968,
+    "CLASE": "LMP2_Gen1",
+    "ID_CLASE": 1087283261,
+    "CV": 604,
+    "ANYO": 2017,
+    "MODELOS": 4,
+    "LUCES": "SI",
+    "DLC": "SI",
+    "CLASE_TRANSLATE": "LMP2 Gen1"
   },
   {
     "AUTO": "Ligier JS P320",
@@ -1482,10 +1506,22 @@
     "ID_CLASE": 31429440,
     "CV": 392,
     "ANYO": 2017,
-    "MODELOS": 13,
+    "MODELOS": 15,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Ligier European Series"
+  },
+  {
+    "AUTO": "Lister Storm GTM",
+    "ID_AUTO": -1064971214,
+    "CLASE": "GT1_05",
+    "ID_CLASE": -1923779498,
+    "CV": 600,
+    "ANYO": 2005,
+    "MODELOS": 6,
+    "LUCES": "SI",
+    "DLC": "SI",
+    "CLASE_TRANSLATE": "GT1 2005"
   },
   {
     "AUTO": "Chevrolet Corvette C3",
@@ -1494,7 +1530,7 @@
     "ID_CLASE": -962921788,
     "CV": 307,
     "ANYO": 1969,
-    "MODELOS": 2,
+    "MODELOS": 13,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Vintage Cars - Tier 1"
@@ -1542,7 +1578,7 @@
     "ID_CLASE": 1740243009,
     "CV": 526,
     "ANYO": 2020,
-    "MODELOS": 3,
+    "MODELOS": 8,
     "LUCES": "SI",
     "DLC": "SI",
     "CLASE_TRANSLATE": "GTE"
@@ -1578,7 +1614,7 @@
     "ID_CLASE": 995310913,
     "CV": 802,
     "ANYO": 1984,
-    "MODELOS": 4,
+    "MODELOS": 8,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Group C"
@@ -1590,7 +1626,7 @@
     "ID_CLASE": 1740243009,
     "CV": 530,
     "ANYO": 2019,
-    "MODELOS": 3,
+    "MODELOS": 8,
     "LUCES": "SI",
     "DLC": "SI",
     "CLASE_TRANSLATE": "GTE"
@@ -1602,7 +1638,7 @@
     "ID_CLASE": 1740243009,
     "CV": 551,
     "ANYO": 2017,
-    "MODELOS": 3,
+    "MODELOS": 10,
     "LUCES": "SI",
     "DLC": "SI",
     "CLASE_TRANSLATE": "GTE"
@@ -1614,7 +1650,7 @@
     "ID_CLASE": -112887377,
     "CV": 526,
     "ANYO": 2016,
-    "MODELOS": 5,
+    "MODELOS": 6,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "GT3"
@@ -1638,7 +1674,7 @@
     "ID_CLASE": 1101044510,
     "CV": 549,
     "ANYO": 2022,
-    "MODELOS": 4,
+    "MODELOS": 6,
     "LUCES": "SI",
     "DLC": "SI",
     "CLASE_TRANSLATE": "GT3 Gen2"
@@ -1650,7 +1686,7 @@
     "ID_CLASE": -962921788,
     "CV": 190,
     "ANYO": 1973,
-    "MODELOS": 2,
+    "MODELOS": 15,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Vintage Cars - Tier 1"
@@ -1662,7 +1698,7 @@
     "ID_CLASE": -962921788,
     "CV": 398,
     "ANYO": 1971,
-    "MODELOS": 23,
+    "MODELOS": 8,
     "LUCES": "SI",
     "DLC": "SI",
     "CLASE_TRANSLATE": "Vintage Cars - Tier 1"
@@ -1770,7 +1806,7 @@
     "ID_CLASE": -112887377,
     "CV": 521,
     "ANYO": 2015,
-    "MODELOS": 5,
+    "MODELOS": 7,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "GT3"
@@ -1800,13 +1836,25 @@
     "CLASE_TRANSLATE": "GT4"
   },
   {
+    "AUTO": "Maserati GranSport Trofeo",
+    "ID_AUTO": -896466442,
+    "CLASE": "Trofeo_2005",
+    "ID_CLASE": -1299043169,
+    "CV": 420,
+    "ANYO": 2005,
+    "MODELOS": 20,
+    "LUCES": "SI",
+    "DLC": "SI",
+    "CLASE_TRANSLATE": "Maserati Trofeo 2005"
+  },
+  {
     "AUTO": "Maserati GT2 Stradale",
     "ID_AUTO": 1025465700,
     "CLASE": "Supercars",
     "ID_CLASE": -1200372575,
     "CV": 630,
     "ANYO": 2024,
-    "MODELOS": 12,
+    "MODELOS": 17,
     "LUCES": "SI",
     "DLC": "SI",
     "CLASE_TRANSLATE": "Supercars"
@@ -1824,13 +1872,25 @@
     "CLASE_TRANSLATE": "GT1 2005"
   },
   {
+    "AUTO": "Milano GT55",
+    "ID_AUTO": 760386338,
+    "CLASE": "GT1_05",
+    "ID_CLASE": -1923779498,
+    "CV": 600,
+    "ANYO": 2005,
+    "MODELOS": 6,
+    "LUCES": "SI",
+    "DLC": "NO",
+    "CLASE_TRANSLATE": "GT1 2005"
+  },
+  {
     "AUTO": "Milano GT36",
     "ID_AUTO": -1941368649,
     "CLASE": "GT2_05",
     "ID_CLASE": 776908952,
     "CV": 471,
     "ANYO": 2005,
-    "MODELOS": 12,
+    "MODELOS": 8,
     "LUCES": "SI",
     "DLC": "SI",
     "CLASE_TRANSLATE": "GT2 2005"
@@ -1854,7 +1914,7 @@
     "ID_CLASE": -112887377,
     "CV": 530,
     "ANYO": 2018,
-    "MODELOS": 5,
+    "MODELOS": 7,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "GT3"
@@ -1878,7 +1938,7 @@
     "ID_CLASE": -112887377,
     "CV": 542,
     "ANYO": 2017,
-    "MODELOS": 5,
+    "MODELOS": 7,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "GT3"
@@ -1890,7 +1950,7 @@
     "ID_CLASE": 1734909113,
     "CV": 450,
     "ANYO": 2010,
-    "MODELOS": 2,
+    "MODELOS": 12,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Porsche Carrera Cup"
@@ -1902,7 +1962,7 @@
     "ID_CLASE": 1734909113,
     "CV": 462,
     "ANYO": 2017,
-    "MODELOS": 2,
+    "MODELOS": 10,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Porsche Carrera Cup"
@@ -1950,7 +2010,7 @@
     "ID_CLASE": -112887377,
     "CV": 522,
     "ANYO": 2019,
-    "MODELOS": 5,
+    "MODELOS": 6,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "GT3"
@@ -1962,7 +2022,7 @@
     "ID_CLASE": 1101044510,
     "CV": 541,
     "ANYO": 2022,
-    "MODELOS": 5,
+    "MODELOS": 6,
     "LUCES": "SI",
     "DLC": "SI",
     "CLASE_TRANSLATE": "GT3 Gen2"
@@ -1974,7 +2034,7 @@
     "ID_CLASE": 1553262379,
     "CV": 446,
     "ANYO": 2017,
-    "MODELOS": 6,
+    "MODELOS": 5,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "GT4"
@@ -1986,7 +2046,7 @@
     "ID_CLASE": 1323122160,
     "CV": 581,
     "ANYO": 1997,
-    "MODELOS": 4,
+    "MODELOS": 10,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "GT1"
@@ -1998,7 +2058,7 @@
     "ID_CLASE": 1323122160,
     "CV": 597,
     "ANYO": 1998,
-    "MODELOS": 4,
+    "MODELOS": 10,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "GT1"
@@ -2010,7 +2070,7 @@
     "ID_CLASE": 1323122160,
     "CV": 554,
     "ANYO": 1998,
-    "MODELOS": 4,
+    "MODELOS": 10,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "GT1"
@@ -2028,13 +2088,25 @@
     "CLASE_TRANSLATE": "LMP2 Gen2"
   },
   {
+    "AUTO": "Oreca 07",
+    "ID_AUTO": 440916666,
+    "CLASE": "LMP2_Gen1",
+    "ID_CLASE": 1087283261,
+    "CV": 526,
+    "ANYO": 2017,
+    "MODELOS": 6,
+    "LUCES": "SI",
+    "DLC": "SI",
+    "CLASE_TRANSLATE": "LMP2 Gen1"
+  },
+  {
     "AUTO": "Nissan R390 GT1",
     "ID_AUTO": -343023508,
     "CLASE": "GT1",
     "ID_CLASE": 1323122160,
     "CV": 618,
     "ANYO": 1997,
-    "MODELOS": 4,
+    "MODELOS": 10,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "GT1"
@@ -2046,7 +2118,7 @@
     "ID_CLASE": 995310913,
     "CV": 918,
     "ANYO": 1989,
-    "MODELOS": 4,
+    "MODELOS": 8,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Group C"
@@ -2058,7 +2130,7 @@
     "ID_CLASE": 995310913,
     "CV": 710,
     "ANYO": 1987,
-    "MODELOS": 4,
+    "MODELOS": 10,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Group C"
@@ -2070,10 +2142,22 @@
     "ID_CLASE": 995310913,
     "CV": 850,
     "ANYO": 1989,
-    "MODELOS": 4,
+    "MODELOS": 10,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Group C"
+  },
+  {
+    "AUTO": "Spyker C8 Spyder GT2-R",
+    "ID_AUTO": -1609635929,
+    "CLASE": "GT2_05",
+    "ID_CLASE": 776908952,
+    "CV": 450,
+    "ANYO": 2005,
+    "MODELOS": 4,
+    "LUCES": "SI",
+    "DLC": "SI",
+    "CLASE_TRANSLATE": "GT2 2005"
   },
   {
     "AUTO": "Brabham BT62",
@@ -2130,7 +2214,7 @@
     "ID_CLASE": 1242485147,
     "CV": 34,
     "ANYO": 2017,
-    "MODELOS": 34,
+    "MODELOS": 24,
     "LUCES": "NO",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Kart Shifter"
@@ -2142,7 +2226,7 @@
     "ID_CLASE": -1710882048,
     "CV": 217,
     "ANYO": 2006,
-    "MODELOS": 2,
+    "MODELOS": 27,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "P4"
@@ -2154,7 +2238,7 @@
     "ID_CLASE": -1200372575,
     "CV": 635,
     "ANYO": 1995,
-    "MODELOS": 3,
+    "MODELOS": 8,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Supercars"
@@ -2178,7 +2262,7 @@
     "ID_CLASE": 1347575036,
     "CV": 594,
     "ANYO": 2017,
-    "MODELOS": 5,
+    "MODELOS": 8,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "P1"
@@ -2190,7 +2274,7 @@
     "ID_CLASE": 1347575036,
     "CV": 579,
     "ANYO": 2017,
-    "MODELOS": 5,
+    "MODELOS": 8,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "P1"
@@ -2202,7 +2286,7 @@
     "ID_CLASE": 1347575036,
     "CV": 556,
     "ANYO": 2017,
-    "MODELOS": 5,
+    "MODELOS": 6,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "P1"
@@ -2214,7 +2298,7 @@
     "ID_CLASE": 1347575036,
     "CV": 560,
     "ANYO": 2017,
-    "MODELOS": 5,
+    "MODELOS": 7,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "P1"
@@ -2226,7 +2310,7 @@
     "ID_CLASE": 1282629711,
     "CV": 593,
     "ANYO": 2023,
-    "MODELOS": 5,
+    "MODELOS": 4,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "P1 Gen2"
@@ -2238,7 +2322,7 @@
     "ID_CLASE": 1282629711,
     "CV": 575,
     "ANYO": 2023,
-    "MODELOS": 5,
+    "MODELOS": 4,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "P1 Gen2"
@@ -2250,7 +2334,7 @@
     "ID_CLASE": 1282629711,
     "CV": 561,
     "ANYO": 2023,
-    "MODELOS": 5,
+    "MODELOS": 4,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "P1 Gen2"
@@ -2262,7 +2346,7 @@
     "ID_CLASE": 4952537,
     "CV": 290,
     "ANYO": 2012,
-    "MODELOS": 2,
+    "MODELOS": 16,
     "LUCES": "NO",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Lancer Cup"
@@ -2274,7 +2358,7 @@
     "ID_CLASE": 4952537,
     "CV": 301,
     "ANYO": 2010,
-    "MODELOS": 2,
+    "MODELOS": 16,
     "LUCES": "NO",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Lancer Cup"
@@ -2286,7 +2370,7 @@
     "ID_CLASE": 374379774,
     "CV": 369,
     "ANYO": 2010,
-    "MODELOS": 1,
+    "MODELOS": 24,
     "LUCES": "NO",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Copa Montana"
@@ -2334,7 +2418,7 @@
     "ID_CLASE": 891493676,
     "CV": 265,
     "ANYO": 2012,
-    "MODELOS": 1,
+    "MODELOS": 20,
     "LUCES": "NO",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Sprint Race"
@@ -2346,7 +2430,7 @@
     "ID_CLASE": -1097982207,
     "CV": 631,
     "ANYO": 2018,
-    "MODELOS": 1,
+    "MODELOS": 30,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Super V8"
@@ -2358,7 +2442,7 @@
     "ID_CLASE": 492525831,
     "CV": 473,
     "ANYO": 2019,
-    "MODELOS": 1,
+    "MODELOS": 28,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Stock Car Brasil 2019"
@@ -2370,7 +2454,7 @@
     "ID_CLASE": 1183960633,
     "CV": 473,
     "ANYO": 2020,
-    "MODELOS": 2,
+    "MODELOS": 23,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Stock Car Brasil 2020"
@@ -2382,7 +2466,7 @@
     "ID_CLASE": 29233678,
     "CV": 473,
     "ANYO": 2021,
-    "MODELOS": 2,
+    "MODELOS": 24,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Stock Car Brasil 2021"
@@ -2394,7 +2478,7 @@
     "ID_CLASE": -1049783369,
     "CV": 473,
     "ANYO": 2022,
-    "MODELOS": 2,
+    "MODELOS": 21,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Stock Car Pro Series 2022"
@@ -2406,7 +2490,7 @@
     "ID_CLASE": -217808338,
     "CV": 473,
     "ANYO": 2023,
-    "MODELOS": 2,
+    "MODELOS": 18,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Stock Car Pro Series 2023"
@@ -2418,7 +2502,7 @@
     "ID_CLASE": -1091733035,
     "CV": 473,
     "ANYO": 2024,
-    "MODELOS": 10,
+    "MODELOS": 19,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Stock Car Pro Series 2024"
@@ -2430,7 +2514,7 @@
     "ID_CLASE": 1183960633,
     "CV": 473,
     "ANYO": 2020,
-    "MODELOS": 2,
+    "MODELOS": 9,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Stock Car Brasil 2020"
@@ -2442,7 +2526,7 @@
     "ID_CLASE": 29233678,
     "CV": 473,
     "ANYO": 2021,
-    "MODELOS": 2,
+    "MODELOS": 11,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Stock Car Brasil 2021"
@@ -2454,7 +2538,7 @@
     "ID_CLASE": -1049783369,
     "CV": 473,
     "ANYO": 2022,
-    "MODELOS": 2,
+    "MODELOS": 12,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Stock Car Pro Series 2022"
@@ -2466,7 +2550,7 @@
     "ID_CLASE": -217808338,
     "CV": 473,
     "ANYO": 2023,
-    "MODELOS": 2,
+    "MODELOS": 13,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Stock Car Pro Series 2023"
@@ -2490,7 +2574,7 @@
     "ID_CLASE": -1453448982,
     "CV": 338,
     "ANYO": 1999,
-    "MODELOS": 1,
+    "MODELOS": 20,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Stock Car 99"
@@ -2562,10 +2646,22 @@
     "ID_CLASE": -1783810445,
     "CV": 634,
     "ANYO": 2025,
-    "MODELOS": 6,
+    "MODELOS": 20,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "STT"
+  },
+  {
+    "AUTO": "TVR Tuscan T400R GT2",
+    "ID_AUTO": 1475475090,
+    "CLASE": "GT2_05",
+    "ID_CLASE": 776908952,
+    "CV": 400,
+    "ANYO": 2005,
+    "MODELOS": 4,
+    "LUCES": "SI",
+    "DLC": "SI",
+    "CLASE_TRANSLATE": "GT2 2005"
   },
   {
     "AUTO": "Ultima GTR",
@@ -2574,7 +2670,7 @@
     "ID_CLASE": -1200372575,
     "CV": 606,
     "ANYO": 2012,
-    "MODELOS": 3,
+    "MODELOS": 12,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Supercars"
@@ -2586,7 +2682,7 @@
     "ID_CLASE": 801463365,
     "CV": 538,
     "ANYO": 2014,
-    "MODELOS": 2,
+    "MODELOS": 18,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "GT Open"
@@ -2598,7 +2694,7 @@
     "ID_CLASE": -553893888,
     "CV": 372,
     "ANYO": 2018,
-    "MODELOS": 2,
+    "MODELOS": 9,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "P2"
@@ -2610,7 +2706,7 @@
     "ID_CLASE": 829452122,
     "CV": 303,
     "ANYO": 2009,
-    "MODELOS": 3,
+    "MODELOS": 8,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "P3"
@@ -2622,7 +2718,7 @@
     "ID_CLASE": -1710882048,
     "CV": 311,
     "ANYO": 2009,
-    "MODELOS": 2,
+    "MODELOS": 10,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "P4"
@@ -2634,7 +2730,7 @@
     "ID_CLASE": 829452122,
     "CV": 360,
     "ANYO": 2009,
-    "MODELOS": 3,
+    "MODELOS": 8,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "P3"
@@ -2646,10 +2742,22 @@
     "ID_CLASE": 829452122,
     "CV": 283,
     "ANYO": 2019,
-    "MODELOS": 3,
+    "MODELOS": 6,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "P3"
+  },
+  {
+    "AUTO": "Saleen S7-R GT1",
+    "ID_AUTO": 109500005,
+    "CLASE": "GT1_05",
+    "ID_CLASE": -1923779498,
+    "CV": 600,
+    "ANYO": 2005,
+    "MODELOS": 6,
+    "LUCES": "SI",
+    "DLC": "SI",
+    "CLASE_TRANSLATE": "GT1 2005"
   },
   {
     "AUTO": "Sigma P1",
@@ -2658,7 +2766,7 @@
     "ID_CLASE": -553893888,
     "CV": 502,
     "ANYO": 2017,
-    "MODELOS": 2,
+    "MODELOS": 6,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "P2"
@@ -2682,7 +2790,7 @@
     "ID_CLASE": 1260887313,
     "CV": 176,
     "ANYO": 1979,
-    "MODELOS": 1,
+    "MODELOS": 20,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Opala 79"
@@ -2694,7 +2802,7 @@
     "ID_CLASE": 6496832,
     "CV": 248,
     "ANYO": 1986,
-    "MODELOS": 1,
+    "MODELOS": 20,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Opala 86"
@@ -2706,7 +2814,7 @@
     "ID_CLASE": 1217280833,
     "CV": 293,
     "ANYO": 1979,
-    "MODELOS": 1,
+    "MODELOS": 21,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Old Stock"
@@ -2730,7 +2838,7 @@
     "ID_CLASE": -1773220174,
     "CV": 212,
     "ANYO": 1971,
-    "MODELOS": 4,
+    "MODELOS": 6,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Copa Classic FL"
@@ -2742,7 +2850,7 @@
     "ID_CLASE": -1276839914,
     "CV": 123,
     "ANYO": 1973,
-    "MODELOS": 6,
+    "MODELOS": 8,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Copa Classic B"
@@ -2754,7 +2862,7 @@
     "ID_CLASE": -1358908608,
     "CV": 173,
     "ANYO": 1979,
-    "MODELOS": 2,
+    "MODELOS": 20,
     "LUCES": "NO",
     "DLC": "NO",
     "CLASE_TRANSLATE": "GT5"
@@ -2766,7 +2874,7 @@
     "ID_CLASE": -1276839914,
     "CV": 123,
     "ANYO": 1973,
-    "MODELOS": 6,
+    "MODELOS": 8,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Copa Classic B"
@@ -2778,7 +2886,7 @@
     "ID_CLASE": -1165550561,
     "CV": 123,
     "ANYO": 1980,
-    "MODELOS": 1,
+    "MODELOS": 26,
     "LUCES": "NO",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Copa Fusca"
@@ -2790,7 +2898,7 @@
     "ID_CLASE": -1773220174,
     "CV": 165,
     "ANYO": 2011,
-    "MODELOS": 4,
+    "MODELOS": 6,
     "LUCES": "NO",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Copa Classic FL"
@@ -2802,7 +2910,7 @@
     "ID_CLASE": -1774345913,
     "CV": 120,
     "ANYO": 1995,
-    "MODELOS": 1,
+    "MODELOS": 28,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Copa Uno"
@@ -2826,7 +2934,7 @@
     "ID_CLASE": -1773220174,
     "CV": 173,
     "ANYO": 1986,
-    "MODELOS": 4,
+    "MODELOS": 6,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Copa Classic FL"
@@ -2838,10 +2946,22 @@
     "ID_CLASE": -1276839914,
     "CV": 120,
     "ANYO": 1989,
-    "MODELOS": 6,
+    "MODELOS": 8,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Copa Classic B"
+  },
+  {
+    "AUTO": "Panoz Esperante GTLM",
+    "ID_AUTO": 2134184300,
+    "CLASE": "GT2_05",
+    "ID_CLASE": 776908952,
+    "CV": 420,
+    "ANYO": 2005,
+    "MODELOS": 4,
+    "LUCES": "SI",
+    "DLC": "SI",
+    "CLASE_TRANSLATE": "GT2 2005"
   },
   {
     "AUTO": "Passat Classic FL",
@@ -2850,7 +2970,7 @@
     "ID_CLASE": -1773220174,
     "CV": 173,
     "ANYO": 2011,
-    "MODELOS": 4,
+    "MODELOS": 6,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Copa Classic FL"
@@ -2862,7 +2982,7 @@
     "ID_CLASE": -1276839914,
     "CV": 120,
     "ANYO": 2011,
-    "MODELOS": 6,
+    "MODELOS": 8,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Copa Classic B"
@@ -2874,7 +2994,7 @@
     "ID_CLASE": -1388199464,
     "CV": 160,
     "ANYO": 1985,
-    "MODELOS": 4,
+    "MODELOS": 5,
     "LUCES": "NO",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Hot Cars"
@@ -2886,7 +3006,7 @@
     "ID_CLASE": -1388199464,
     "CV": 160,
     "ANYO": 1985,
-    "MODELOS": 4,
+    "MODELOS": 6,
     "LUCES": "NO",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Hot Cars"
@@ -2898,7 +3018,7 @@
     "ID_CLASE": -1388199464,
     "CV": 165,
     "ANYO": 1983,
-    "MODELOS": 4,
+    "MODELOS": 6,
     "LUCES": "NO",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Hot Cars"
@@ -2910,7 +3030,7 @@
     "ID_CLASE": -1388199464,
     "CV": 160,
     "ANYO": 1983,
-    "MODELOS": 4,
+    "MODELOS": 5,
     "LUCES": "NO",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Hot Cars"
@@ -2934,7 +3054,7 @@
     "ID_CLASE": -1271013239,
     "CV": 128,
     "ANYO": 2017,
-    "MODELOS": 4,
+    "MODELOS": 5,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "TSI Cup"
@@ -2946,7 +3066,7 @@
     "ID_CLASE": -1271013239,
     "CV": 148,
     "ANYO": 2020,
-    "MODELOS": 4,
+    "MODELOS": 7,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "TSI Cup"
@@ -2958,7 +3078,7 @@
     "ID_CLASE": -1271013239,
     "CV": 128,
     "ANYO": 2018,
-    "MODELOS": 4,
+    "MODELOS": 5,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "TSI Cup"
@@ -2970,7 +3090,7 @@
     "ID_CLASE": -1271013239,
     "CV": 148,
     "ANYO": 2020,
-    "MODELOS": 4,
+    "MODELOS": 7,
     "LUCES": "SI",
     "DLC": "NO",
     "CLASE_TRANSLATE": "TSI Cup"
@@ -2982,7 +3102,7 @@
     "ID_CLASE": -883865111,
     "CV": 910,
     "ANYO": 2000,
-    "MODELOS": 7,
+    "MODELOS": 5,
     "LUCES": "NO",
     "DLC": "SI",
     "CLASE_TRANSLATE": "Formula USA Gen3"
@@ -2994,7 +3114,7 @@
     "ID_CLASE": -883865111,
     "CV": 895,
     "ANYO": 2000,
-    "MODELOS": 7,
+    "MODELOS": 4,
     "LUCES": "NO",
     "DLC": "SI",
     "CLASE_TRANSLATE": "Formula USA Gen3"
@@ -3006,7 +3126,7 @@
     "ID_CLASE": -883865111,
     "CV": 917,
     "ANYO": 2000,
-    "MODELOS": 7,
+    "MODELOS": 2,
     "LUCES": "NO",
     "DLC": "SI",
     "CLASE_TRANSLATE": "Formula USA Gen3"
@@ -3054,7 +3174,7 @@
     "ID_CLASE": -883865111,
     "CV": 910,
     "ANYO": 2000,
-    "MODELOS": 7,
+    "MODELOS": 6,
     "LUCES": "NO",
     "DLC": "SI",
     "CLASE_TRANSLATE": "Formula USA Gen3"
@@ -3066,7 +3186,7 @@
     "ID_CLASE": -883865111,
     "CV": 917,
     "ANYO": 2000,
-    "MODELOS": 7,
+    "MODELOS": 5,
     "LUCES": "NO",
     "DLC": "SI",
     "CLASE_TRANSLATE": "Formula USA Gen3"
@@ -3078,7 +3198,7 @@
     "ID_CLASE": -883865111,
     "CV": 895,
     "ANYO": 2000,
-    "MODELOS": 7,
+    "MODELOS": 6,
     "LUCES": "NO",
     "DLC": "SI",
     "CLASE_TRANSLATE": "Formula USA Gen3"
@@ -3090,7 +3210,7 @@
     "ID_CLASE": -883865111,
     "CV": 917,
     "ANYO": 2000,
-    "MODELOS": 7,
+    "MODELOS": 3,
     "LUCES": "NO",
     "DLC": "SI",
     "CLASE_TRANSLATE": "Formula USA Gen3"
@@ -3102,7 +3222,7 @@
     "ID_CLASE": 2018873511,
     "CV": 810,
     "ANYO": 1995,
-    "MODELOS": 5,
+    "MODELOS": 9,
     "LUCES": "NO",
     "DLC": "SI",
     "CLASE_TRANSLATE": "Formula USA Gen1"
@@ -3114,7 +3234,7 @@
     "ID_CLASE": 2018873511,
     "CV": 810,
     "ANYO": 1995,
-    "MODELOS": 5,
+    "MODELOS": 2,
     "LUCES": "NO",
     "DLC": "SI",
     "CLASE_TRANSLATE": "Formula USA Gen1"
@@ -3150,7 +3270,7 @@
     "ID_CLASE": 2084530285,
     "CV": 875,
     "ANYO": 1998,
-    "MODELOS": 6,
+    "MODELOS": 4,
     "LUCES": "NO",
     "DLC": "SI",
     "CLASE_TRANSLATE": "Formula USA Gen2"
@@ -3162,7 +3282,7 @@
     "ID_CLASE": 2084530285,
     "CV": 875,
     "ANYO": 1998,
-    "MODELOS": 6,
+    "MODELOS": 4,
     "LUCES": "NO",
     "DLC": "SI",
     "CLASE_TRANSLATE": "Formula USA Gen2"
@@ -3174,7 +3294,7 @@
     "ID_CLASE": 2084530285,
     "CV": 847,
     "ANYO": 1998,
-    "MODELOS": 6,
+    "MODELOS": 4,
     "LUCES": "NO",
     "DLC": "SI",
     "CLASE_TRANSLATE": "Formula USA Gen2"
@@ -3186,7 +3306,7 @@
     "ID_CLASE": 2084530285,
     "CV": 875,
     "ANYO": 1998,
-    "MODELOS": 6,
+    "MODELOS": 4,
     "LUCES": "NO",
     "DLC": "NO",
     "CLASE_TRANSLATE": "Formula USA Gen2"
@@ -3198,7 +3318,7 @@
     "ID_CLASE": 869498920,
     "CV": 84,
     "ANYO": 2022,
-    "MODELOS": 1,
+    "MODELOS": 20,
     "LUCES": "NO",
     "DLC": "SI",
     "CLASE_TRANSLATE": "Formula Dirt"
@@ -3262,89 +3382,5 @@
     "LUCES": "NO",
     "DLC": "SI",
     "CLASE_TRANSLATE": "RX"
-  },
-  {
-    "AUTO": "Ligier JS P217 Gen1",
-    "ID_AUTO": 1679105968,
-    "CLASE": "LMP2_Gen1",
-    "ID_CLASE": 1087283261,
-    "CV": 604,
-    "ANYO": 2017,
-    "MODELOS": 4,
-    "LUCES": "SI",
-    "DLC": "SI",
-    "CLASE_TRANSLATE": "LMP2_Gen1"
-  },
-  {
-    "AUTO": "Oreca 07 Gen1",
-    "ID_AUTO": 440916666,
-    "CLASE": "LMP2_Gen1",
-    "ID_CLASE": 1087283261,
-    "CV": 526,
-    "ANYO": 2017,
-    "MODELOS": 12,
-    "LUCES": "SI",
-    "DLC": "SI",
-    "CLASE_TRANSLATE": "LMP2_Gen1"
-  },
-  {
-    "AUTO": "Porsche 963 (LM24)",
-    "ID_AUTO": 1230057116,
-    "CLASE": "LMDh",
-    "ID_CLASE": -837115715,
-    "CV": 670,
-    "ANYO": 2023,
-    "MODELOS": 4,
-    "LUCES": "SI",
-    "DLC": "SI",
-    "CLASE_TRANSLATE": "LMDh"
-  },
-  {
-    "AUTO": "Cadillac V-Series.R (LM24)",
-    "ID_AUTO": 913906120,
-    "CLASE": "LMDh",
-    "ID_CLASE": -837115715,
-    "CV": 670,
-    "ANYO": 2023,
-    "MODELOS": 4,
-    "LUCES": "SI",
-    "DLC": "SI",
-    "CLASE_TRANSLATE": "LMDh"
-  },
-  {
-    "AUTO": "BMW M Hybrid V8 (LM24)",
-    "ID_AUTO": -1147272772,
-    "CLASE": "LMDh",
-    "ID_CLASE": -837115715,
-    "CV": 670,
-    "ANYO": 2023,
-    "MODELOS": 4,
-    "LUCES": "SI",
-    "DLC": "SI",
-    "CLASE_TRANSLATE": "LMDh"
-  },
-  {
-    "AUTO": "Formula V8 Gen2",
-    "ID_AUTO": 468530913,
-    "CLASE": "F-V8_Gen2",
-    "ID_CLASE": -1027000403,
-    "CV": 750,
-    "ANYO": 2012,
-    "MODELOS": 1,
-    "LUCES": "NO",
-    "DLC": "NO",
-    "CLASE_TRANSLATE": "Formula V8 Gen2"
-  },
-  {
-    "AUTO": "Renault R28",
-    "ID_AUTO": -1728094695,
-    "CLASE": "F-V8_Gen2",
-    "ID_CLASE": -1027000403,
-    "CV": 800,
-    "ANYO": 2008,
-    "MODELOS": 2,
-    "LUCES": "NO",
-    "DLC": "SI",
-    "CLASE_TRANSLATE": "Formula V8 Gen2"
   }
 ]
