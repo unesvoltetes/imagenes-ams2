@@ -1,4 +1,4 @@
-﻿[
+[
   {
     "CIRCUITO": "Adelaide_Historic",
     "ID": -559709709,
@@ -157,7 +157,8 @@
     "AMANECER_VERANO": "4:56",
     "ANOCHECER_VERANO": "21:37",
     "AMANECER_OTONO": "7:15",
-    "ANOCHECER_OTONO": "19:18"
+    "ANOCHECER_OTONO": "19:18",
+    "NOVEDAD": "SI"
   },
   {
     "CIRCUITO": "Barcelona_GP_2001",
@@ -177,7 +178,8 @@
     "AMANECER_VERANO": "4:56",
     "ANOCHECER_VERANO": "21:37",
     "AMANECER_OTONO": "7:15",
-    "ANOCHECER_OTONO": "19:18"
+    "ANOCHECER_OTONO": "19:18",
+    "NOVEDAD": "SI"
   },
   {
     "CIRCUITO": "Bathurst_1983",
@@ -1517,7 +1519,8 @@
     "AMANECER_VERANO": "5:16",
     "ANOCHECER_VERANO": "20:37",
     "AMANECER_OTONO": "7:32",
-    "ANOCHECER_OTONO": "18:21"
+    "ANOCHECER_OTONO": "18:21",
+    "NOVEDAD": "SI"
   },
   {
     "CIRCUITO": "Ibarra_Reverse",
@@ -1657,7 +1660,8 @@
     "AMANECER_VERANO": "5:10",
     "ANOCHECER_VERANO": "20:36",
     "AMANECER_OTONO": "7:27",
-    "ANOCHECER_OTONO": "18:19"
+    "ANOCHECER_OTONO": "18:19",
+    "NOVEDAD": "SI"
   },
   {
     "CIRCUITO": "Imola_GP_2018",
@@ -1697,7 +1701,8 @@
     "AMANECER_VERANO": "4:59",
     "ANOCHECER_VERANO": "20:27",
     "AMANECER_OTONO": "7:16",
-    "ANOCHECER_OTONO": "18:10"
+    "ANOCHECER_OTONO": "18:10",
+    "NOVEDAD": "SI"
   },
   {
     "CIRCUITO": "Indianapolis_2001_RC",
@@ -4037,7 +4042,8 @@
     "AMANECER_VERANO": "5:16",
     "ANOCHECER_VERANO": "20:37",
     "AMANECER_OTONO": "7:32",
-    "ANOCHECER_OTONO": "18:21"
+    "ANOCHECER_OTONO": "18:21",
+    "NOVEDAD": "SI"
   },
   {
     "CIRCUITO": "Spielberg_Historic",
