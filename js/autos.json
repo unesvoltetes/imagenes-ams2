@@ -3382,5 +3382,53 @@
     "LUCES": "NO",
     "DLC": "SI",
     "CLASE_TRANSLATE": "RX"
+  },
+  {
+    "AUTO": "Maserati MC12 GT1",
+    "ID_AUTO": 913906120,
+    "CLASE": "GT1",
+    "ID_CLASE": -1923779498,
+    "CV": 630,
+    "ANYO": 2004,
+    "MODELOS": 1,
+    "LUCES": "SI",
+    "DLC": "NO",
+    "CLASE_TRANSLATE": "GT1"
+  },
+  {
+    "AUTO": "Porsche 911 GT1-98",
+    "ID_AUTO": -1185077353,
+    "CLASE": "GT1",
+    "ID_CLASE": 1101044510,
+    "CV": 550,
+    "ANYO": 1998,
+    "MODELOS": 1,
+    "LUCES": "SI",
+    "DLC": "NO",
+    "CLASE_TRANSLATE": "GT1"
+  },
+  {
+    "AUTO": "Stock Car Pro 2024",
+    "ID_AUTO": -966026248,
+    "CLASE": "Stock Car Pro Series",
+    "ID_CLASE": -837115715,
+    "CV": 550,
+    "ANYO": 2024,
+    "MODELOS": 1,
+    "LUCES": "SI",
+    "DLC": "NO",
+    "CLASE_TRANSLATE": "Stock Car"
+  },
+  {
+    "AUTO": "Lister Storm GTM",
+    "ID_AUTO": 613527340,
+    "CLASE": "GT1",
+    "ID_CLASE": -564539194,
+    "CV": 600,
+    "ANYO": 2006,
+    "MODELOS": 1,
+    "LUCES": "SI",
+    "DLC": "NO",
+    "CLASE_TRANSLATE": "GT1"
   }
 ]
